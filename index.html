@@ -67,6 +67,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hexo排坑实录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/21/hexo排坑实录/" class="article-date">
+  <time datetime="2018-09-21T06:24:17.000Z" itemprop="datePublished">2018-09-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/21/hexo排坑实录/">hexo排坑实录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="hexo是什么"><a href="#hexo是什么" class="headerlink" title="hexo是什么"></a>hexo是什么</h2><p>hexo是基于Node.js的博客框架，支持 Markdown，可部署到 GitHub Pages。<br>由于是基于Node.js的，因此对前端程序员天然友好。<br>官网：<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a><br>安装部署教程网上较多，在此不再赘述，仅记录安装部署过程中遇到的坑及解决办法。  </p>
+<h2 id="部署完毕后，githubPage打开显示404，项目setting中的githubPage项提示：The-tag-fancybox-on-line-77-in-theme-landspace-README-md-is-not-recognized-Liquid-tag"><a href="#部署完毕后，githubPage打开显示404，项目setting中的githubPage项提示：The-tag-fancybox-on-line-77-in-theme-landspace-README-md-is-not-recognized-Liquid-tag" class="headerlink" title="部署完毕后，githubPage打开显示404，项目setting中的githubPage项提示：The tag fancybox on line 77 in theme/landspace/README.md is not recognized Liquid tag"></a>部署完毕后，<code>githubPage</code>打开显示404，项目<code>setting</code>中的<code>githubPage</code>项提示：<code>The tag fancybox on line 77 in theme/landspace/README.md is not recognized Liquid tag</code></h2><p>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf .deploy_git</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<h2 id="提示没有git仓库"><a href="#提示没有git仓库" class="headerlink" title="提示没有git仓库"></a>提示没有git仓库</h2><p>解决办法：运行<code>git init</code></p>
+<p>##其他问题<br>其他无法解决的问题建议去github issue看一看</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/21/hexo排坑实录/" data-id="cjmbp3isl0001o8kypjlbuo6g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-测试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/21/测试/" class="article-date">
@@ -97,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/21/测试/" data-id="cjmblm70l000050kydto99f81" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/21/测试/" data-id="cjmbp3it00004o8kyfez12lqg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/21/hello-world/" data-id="cjmblm712000150kya9q18tgs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/21/hello-world/" data-id="cjmbp3isg0000o8ky3h5gwk4h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,9 +204,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/博客/" style="font-size: 10px;">博客</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -181,6 +237,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/09/21/hexo排坑实录/">hexo排坑实录</a>
+          </li>
         
           <li>
             <a href="/2018/09/21/测试/">测试</a>
