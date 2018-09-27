@@ -67,6 +67,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JS函数参数值校验" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/27/JS函数参数值校验/" class="article-date">
+  <time datetime="2018-09-27T07:22:55.000Z" itemprop="datePublished">2018-09-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在<code>ES6</code>中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。  </p>
+<p>其实，我们可以通过这个特性来做函数参数值的校验。  </p>
+<p>首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = getA(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getA</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'get a'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// get a</span></span><br><span class="line"><span class="comment">// a 2</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看出，如果在调用<code>fix</code> <code>时传了参数</code>a<code></code>，则不会执行函数<code>getA</code>，只有当不传递参数<code>a</code>时，才会执行函数<code>getA</code>。</p>
+<p>这时候，我们可以利用这一特性，为参数<code>a</code>添加一个必传的校验，代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = require(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">require</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'缺少了参数 a'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// Uncaught Error: 缺少了参数 a</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/27/JS函数参数值校验/" data-id="cjmkaincf0000iskyvkl56qgg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JOSN.stringfy小技巧" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/27/JOSN.stringfy小技巧/" class="article-date">
@@ -103,50 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/JOSN.stringfy小技巧/" data-id="cjmkah0570000n0kyh7lkw019" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JS函数参数值校验" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/27/JS函数参数值校验/" class="article-date">
-  <time datetime="2018-09-27T07:22:55.000Z" itemprop="datePublished">2018-09-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在<code>ES6</code>中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。  </p>
-<p>其实，我们可以通过这个特性来做函数参数值的校验。  </p>
-<p>首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = getA(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getA</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'get a'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// get a</span></span><br><span class="line"><span class="comment">// a 2</span></span><br></pre></td></tr></table></figure></p>
-<p>可以看出，如果在调用<code>fix</code> <code>时传了参数</code>a<code></code>，则不会执行函数<code>getA</code>，只有当不传递参数<code>a</code>时，才会执行函数<code>getA</code>。</p>
-<p>这时候，我们可以利用这一特性，为参数<code>a</code>添加一个必传的校验，代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = require(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">require</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'缺少了参数 a'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// Uncaught Error: 缺少了参数 a</span></span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/JS函数参数值校验/" data-id="cjmkah05c0001n0kyppadmlgd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/JOSN.stringfy小技巧/" data-id="cjmkaincl0001iskyj5xm5e0u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -186,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/JS函数收藏/" data-id="cjmkah05g0003n0kyjt6p9s69" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/JS函数收藏/" data-id="cjmkaincp0003isky421gnq3c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -244,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/background-attachment实现滚动视差/" data-id="cjmkah05i0004n0kyc4o3rn00" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/background-attachment实现滚动视差/" data-id="cjmkaincr0004iskypridtpfh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Css/">Css</a></li></ul>
@@ -398,7 +398,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/从进程谈JS运行机制/" data-id="cjmkah05m0008n0ky1j82hrjc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/从进程谈JS运行机制/" data-id="cjmkaincv0008iskypa20z9l4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -440,7 +440,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/解构赋值和拓展运算符/" data-id="cjmkah05o0009n0kyd7w1q4if" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/解构赋值和拓展运算符/" data-id="cjmkaincx0009iskyccd2b2ud" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -482,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/21/hexo排坑实录/" data-id="cjmkah05j0005n0kyaiqekjvg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/21/hexo排坑实录/" data-id="cjmkaincs0005iskybhk5wauo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
@@ -539,11 +539,11 @@
       <ul>
         
           <li>
-            <a href="/2018/09/27/JOSN.stringfy小技巧/">JOSN.stringfy小技巧</a>
+            <a href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
           </li>
         
           <li>
-            <a href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
+            <a href="/2018/09/27/JOSN.stringfy小技巧/">JOSN.stringfy小技巧</a>
           </li>
         
           <li>
