@@ -67,6 +67,93 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-eslint进行代码检查" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/28/eslint进行代码检查/" class="article-date">
+  <time datetime="2018-09-28T06:40:45.000Z" itemprop="datePublished">2018-09-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/28/eslint进行代码检查/">eslint进行代码检查</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用<code>sonar</code>进行代码扫描。而<code>JavaScript</code>是弱类型语言，其实很有扫描检查的必要。<br><code>sonar</code>支持<code>JS</code>和<code>typeScript</code>的扫描，不支持<code>Vue</code>。因此改用<code>eslint</code>进行代码扫描。<br>平常在开发中，都是嫌麻烦把<code>eslint</code>关掉的。。  </p>
+<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>除了安装<code>eslint</code>以外，还需安装<code>eslint-plugin-vue</code>插件来检查<code>Vue</code>代码。<br>直接<code>-g</code>吧。<br><code>npm install eslint eslint-plugin-vue -g</code></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>一般推荐使用配置文件进行配置，在项目根目录下创建<code>.eslintrc.json</code>，其中写入各个配置项。<br>如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"root"</span>: <span class="literal">true</span>,</span><br><span class="line">    //此项是用来告诉eslint找当前配置文件不能往父级查找</span><br><span class="line">    "extends": ["plugin:vue/essential","eslint:recommended"],</span><br><span class="line">    //vue插件和推荐eslint规则</span><br><span class="line">    "parserOptions": &#123;</span><br><span class="line">        "ecmaVersion": 6,</span><br><span class="line">        "sourceType": "module",</span><br><span class="line">        "ecmaFeatures": &#123;</span><br><span class="line">            "jsx": true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    //指定为浏览器环境</span><br><span class="line">    "env": &#123;</span><br><span class="line">        "es6": true,</span><br><span class="line">        "browser": true,</span><br><span class="line">        "node": true</span><br><span class="line">    &#125;,</span><br><span class="line">    "rules": &#123;</span><br><span class="line">        "camelcase": "error",</span><br><span class="line">        "eqeqeq": "error",</span><br><span class="line">        "no-console": "error",</span><br><span class="line">        "no-alert": "error",</span><br><span class="line">        "require-jsdoc": ["error", &#123;</span><br><span class="line">            "require": &#123;</span><br><span class="line">                "FunctionDeclaration": false,</span><br><span class="line">                "MethodDefinition": false,</span><br><span class="line">                "ClassDeclaration": false,</span><br><span class="line">                "ArrowFunctionExpression": false</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;],</span><br><span class="line">        "new-cap": "error",</span><br><span class="line">        "brace-style": "error",</span><br><span class="line">        "comma-dangle": "error",</span><br><span class="line">        "no-param-reassign": "error"</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意json中不能有注释，复制下来记得删除注释。</p>
+<p>#规则<br>举几个常用的规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;no-alert&quot;: 2,//禁止使用alert confirm prompt  </span><br><span class="line">    &quot;no-console&quot;: 2,//禁止使用console</span><br><span class="line">    &quot;no-const-assign&quot;: 2,//禁止修改const声明的变量</span><br><span class="line">    &quot;no-debugger&quot;: 2,//禁止使用debugger</span><br><span class="line">    &quot;no-dupe-keys&quot;: 2,//在创建对象字面量时不允许键重复</span><br><span class="line">    &quot;no-dupe-args&quot;: 2,//函数参数不能重复</span><br><span class="line">    &quot;no-duplicate-case&quot;: 2,//switch中的case标签不能重复</span><br><span class="line">    &quot;no-empty&quot;: 2,//块语句中的内容不能为空</span><br><span class="line">    &quot;no-eval&quot;: 1,//禁止使用eval</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>具体规则见官网 <a href="https://eslint.org/docs/rules/" target="_blank" rel="noopener">https://eslint.org/docs/rules/</a></p>
+<h1 id="代码扫描"><a href="#代码扫描" class="headerlink" title="代码扫描"></a>代码扫描</h1><p>项目根目录运行<code>eslint --ext .js,.vue src</code>。<br>或者将运行结果输出到文件<code>eslint --ext .js,.vue src &gt; log.txt</code>。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>通过对输出的文件分析，我们项目的错误（警告）有以下几种  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">报错</th>
+<th style="text-align:right">规则</th>
+<th style="text-align:center">规则  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Unexpected trailing comma</td>
+<td style="text-align:right">comma-dangle</td>
+<td style="text-align:center">对象结尾跟随了一个多余的逗号</td>
+</tr>
+<tr>
+<td style="text-align:right">Expected ‘===’ and instead saw ‘==’</td>
+<td style="text-align:right">eqeqeq</td>
+<td style="text-align:center">必须使用全等</td>
+</tr>
+<tr>
+<td style="text-align:right">‘util’ is not defined</td>
+<td style="text-align:right">no-undef</td>
+<td style="text-align:center">不能有声明后未被使用的变量或参数</td>
+</tr>
+<tr>
+<td style="text-align:right">‘delSpace’ is defined but never used</td>
+<td style="text-align:right">no-unused-vars</td>
+<td style="text-align:center">不能有声明后未被使用的变量或参数</td>
+</tr>
+<tr>
+<td style="text-align:right">Elements in iteration expect to have ‘v-bind:key’ directives</td>
+<td style="text-align:right">vue/require-v-for-key</td>
+<td style="text-align:center">v-for中需v-bind:key</td>
+</tr>
+<tr>
+<td style="text-align:right">Unexpected console statement</td>
+<td style="text-align:right">no-console</td>
+<td style="text-align:center">no-console</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/28/eslint进行代码检查/" data-id="cjmlovne6000058kykaf3rxe6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JOSN.stringfy小技巧" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/27/JOSN.stringfy小技巧/" class="article-date">
@@ -103,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/JOSN.stringfy小技巧/" data-id="cjmkaodum0000o0ky7gnhypl2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/JOSN.stringfy小技巧/" data-id="cjmlovnep000158ky9407aiw4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -115,9 +202,9 @@
 
 
   
-    <article id="post-JS函数参数值校验" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-JS函数收藏" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/27/JS函数参数值校验/" class="article-date">
+    <a href="/2018/09/27/JS函数收藏/" class="article-date">
   <time datetime="2018-09-27T07:22:55.000Z" itemprop="datePublished">2018-09-27</time>
 </a>
     
@@ -129,7 +216,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
+      <a class="article-title" href="/2018/09/27/JS函数收藏/">JS函数收藏</a>
     </h1>
   
 
@@ -137,16 +224,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在<code>ES6</code>中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。  </p>
-<p>其实，我们可以通过这个特性来做函数参数值的校验。  </p>
-<p>首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = getA(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getA</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'get a'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// get a</span></span><br><span class="line"><span class="comment">// a 2</span></span><br></pre></td></tr></table></figure></p>
-<p>可以看出，如果在调用<code>fix</code> <code>时传了参数</code>a<code></code>，则不会执行函数<code>getA</code>，只有当不传递参数<code>a</code>时，才会执行函数<code>getA</code>。</p>
-<p>这时候，我们可以利用这一特性，为参数<code>a</code>添加一个必传的校验，代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = require(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">require</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'缺少了参数 a'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// Uncaught Error: 缺少了参数 a</span></span><br></pre></td></tr></table></figure></p>
+        <h1 id="Array-prototype-findIndex"><a href="#Array-prototype-findIndex" class="headerlink" title="Array.prototype.findIndex()"></a>Array.prototype.findIndex()</h1><p>返回数组中满足回调函数函数的第一个元素的索引。否则返回-1。</p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p><code>arr.findIndex(callback)</code><br>举例：返回对象数组中value出现的索引<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> index=arr.findIndex(<span class="function">(<span class="params">item</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.value===value;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/JS函数参数值校验/" data-id="cjmkaodur0001o0ky9irnxj6e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/JS函数收藏/" data-id="cjmlovnet000358kydb8a12xf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -204,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/background-attachment实现滚动视差/" data-id="cjmkaoduv0003o0ky1zg97g9u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/background-attachment实现滚动视差/" data-id="cjmlovnev000558kym7h6mdf0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Css/">Css</a></li></ul>
@@ -216,9 +300,9 @@
 
 
   
-    <article id="post-JS函数收藏" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-JS函数参数值校验" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/27/JS函数收藏/" class="article-date">
+    <a href="/2018/09/27/JS函数参数值校验/" class="article-date">
   <time datetime="2018-09-27T07:22:55.000Z" itemprop="datePublished">2018-09-27</time>
 </a>
     
@@ -230,7 +314,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/27/JS函数收藏/">JS函数收藏</a>
+      <a class="article-title" href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
     </h1>
   
 
@@ -238,13 +322,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Array-prototype-findIndex"><a href="#Array-prototype-findIndex" class="headerlink" title="Array.prototype.findIndex()"></a>Array.prototype.findIndex()</h1><p>返回数组中满足回调函数函数的第一个元素的索引。否则返回-1。</p>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p><code>arr.findIndex(callback)</code><br>举例：返回对象数组中value出现的索引<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> index=arr.findIndex(<span class="function">(<span class="params">item</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.value===value;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+        <p>在<code>ES6</code>中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。  </p>
+<p>其实，我们可以通过这个特性来做函数参数值的校验。  </p>
+<p>首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = getA(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getA</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'get a'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// get a</span></span><br><span class="line"><span class="comment">// a 2</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看出，如果在调用<code>fix</code> <code>时传了参数</code>a<code></code>，则不会执行函数<code>getA</code>，只有当不传递参数<code>a</code>时，才会执行函数<code>getA</code>。</p>
+<p>这时候，我们可以利用这一特性，为参数<code>a</code>添加一个必传的校验，代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = require(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">require</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'缺少了参数 a'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// Uncaught Error: 缺少了参数 a</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/JS函数收藏/" data-id="cjmkaodux0004o0kyfjgsge69" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/JS函数参数值校验/" data-id="cjmlovney000858kyogxmiwrp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -398,7 +485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/从进程谈JS运行机制/" data-id="cjmkaodv10008o0kyt8qsp3xt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/从进程谈JS运行机制/" data-id="cjmlovnfa000h58kymlswgboc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -440,7 +527,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/27/解构赋值和拓展运算符/" data-id="cjmkaodvf000go0kyigr0t0ga" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/27/解构赋值和拓展运算符/" data-id="cjmlovnfc000i58kyu119e8na" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -482,7 +569,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/21/hexo排坑实录/" data-id="cjmkaoduy0005o0kylh4o429c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/21/hexo排坑实录/" data-id="cjmlovneu000458kyap83ss1j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
@@ -539,15 +626,11 @@
       <ul>
         
           <li>
+            <a href="/2018/09/28/eslint进行代码检查/">eslint进行代码检查</a>
+          </li>
+        
+          <li>
             <a href="/2018/09/27/JOSN.stringfy小技巧/">JOSN.stringfy小技巧</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/27/background-attachment实现滚动视差/">background-attachment实现滚动视差</a>
           </li>
         
           <li>
@@ -555,7 +638,11 @@
           </li>
         
           <li>
-            <a href="/2018/09/27/从进程谈JS运行机制/">从进程谈JS运行机制</a>
+            <a href="/2018/09/27/background-attachment实现滚动视差/">background-attachment实现滚动视差</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
           </li>
         
       </ul>

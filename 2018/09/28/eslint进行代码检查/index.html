@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>eslint进行代码检查 | 虾米俊</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用sonar进行代码扫描。而JavaScript是弱类型语言，其实很有扫描检查的必要。sonar支持JS和typeScript的扫描，不支持Vue。因此改用eslint进行代码扫描。平常在开发中，都是嫌麻烦把eslint关掉的。。   安装依赖除了安装eslint以外，还需安装eslint-plugin-vue插件来检查Vue代码。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eslint进行代码检查">
+<meta property="og:url" content="http://yoursite.com/2018/09/28/eslint进行代码检查/index.html">
+<meta property="og:site_name" content="虾米俊">
+<meta property="og:description" content="前言最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用sonar进行代码扫描。而JavaScript是弱类型语言，其实很有扫描检查的必要。sonar支持JS和typeScript的扫描，不支持Vue。因此改用eslint进行代码扫描。平常在开发中，都是嫌麻烦把eslint关掉的。。   安装依赖除了安装eslint以外，还需安装eslint-plugin-vue插件来检查Vue代码。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-28T07:30:00.270Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="eslint进行代码检查">
+<meta name="twitter:description" content="前言最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用sonar进行代码扫描。而JavaScript是弱类型语言，其实很有扫描检查的必要。sonar支持JS和typeScript的扫描，不支持Vue。因此改用eslint进行代码扫描。平常在开发中，都是嫌麻烦把eslint关掉的。。   安装依赖除了安装eslint以外，还需安装eslint-plugin-vue插件来检查Vue代码。">
+  
+    <link rel="alternate" href="/atom.xml" title="虾米俊" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">虾米俊</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">虾米俊的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-eslint进行代码检查" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/28/eslint进行代码检查/" class="article-date">
+  <time datetime="2018-09-28T06:40:45.000Z" itemprop="datePublished">2018-09-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      eslint进行代码检查
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用<code>sonar</code>进行代码扫描。而<code>JavaScript</code>是弱类型语言，其实很有扫描检查的必要。<br><code>sonar</code>支持<code>JS</code>和<code>typeScript</code>的扫描，不支持<code>Vue</code>。因此改用<code>eslint</code>进行代码扫描。<br>平常在开发中，都是嫌麻烦把<code>eslint</code>关掉的。。  </p>
+<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>除了安装<code>eslint</code>以外，还需安装<code>eslint-plugin-vue</code>插件来检查<code>Vue</code>代码。<br>直接<code>-g</code>吧。<br><code>npm install eslint eslint-plugin-vue -g</code></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>一般推荐使用配置文件进行配置，在项目根目录下创建<code>.eslintrc.json</code>，其中写入各个配置项。<br>如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"root"</span>: <span class="literal">true</span>,</span><br><span class="line">    //此项是用来告诉eslint找当前配置文件不能往父级查找</span><br><span class="line">    "extends": ["plugin:vue/essential","eslint:recommended"],</span><br><span class="line">    //vue插件和推荐eslint规则</span><br><span class="line">    "parserOptions": &#123;</span><br><span class="line">        "ecmaVersion": 6,</span><br><span class="line">        "sourceType": "module",</span><br><span class="line">        "ecmaFeatures": &#123;</span><br><span class="line">            "jsx": true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    //指定为浏览器环境</span><br><span class="line">    "env": &#123;</span><br><span class="line">        "es6": true,</span><br><span class="line">        "browser": true,</span><br><span class="line">        "node": true</span><br><span class="line">    &#125;,</span><br><span class="line">    "rules": &#123;</span><br><span class="line">        "camelcase": "error",</span><br><span class="line">        "eqeqeq": "error",</span><br><span class="line">        "no-console": "error",</span><br><span class="line">        "no-alert": "error",</span><br><span class="line">        "require-jsdoc": ["error", &#123;</span><br><span class="line">            "require": &#123;</span><br><span class="line">                "FunctionDeclaration": false,</span><br><span class="line">                "MethodDefinition": false,</span><br><span class="line">                "ClassDeclaration": false,</span><br><span class="line">                "ArrowFunctionExpression": false</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;],</span><br><span class="line">        "new-cap": "error",</span><br><span class="line">        "brace-style": "error",</span><br><span class="line">        "comma-dangle": "error",</span><br><span class="line">        "no-param-reassign": "error"</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意json中不能有注释，复制下来记得删除注释。</p>
+<p>#规则<br>举几个常用的规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;no-alert&quot;: 2,//禁止使用alert confirm prompt  </span><br><span class="line">    &quot;no-console&quot;: 2,//禁止使用console</span><br><span class="line">    &quot;no-const-assign&quot;: 2,//禁止修改const声明的变量</span><br><span class="line">    &quot;no-debugger&quot;: 2,//禁止使用debugger</span><br><span class="line">    &quot;no-dupe-keys&quot;: 2,//在创建对象字面量时不允许键重复</span><br><span class="line">    &quot;no-dupe-args&quot;: 2,//函数参数不能重复</span><br><span class="line">    &quot;no-duplicate-case&quot;: 2,//switch中的case标签不能重复</span><br><span class="line">    &quot;no-empty&quot;: 2,//块语句中的内容不能为空</span><br><span class="line">    &quot;no-eval&quot;: 1,//禁止使用eval</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>具体规则见官网 <a href="https://eslint.org/docs/rules/" target="_blank" rel="noopener">https://eslint.org/docs/rules/</a></p>
+<h1 id="代码扫描"><a href="#代码扫描" class="headerlink" title="代码扫描"></a>代码扫描</h1><p>项目根目录运行<code>eslint --ext .js,.vue src</code>。<br>或者将运行结果输出到文件<code>eslint --ext .js,.vue src &gt; log.txt</code>。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>通过对输出的文件分析，我们项目的错误（警告）有以下几种  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">报错</th>
+<th style="text-align:right">规则</th>
+<th style="text-align:center">规则  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Unexpected trailing comma</td>
+<td style="text-align:right">comma-dangle</td>
+<td style="text-align:center">对象结尾跟随了一个多余的逗号</td>
+</tr>
+<tr>
+<td style="text-align:right">Expected ‘===’ and instead saw ‘==’</td>
+<td style="text-align:right">eqeqeq</td>
+<td style="text-align:center">必须使用全等</td>
+</tr>
+<tr>
+<td style="text-align:right">‘util’ is not defined</td>
+<td style="text-align:right">no-undef</td>
+<td style="text-align:center">不能有声明后未被使用的变量或参数</td>
+</tr>
+<tr>
+<td style="text-align:right">‘delSpace’ is defined but never used</td>
+<td style="text-align:right">no-unused-vars</td>
+<td style="text-align:center">不能有声明后未被使用的变量或参数</td>
+</tr>
+<tr>
+<td style="text-align:right">Elements in iteration expect to have ‘v-bind:key’ directives</td>
+<td style="text-align:right">vue/require-v-for-key</td>
+<td style="text-align:center">v-for中需v-bind:key</td>
+</tr>
+<tr>
+<td style="text-align:right">Unexpected console statement</td>
+<td style="text-align:right">no-console</td>
+<td style="text-align:center">no-console</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/28/eslint进行代码检查/" data-id="cjmlovne6000058kykaf3rxe6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/27/JOSN.stringfy小技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JOSN.stringfy小技巧</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Css/">Css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Css/" style="font-size: 10px;">Css</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/28/eslint进行代码检查/">eslint进行代码检查</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/JOSN.stringfy小技巧/">JOSN.stringfy小技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/JS函数收藏/">JS函数收藏</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/background-attachment实现滚动视差/">background-attachment实现滚动视差</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jun Xie<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
