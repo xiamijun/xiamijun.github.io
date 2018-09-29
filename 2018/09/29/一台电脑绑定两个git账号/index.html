@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>一台电脑绑定两个git账号 | 虾米俊</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。 1.生成部署新SHH key输入命令1ssh-keygen -t rsa -C &amp;quot;xxxxx@xxxxx.com&amp;quot; 注意不要直接回车，第一步输入存储路径，可以找个其他路径先存放，再重命名后复制到.ssh目录下。   假设原有的自己">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一台电脑绑定两个git账号">
+<meta property="og:url" content="http://yoursite.com/2018/09/29/一台电脑绑定两个git账号/index.html">
+<meta property="og:site_name" content="虾米俊">
+<meta property="og:description" content="前言公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。 1.生成部署新SHH key输入命令1ssh-keygen -t rsa -C &amp;quot;xxxxx@xxxxx.com&amp;quot; 注意不要直接回车，第一步输入存储路径，可以找个其他路径先存放，再重命名后复制到.ssh目录下。   假设原有的自己">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-29T08:20:03.258Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一台电脑绑定两个git账号">
+<meta name="twitter:description" content="前言公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。 1.生成部署新SHH key输入命令1ssh-keygen -t rsa -C &amp;quot;xxxxx@xxxxx.com&amp;quot; 注意不要直接回车，第一步输入存储路径，可以找个其他路径先存放，再重命名后复制到.ssh目录下。   假设原有的自己">
+  
+    <link rel="alternate" href="/atom.xml" title="虾米俊" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">虾米俊</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">虾米俊的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-一台电脑绑定两个git账号" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/29/一台电脑绑定两个git账号/" class="article-date">
+  <time datetime="2018-09-29T08:01:03.000Z" itemprop="datePublished">2018-09-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一台电脑绑定两个git账号
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。</p>
+<h1 id="1-生成部署新SHH-key"><a href="#1-生成部署新SHH-key" class="headerlink" title="1.生成部署新SHH key"></a>1.生成部署新SHH key</h1><p>输入命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;xxxxx@xxxxx.com&quot;</span><br></pre></td></tr></table></figure></p>
+<p>注意不要直接回车，第一步输入存储路径，可以找个其他路径先存放，再重命名后复制到.ssh目录下。  </p>
+<p>假设原有的自己的私钥和公钥分别命名为id_rsa和id_rsa.pub，<br>新的公司的私钥和公钥分别命名为id_rsa_company和id_rsa_company.pub。  </p>
+<p>同样把新的公钥id_rsa_company.pub的内容复制到git服务的设置里。</p>
+<h1 id="2-添加秘钥到SSH-Agent"><a href="#2-添加秘钥到SSH-Agent" class="headerlink" title="2.添加秘钥到SSH Agent"></a>2.添加秘钥到SSH Agent</h1><p>因为默认只读取id_rsa,为了让SSH识别新的私钥，需将其添加的SSH agent中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-agent bash</span><br><span class="line">ssh-add ~/.ssh/id_rsa</span><br><span class="line">ssh-add ~/.ssh/id_rsa_company</span><br></pre></td></tr></table></figure></p>
+<h1 id="3-创建并配置config文件"><a href="#3-创建并配置config文件" class="headerlink" title="3.创建并配置config文件"></a>3.创建并配置config文件</h1><p>在.ssh目录下创建一个config文本文件,添加相关配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># default                       </span><br><span class="line">    Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    User xiamijun</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line"># two                           </span><br><span class="line">    Host http://git.flyui.cn</span><br><span class="line">    HostName http://git.flyui.cn</span><br><span class="line">    User junxie4</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa_company</span><br></pre></td></tr></table></figure></p>
+<h1 id="4-测试ssh链接"><a href="#4-测试ssh链接" class="headerlink" title="4.测试ssh链接"></a>4.测试ssh链接</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@ieit.github.com</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>如果成功，会显示欢迎信息，并显示用户名。</p>
+<h1 id="5-用户名-邮箱配置"><a href="#5-用户名-邮箱配置" class="headerlink" title="5.用户名/邮箱配置"></a>5.用户名/邮箱配置</h1><p>为了使提交代码不混淆，需要区分一下用户名和邮箱。  </p>
+<p>可以清楚全局设置，在每个仓库下单独设置用户名和邮箱，但这样较为繁琐。  </p>
+<p>由于平常自己的账号使用较多，公司的使用不多，所以使用自己的账号作为全局，公司的账号按需配置。  </p>
+<p>全局设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;xiamijun&quot;</span><br><span class="line">git config --global user.email &quot;171571466@qq.com&quot;</span><br></pre></td></tr></table></figure></p>
+<p>单个仓库设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name &quot;xxx&quot;</span><br><span class="line">git config user.email &quot;xxx@company.com&quot;</span><br></pre></td></tr></table></figure></p>
+<p>大功告成~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/29/一台电脑绑定两个git账号/" data-id="cjmn62bbw0005u0ky6f05b7l9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/28/eslint进行代码检查/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">eslint进行代码检查</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Css/">Css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Css/" style="font-size: 10px;">Css</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/29/一台电脑绑定两个git账号/">一台电脑绑定两个git账号</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/28/eslint进行代码检查/">eslint进行代码检查</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/background-attachment实现滚动视差/">background-attachment实现滚动视差</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/JS函数收藏/">JS函数收藏</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/JS函数参数值校验/">JS函数参数值校验</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jun Xie<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
