@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="./index.js"></script>
+</head>
+<body>
+<div id="wrap">
+  {{obj.test}}
+  <p v-html="test"></p>
+  <input type="text" v-model="form">
+  <input type="text" v-model="form">
+  <button @click="changeValue">改变值</button>
+  {{form}}
+</div>
+<script>
+  new Vue({
+    el: '#wrap',
+    data: {
+      form: '这是form的值',
+      test: '<strong>我是粗体</strong>',
+      obj: {
+        test: 123
+      }
+    },
+    methods: {
+      changeValue() {
+        console.log(this.form);
+        this.form = '改变了';
+      }
+    }
+  });
+
+</script>
+</body>
+</html>
