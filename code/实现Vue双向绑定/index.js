@@ -50,6 +50,7 @@ class Vue {
   }
 
   compile(el) {
+    let _this=this;
     let nodes = el.childNodes;
     for (let i = 0, len = nodes.length; i < len; i++) {
       const node = nodes[i];
@@ -66,7 +67,7 @@ class Vue {
         if (node.hasAttribute('v-model') && (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA')) {
           node.addEventListener('input', (() => {
             let attrVal = node.getAttribute('v-model');
-            this.watcherTask[attrVal].push(new Watcher(node, this, attrVal, 'value'));
+            this.watcherTask[attrVal].push(new Watcher(node, _this, attrVal, 'value'));
             // node.removeAttribute('v-model');
             return () => {
               this.data[attrVal] = node.value;
@@ -75,7 +76,7 @@ class Vue {
         }
         if (node.hasAttribute('v-html')) {
           let attrVal = node.getAttribute('v-html');
-          this.watcherTask[attrVal].push(new Watcher(node, this, attrVal, 'innerHTML'));
+          this.watcherTask[attrVal].push(new Watcher(node, _this, attrVal, 'innerHTML'));
           // node.removeAttribute('v-html');
         }
         this.compileText(node, 'innerHTMl');
@@ -83,7 +84,7 @@ class Vue {
           let attrVal = node.getAttribute('@click');
           // node.removeAttribute('@click');
           node.addEventListener('click', e => {
-            this.methods[attrVal] && this.methods[attrVal].bind(this)()
+            this.methods[attrVal] && this.methods[attrVal].bind(_this)()
           })
         }
       }
