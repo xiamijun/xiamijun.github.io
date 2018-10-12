@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/JS函数参数值校验/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/从进程谈JS运行机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="虾米俊">
@@ -262,7 +262,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/27/JS函数参数值校验/" itemprop="url">JS函数参数值校验</a></h1>
+                <a class="post-title-link" href="/2018/09/27/从进程谈JS运行机制/" itemprop="url">从进程谈JS运行机制</a></h1>
         
 
         <div class="post-meta">
@@ -314,11 +314,122 @@
       
         
           
-            <p>在<code>ES6</code>中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。  </p>
-<p>其实，我们可以通过这个特性来做函数参数值的校验。  </p>
-<p>首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = getA(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getA</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'get a'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// get a</span></span><br><span class="line"><span class="comment">// a 2</span></span><br></pre></td></tr></table></figure></p>
-<p>可以看出，如果在调用<code>fix</code> <code>时传了参数</code>a<code></code>，则不会执行函数<code>getA</code>，只有当不传递参数<code>a</code>时，才会执行函数<code>getA</code>。</p>
-<p>这时候，我们可以利用这一特性，为参数<code>a</code>添加一个必传的校验，代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = require(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">require</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'缺少了参数 a'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// Uncaught Error: 缺少了参数 a</span></span><br></pre></td></tr></table></figure></p>
+            <h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><ul>
+<li>进程之间相互独立。</li>
+<li>一个进程由一个或多个线程组成。</li>
+<li>多个线程在进程中协作完成任务。</li>
+<li>同一进程下的各个线程之间共享程序的内存空间。</li>
+<li>进程是cpu资源分配的最小单位。</li>
+<li>线程是cpu调度的最小单位。</li>
+</ul>
+<h2 id="浏览器是多进程的"><a href="#浏览器是多进程的" class="headerlink" title="浏览器是多进程的"></a>浏览器是多进程的</h2><ul>
+<li>浏览器每打开一个tab标签页，任务管理器会多加一条记录。</li>
+</ul>
+<h3 id="浏览器包含哪些进程"><a href="#浏览器包含哪些进程" class="headerlink" title="浏览器包含哪些进程"></a>浏览器包含哪些进程</h3><ol>
+<li><p>Browser进程<br>主进程，只有一个<br>作用：用户交互，如前进，后退。页面的管理，创建和销毁其他进程。网络资源管理，下载。</p>
+</li>
+<li><p>第三方插件进程</p>
+</li>
+<li><p>GPU进程<br>用于3D绘制</p>
+</li>
+<li><p>浏览器渲染进程（浏览器内核）<br><code>Renderer</code>进程，内部是多线程的</p>
+</li>
+</ol>
+<h3 id="浏览器内核（渲染进程）"><a href="#浏览器内核（渲染进程）" class="headerlink" title="浏览器内核（渲染进程）"></a>浏览器内核（渲染进程）</h3><ul>
+<li>页面的渲染，JS的执行，事件的循环，都在这个进程内进行。  </li>
+<li>渲染进程是多线程的</li>
+</ul>
+<h4 id="浏览器渲染进程包含的线程"><a href="#浏览器渲染进程包含的线程" class="headerlink" title="浏览器渲染进程包含的线程"></a>浏览器渲染进程包含的线程</h4><ol>
+<li><p>GUI渲染线程<br>&ensp; &ensp; 解析HTML，CSS，构建DOM树和RenderObject树，布局和绘制等。<br>&ensp; &ensp; 注：GUI渲染线程与JS引擎线程是互斥的，当JS引擎执行时GUI线程会被挂起，GUI更新会被保存在一个队列中等到JS引擎空闲时立即被执行。</p>
+</li>
+<li><p>JS引擎线程<br>&ensp; &ensp; 例如V8引擎。 </p>
+</li>
+<li><p>事件触发线程<br>&ensp; &ensp; 归属于浏览器而不是JS引擎，用来控制事件循环（可以理解，JS引擎自己都忙不过来，需要浏览器另开线程协助）。<br>&ensp; &ensp; 当JS引擎执行如<code>setTimeOut</code>、<code>AJAX</code>异步请求等时，会将对应任务添加到事件线程中。<br>&ensp; &ensp; 当对应的事件符合触发条件被触发时，该线程会把事件添加到待处理队列的队尾，等待JS引擎的处理。<br>&ensp; &ensp; 由于JS的单线程关系，所以这些待处理队列中的事件都得排队等待JS引擎处理（当JS引擎空闲时才会去执行）。 </p>
+</li>
+<li><p>定时触发器线程<br>&ensp; &ensp; <code>setInternal</code>与 <code>setTimeout</code>所在线程。<br>&ensp; &ensp; 浏览器定时计数器并不是由JavaScript引擎计数的。<br>&ensp; &ensp; 通过单独线程来计时并触发定时（计时完毕后，添加到事件队列中，等待JS引擎空闲后执行）。<br>&ensp; &ensp; 规定要求<code>setTimeout</code>中低于<code>4ms</code>的时间间隔算为<code>4ms</code>。  </p>
+</li>
+<li><p>异步http请求线程<br>&ensp; &ensp; <code>XMLHttpRequest</code>在连接后通过新开一个线程请求。<br>&ensp; &ensp; 检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放入事件队列中。再由JavaScript引擎执行。<br><img src="https://github.com/xiamijun/blog/blob/master/images/thread.png?raw=true" alt="图">  </p>
+<h3 id="Browser进程和浏览器内核（Renderer进程）的通信过程"><a href="#Browser进程和浏览器内核（Renderer进程）的通信过程" class="headerlink" title="Browser进程和浏览器内核（Renderer进程）的通信过程"></a>Browser进程和浏览器内核（Renderer进程）的通信过程</h3></li>
+</ol>
+<ul>
+<li><p><code>Browser</code>进程收到用户请求，获取页面内容（如通过网络下载资源），随后将该任务通过<code>RendererHost</code>接口传递给<code>Render</code>进程。  </p>
+</li>
+<li><p><code>Renderer</code>进程收到消息，简单解释后，交给渲染线程，然后开始渲染。<br>&ensp; &ensp; 渲染线程接收请求，加载网页并渲染网页。<br>&ensp; &ensp; 可能会有JS线程操作DOM（这样可能会造成回流并重绘）。<br>&ensp; &ensp; 最后<code>Render</code>进程将结果传递给<code>Browser</code>进程。  </p>
+</li>
+<li><p><code>Browser</code>进程接收到结果并将结果绘制出来。</p>
+</li>
+</ul>
+<h3 id="GUI渲染线程与JS引擎线程互斥"><a href="#GUI渲染线程与JS引擎线程互斥" class="headerlink" title="GUI渲染线程与JS引擎线程互斥"></a>GUI渲染线程与JS引擎线程互斥</h3><ul>
+<li><p>当JS引擎执行时GUI线程会被挂起  </p>
+</li>
+<li><p>巨量计算阻塞页面加载</p>
+</li>
+</ul>
+<h3 id="WebWorker"><a href="#WebWorker" class="headerlink" title="WebWorker"></a>WebWorker</h3><ul>
+<li><p>应对cpu密集型计算</p>
+</li>
+<li><p>创建<code>Worker</code>时，JS引擎向浏览器申请开一个子线程（子线程是浏览器开的，完全受主线程控制，而且不能操作DOM）</p>
+</li>
+<li>JS引擎线程与<code>worker</code>线程间通过特定的方式通信</li>
+<li>JS引擎是单线程的，本质仍然未改变</li>
+</ul>
+<h2 id="浏览器渲染流程"><a href="#浏览器渲染流程" class="headerlink" title="浏览器渲染流程"></a>浏览器渲染流程</h2><ol>
+<li><p>解析<code>html</code>建立<code>dom</code>树</p>
+</li>
+<li><p>解析<code>css</code>构建<code>render</code>树（将<code>CSS</code>代码解析成树形的数据结构，然后结合<code>DOM</code>合并成<code>render</code>树）</p>
+</li>
+<li><p>布局<code>render</code>树（<code>Layout/reflow</code>），负责各元素尺寸、位置的计算</p>
+</li>
+<li><p>绘制<code>render</code>树（<code>paint</code>），绘制页面像素信息</p>
+</li>
+<li><p>浏览器会将各层的信息发送给GPU，GPU会将各层合成（<code>composite</code>），显示在屏幕上。</p>
+</li>
+</ol>
+<h2 id="从Event-Loop谈JS的运行机制"><a href="#从Event-Loop谈JS的运行机制" class="headerlink" title="从Event Loop谈JS的运行机制"></a>从Event Loop谈JS的运行机制</h2><p>概念： </p>
+<ul>
+<li><p>JS分为<code>同步任务</code>和<code>异步任务</code></p>
+</li>
+<li><p>同步任务都在<code>主线程</code>上执行，形成一个<code>执行栈</code></p>
+</li>
+<li><p>主线程之外，<code>事件触发线程</code>管理着一个<code>任务队列</code>，只要<code>异步任务</code>有了运行结果，就在<code>任务队列</code>之中放置一个事件。</p>
+</li>
+<li><p>一旦<code>执行栈</code>中的所有<code>同步任务</code>执行完毕（此时JS引擎空闲），系统就会读取<code>任务队列</code>，将可运行的<code>异步任务</code>添加到<code>执行栈</code>中，开始执行。<br><img src="https://github.com/xiamijun/blog/blob/master/images/eventLoop.png?raw=true" alt="event Loop">  </p>
+</li>
+</ul>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p>定时器是JS引擎检测的么？当然不是了。它是由定时器线程控制（因为JS引擎自己都忙不过来，根本无暇分身）。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'hello!'</span>);</span><br><span class="line">&#125;,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure></p>
+<p>1000毫秒计时完毕后（由定时器线程计时），将回调函数推入事件队列中，等待主线程执行。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'hello!'</span>);</span><br><span class="line">&#125;,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>以最快的时间内将回调函数推入事件队列中，等待主线程执行。</p>
+</li>
+<li><p>W3C在HTML标准中规定，规定要求<code>setTimeout</code>中低于<code>4ms</code>的时间间隔算为<code>4ms</code>。</p>
+</li>
+</ul>
+<h3 id="setTimeout而不是setInterval"><a href="#setTimeout而不是setInterval" class="headerlink" title="setTimeout而不是setInterval"></a>setTimeout而不是setInterval</h3><ul>
+<li><p><code>setInterval</code>是每次都精确的隔一段时间推入一个事件</p>
+<ul>
+<li><p>但是，事件的实际执行时间不一定就准确，还有可能是这个事件还没执行完毕，下一个事件就来了。</p>
+</li>
+<li><p>致命问题：累计效应</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="macrotask与microtask"><a href="#macrotask与microtask" class="headerlink" title="macrotask与microtask"></a>macrotask与microtask</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>);</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</span><br><span class="line">&#125;,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>);</span><br></pre></td></tr></table></figure>
+<p>正确结果：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">script start</span><br><span class="line">script end</span><br><span class="line">promise1</span><br><span class="line">promise2</span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>因为<code>Promise</code>里有了一个一个新的概念： <code>microtask</code></li>
+<li>JS中分为两种任务类型：<code>macrotask</code>和<code>microtask</code>，在<code>ECMAScript</code>中，<code>microtask</code>称为<code>jobs</code>，<code>macrotask</code>可称为<code>task</code><h5 id="定义和区别"><a href="#定义和区别" class="headerlink" title="定义和区别"></a>定义和区别</h5></li>
+<li><p><code>macrotask</code>（又称之为<code>宏任务</code>）<br>&ensp; &ensp; 可以理解是每次<code>执行栈</code>执行的代码就是一个<code>宏任务</code>（包括每次从事件队列中获取一个事件回调并放到执行栈中执行）。<br>&ensp; &ensp; 每一个<code>macrotask</code>会从头到尾将这个任务执行完毕，不会执行其它。<br>&ensp; &ensp; 浏览器为了能够使得JS内部<code>macrotask</code>与DOM任务能够有序的执行，会在一个<code>macrotask</code>执行结束后，在下一个<code>macrotask</code>执行开始前，对页面进行重新渲染。<br>（<code>task-&gt;渲染-&gt;task-&gt;...</code>）   </p>
+</li>
+<li><p><code>microtask</code>（又称为<code>微任务</code>）<br>&ensp; &ensp; 可以理解是在当前<code>macrotask</code>执行结束后立即执行的任务。<br>&ensp; &ensp; 也就是说，在当前<code>macrotask</code>任务后，下一个<code>macrotask</code>之前，在渲染之前。<br>&ensp; &ensp; 所以它的响应速度相比<code>setTimeout</code>（<code>setTimeout</code>是<code>macrotask</code>）会更快。  </p>
+<h5 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h5></li>
+<li><p><code>macrotask</code>：<br>主代码块，<code>setTimeout</code>，<code>setInterval</code>等（可以看到，事件队列中的每一个事件都是一个<code>macrotask</code>）</p>
+</li>
+<li><p><code>microtask</code>：<br><code>Promise</code>，<code>process</code>.<code>nextTick</code>等</p>
+</li>
+</ul>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p><img src="(https://github.com/xiamijun/blog/blob/master/images/task.png?raw=true" alt="总结"></p>
 
           
         
@@ -367,7 +478,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/解构赋值和拓展运算符/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/background-attachment实现滚动视差/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="虾米俊">
@@ -386,7 +497,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/27/解构赋值和拓展运算符/" itemprop="url">解构赋值和拓展运算符</a></h1>
+                <a class="post-title-link" href="/2018/09/27/background-attachment实现滚动视差/" itemprop="url">background-attachment实现滚动视差</a></h1>
         
 
         <div class="post-meta">
@@ -438,10 +549,26 @@
       
         
           
-            <h2 id="用解构赋值过滤对象属性"><a href="#用解构赋值过滤对象属性" class="headerlink" title="用解构赋值过滤对象属性"></a>用解构赋值过滤对象属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 过滤掉对象 types 中的 inner 和 outer 属性</span></span><br><span class="line"><span class="keyword">const</span> &#123; inner, outer, ...restProps &#125; = &#123;</span><br><span class="line">  inner: <span class="string">'This is inner'</span>,</span><br><span class="line">  outer: <span class="string">'This is outer'</span>,</span><br><span class="line">  v1: <span class="string">'1'</span>,</span><br><span class="line">  v2: <span class="string">'2'</span>,</span><br><span class="line">  v4: <span class="string">'3'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(restProps);</span><br><span class="line"><span class="comment">// &#123;v1: "1", v2: "2", v4: "3"&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="用解构赋值获取嵌套对象的属性"><a href="#用解构赋值获取嵌套对象的属性" class="headerlink" title="用解构赋值获取嵌套对象的属性"></a>用解构赋值获取嵌套对象的属性</h2><p>从一堆嵌套很深的对象属性中，很方便地拿到我们想要的那一个。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过解构赋值获取嵌套对象的值</span></span><br><span class="line"><span class="keyword">const</span> car = &#123;</span><br><span class="line">    model: <span class="string">'bmw 2018'</span>,</span><br><span class="line">    engine: &#123;</span><br><span class="line">        v6: <span class="literal">true</span>,</span><br><span class="line">        turbo: <span class="literal">true</span>,</span><br><span class="line">        vin: <span class="number">12345</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里使用 ES6 中的简单写法，使用 &#123; vin &#125; 替代 &#123; vin: vin &#125;</span></span><br><span class="line"><span class="keyword">const</span> modalAndVIN = <span class="function">(<span class="params">&#123; model, engine: &#123; vin &#125;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`model: <span class="subst">$&#123;model&#125;</span>, vin: <span class="subst">$&#123;vin&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">modalAndVIN(car);</span><br><span class="line"><span class="comment">// "model: bmw 2018, vin: 12345"</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="拓展运算符合并对象"><a href="#拓展运算符合并对象" class="headerlink" title="拓展运算符合并对象"></a>拓展运算符合并对象</h2><p>拓展运算符，可以用来解构数组，也可以用来解构对象，它可以将对象中的所有属性展开。</p>
-<p>通过这个特性，我们可以做一些对象合并的操作。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用拓展运算符合并对象，在后面的属性会重写前面相同属性的值</span></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: <span class="number">3</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> obj2 = &#123; <span class="attr">c</span>: <span class="number">5</span>, <span class="attr">d</span>: <span class="number">9</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> merged = &#123; ...obj1, ...obj2 &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(merged);</span><br><span class="line"><span class="comment">// &#123;a: 1, b: 2, c: 5, d: 9&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj3 = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> obj4 = &#123; <span class="attr">c</span>: <span class="number">3</span>, <span class="attr">d</span>: &#123; <span class="attr">e</span>: <span class="number">4</span>, ...obj3 &#125; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj4);</span><br><span class="line"><span class="comment">// &#123;c: 3, d: &#123;a: 1, b: 2, e: 4&#125; &#125;</span></span><br></pre></td></tr></table></figure></p>
+            <p>#background-attachment实现滚动视差<br>background-attachment 属性设置背景图像是否固定或者随着页面的其余部分滚动。</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scroll</td>
+<td>默认值。背景图像会随着页面其余部分的滚动而移动。</td>
+</tr>
+<tr>
+<td>fixed</td>
+<td>当页面的其余部分滚动时，背景图像不会移动。</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://codepen.io/xiamijun/pen/vzBeXB" target="_blank" rel="noopener">效果</a></p>
 
           
         
@@ -677,6 +804,16 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiamijun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
           
 
           
