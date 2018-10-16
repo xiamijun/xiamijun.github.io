@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Vue," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="雨会下雨会停，这是不变的道理">
-<meta name="keywords" content="JavaScript Vue Css Web Node">
+<meta name="description" content="[TOC] 组件规范化开发要求 单文件组件开发（SFC） 单元测试实现 支持&amp;lt;script&amp;gt;及模块化规范引入 发布到npm  组件开发Vue组件开发规范 单元测试引入vue官方提供test-utils工具进行测试，并基于jest运行测试脚本。   编写单元测试脚本yourApp.spc.js： 打包构建虽然可以直接分享.vue文件，但这样会让那些想直接通过js引用的人无法使用，所以我们">
+<meta name="keywords" content="Vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue组件开发-测试-发布流程总结">
 <meta property="og:url" content="http://yoursite.com/2018/10/12/Vue组件开发-测试-发布流程总结/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="雨会下雨会停，这是不变的道理">
+<meta property="og:description" content="[TOC] 组件规范化开发要求 单文件组件开发（SFC） 单元测试实现 支持&amp;lt;script&amp;gt;及模块化规范引入 发布到npm  组件开发Vue组件开发规范 单元测试引入vue官方提供test-utils工具进行测试，并基于jest运行测试脚本。   编写单元测试脚本yourApp.spc.js： 打包构建虽然可以直接分享.vue文件，但这样会让那些想直接通过js引用的人无法使用，所以我们">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-12T07:00:47.211Z">
+<meta property="og:updated_time" content="2018-10-16T02:29:32.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue组件开发-测试-发布流程总结">
-<meta name="twitter:description" content="雨会下雨会停，这是不变的道理">
+<meta name="twitter:description" content="[TOC] 组件规范化开发要求 单文件组件开发（SFC） 单元测试实现 支持&amp;lt;script&amp;gt;及模块化规范引入 发布到npm  组件开发Vue组件开发规范 单元测试引入vue官方提供test-utils工具进行测试，并基于jest运行测试脚本。   编写单元测试脚本yourApp.spc.js： 打包构建虽然可以直接分享.vue文件，但这样会让那些想直接通过js引用的人无法使用，所以我们">
 
 
 
@@ -353,7 +353,20 @@
       
 
       
-        
+        <p>[TOC]</p>
+<h1 id="组件规范化开发要求"><a href="#组件规范化开发要求" class="headerlink" title="组件规范化开发要求"></a>组件规范化开发要求</h1><ul>
+<li>单文件组件开发（SFC）</li>
+<li>单元测试实现</li>
+<li>支持<code>&lt;script&gt;</code>及模块化规范引入</li>
+<li>发布到npm</li>
+</ul>
+<h1 id="组件开发"><a href="#组件开发" class="headerlink" title="组件开发"></a>组件开发</h1><p>Vue组件开发规范</p>
+<h1 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h1><p>引入vue官方提供<code>test-utils</code>工具进行测试，并基于<code>jest</code>运行测试脚本。  </p>
+<p>编写单元测试脚本<code>yourApp.spc.js</code>：</p>
+<h1 id="打包构建"><a href="#打包构建" class="headerlink" title="打包构建"></a>打包构建</h1><p>虽然可以直接分享<code>.vue</code>文件，但这样会让那些想直接通过js引用的人无法使用，所以我们需要打包构建。</p>
+<p>选择<code>rollup</code>打包，生成<code>yourApp.umd.js</code>到<code>dist</code>目录下，可直接引用。</p>
+<h1 id="发布到npm私服"><a href="#发布到npm私服" class="headerlink" title="发布到npm私服"></a>发布到npm私服</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> npm install nrm -g</span><br><span class="line"><span class="meta">$</span> nrm add xxx http://xx.xx.xx.xx</span><br><span class="line"><span class="meta">$</span> nrm use xxx</span><br><span class="line"><span class="meta">$</span> npm publish</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -367,6 +380,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
       
 
       
@@ -386,6 +405,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/16/hexo使用指南/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -447,8 +470,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -467,7 +499,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -522,6 +554,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#组件规范化开发要求"><span class="nav-number">1.</span> <span class="nav-text">组件规范化开发要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件开发"><span class="nav-number">2.</span> <span class="nav-text">组件开发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单元测试"><span class="nav-number">3.</span> <span class="nav-text">单元测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包构建"><span class="nav-number">4.</span> <span class="nav-text">打包构建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布到npm私服"><span class="nav-number">5.</span> <span class="nav-text">发布到npm私服</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
