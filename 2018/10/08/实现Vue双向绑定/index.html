@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Object.defineProperty()这个API是实现双向绑定的核心，最主要的作用是重写数据的get、set方法。使用方法：123456789101112131415161718192021222324252627282930let obj = &amp;#123;    singer: &quot;周杰伦&quot;&amp;#125;;let default_value = &quot;青花瓷&quot;;Object.defineProp">
+<meta name="description" content="Object.defineProperty()这个API是实现双向绑定的核心，最主要的作用是重写数据的get、set方法。">
 <meta name="keywords" content="Vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实现Vue双向绑定">
 <meta property="og:url" content="http://yoursite.com/2018/10/08/实现Vue双向绑定/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="Object.defineProperty()这个API是实现双向绑定的核心，最主要的作用是重写数据的get、set方法。使用方法：123456789101112131415161718192021222324252627282930let obj = &amp;#123;    singer: &quot;周杰伦&quot;&amp;#125;;let default_value = &quot;青花瓷&quot;;Object.defineProp">
+<meta property="og:description" content="Object.defineProperty()这个API是实现双向绑定的核心，最主要的作用是重写数据的get、set方法。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/xiamijun/xiamijun.github.io/blob/master/images/%E5%AE%9E%E7%8E%B0Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A.png?raw=true">
-<meta property="og:updated_time" content="2018-10-16T02:44:23.571Z">
+<meta property="og:updated_time" content="2018-10-17T02:39:58.427Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现Vue双向绑定">
-<meta name="twitter:description" content="Object.defineProperty()这个API是实现双向绑定的核心，最主要的作用是重写数据的get、set方法。使用方法：123456789101112131415161718192021222324252627282930let obj = &amp;#123;    singer: &quot;周杰伦&quot;&amp;#125;;let default_value = &quot;青花瓷&quot;;Object.defineProp">
+<meta name="twitter:description" content="Object.defineProperty()这个API是实现双向绑定的核心，最主要的作用是重写数据的get、set方法。">
 <meta name="twitter:image" content="https://github.com/xiamijun/xiamijun.github.io/blob/master/images/%E5%AE%9E%E7%8E%B0Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A.png?raw=true">
 
 
@@ -355,7 +355,10 @@
       
 
       
-        <h1 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty()"></a>Object.defineProperty()</h1><p>这个API是实现双向绑定的核心，最主要的作用是重写数据的<code>get</code>、<code>set</code>方法。<br>使用方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    singer: <span class="string">"周杰伦"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> default_value = <span class="string">"青花瓷"</span>;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">"music"</span>, &#123;</span><br><span class="line">    <span class="comment">// value: '七里香',  // 设置属性的值，下面设置了get set函数，所以这里不能设置</span></span><br><span class="line">    configurable: <span class="literal">false</span>,  <span class="comment">// 是否可以删除属性，默认不能删除</span></span><br><span class="line">    <span class="comment">// writable: true,  // 是否可以修改对象，下面设置了get set函数，所以这里不能设置</span></span><br><span class="line">    enumerable: <span class="literal">true</span>, <span class="comment">// music是否可以被枚举，默认是不能被枚举(遍历)</span></span><br><span class="line">    <span class="comment">//get,set设置时不能设置writable和value，要一对一对设置，交叉设置/同时存在就会报错</span></span><br><span class="line">    get() &#123;</span><br><span class="line">    <span class="comment">// 获取obj.music的时候就会调用get方法</span></span><br><span class="line">    <span class="comment">// let default_value = "强行设置get的返回值"; // 打开注释 读取属性永远都是‘强行设置get的返回值’</span></span><br><span class="line">    <span class="keyword">return</span> default_value;</span><br><span class="line">    &#125;,</span><br><span class="line">    set(val) &#123;</span><br><span class="line">    <span class="comment">// 将修改的值重新赋给song</span></span><br><span class="line">    default_value = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj.music); <span class="comment">// 青花瓷</span></span><br><span class="line"><span class="keyword">delete</span> obj.music; <span class="comment">// configurable设为false 删除无效</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.music); <span class="comment">// 青花瓷</span></span><br><span class="line">obj.music = <span class="string">"听妈妈的话"</span>; </span><br><span class="line"><span class="built_in">console</span>.log(obj.music); <span class="comment">// 听妈妈的话</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="comment">// 默认情况下通过defineProperty定义的属性是不能被枚举(遍历)的</span></span><br><span class="line">    <span class="comment">// 需要设置enumerable为true才可以 否则只能拿到singer 属性</span></span><br><span class="line">    <span class="built_in">console</span>.log(key); <span class="comment">// singer, music</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h1 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty()"></a>Object.defineProperty()</h1><p>这个API是实现双向绑定的核心，最主要的作用是重写数据的<code>get</code>、<code>set</code>方法。  </p>
+<a id="more"></a>
+<p>使用方法：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    singer: <span class="string">"周杰伦"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> default_value = <span class="string">"青花瓷"</span>;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">"music"</span>, &#123;</span><br><span class="line">    <span class="comment">// value: '七里香',  // 设置属性的值，下面设置了get set函数，所以这里不能设置</span></span><br><span class="line">    configurable: <span class="literal">false</span>,  <span class="comment">// 是否可以删除属性，默认不能删除</span></span><br><span class="line">    <span class="comment">// writable: true,  // 是否可以修改对象，下面设置了get set函数，所以这里不能设置</span></span><br><span class="line">    enumerable: <span class="literal">true</span>, <span class="comment">// music是否可以被枚举，默认是不能被枚举(遍历)</span></span><br><span class="line">    <span class="comment">//get,set设置时不能设置writable和value，要一对一对设置，交叉设置/同时存在就会报错</span></span><br><span class="line">    get() &#123;</span><br><span class="line">    <span class="comment">// 获取obj.music的时候就会调用get方法</span></span><br><span class="line">    <span class="comment">// let default_value = "强行设置get的返回值"; // 打开注释 读取属性永远都是‘强行设置get的返回值’</span></span><br><span class="line">    <span class="keyword">return</span> default_value;</span><br><span class="line">    &#125;,</span><br><span class="line">    set(val) &#123;</span><br><span class="line">    <span class="comment">// 将修改的值重新赋给song</span></span><br><span class="line">    default_value = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj.music); <span class="comment">// 青花瓷</span></span><br><span class="line"><span class="keyword">delete</span> obj.music; <span class="comment">// configurable设为false 删除无效</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.music); <span class="comment">// 青花瓷</span></span><br><span class="line">obj.music = <span class="string">"听妈妈的话"</span>; </span><br><span class="line"><span class="built_in">console</span>.log(obj.music); <span class="comment">// 听妈妈的话</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="comment">// 默认情况下通过defineProperty定义的属性是不能被枚举(遍历)的</span></span><br><span class="line">    <span class="comment">// 需要设置enumerable为true才可以 否则只能拿到singer 属性</span></span><br><span class="line">    <span class="built_in">console</span>.log(key); <span class="comment">// singer, music</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><ol>
 <li>实现数据监听器<code>Observer</code>，用<code>Object.defineProperty()</code>重写数据的<code>get</code>、<code>set</code>，值更新就在<code>set</code>中通知订阅者更新数据。</li>
 <li>实现模板编译<code>Compile</code>，深度遍历<code>dom</code>树，对每个元素节点的指令模板进行替换数据以及订阅数据。</li>
@@ -771,6 +774,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

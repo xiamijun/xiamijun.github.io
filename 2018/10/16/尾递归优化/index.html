@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="原文地址：廖雪峰的Python教程——递归函数  阶乘 1234def fact(n):    if n == 1:        return 1    return n * fact(n - 1) 使用递归函数需要注意防止栈溢出。在计算机中，函数调用是通过栈（stack）这种数据结构实现的，每当进入一个函数调用，栈就会加一层栈帧，每当函数返回，栈就会减一层栈帧。由于栈的大小不是无限的，所以，递">
+<meta name="description" content="原文地址：廖雪峰的Python教程——递归函数">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="尾递归优化">
 <meta property="og:url" content="http://yoursite.com/2018/10/16/尾递归优化/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="原文地址：廖雪峰的Python教程——递归函数  阶乘 1234def fact(n):    if n == 1:        return 1    return n * fact(n - 1) 使用递归函数需要注意防止栈溢出。在计算机中，函数调用是通过栈（stack）这种数据结构实现的，每当进入一个函数调用，栈就会加一层栈帧，每当函数返回，栈就会减一层栈帧。由于栈的大小不是无限的，所以，递">
+<meta property="og:description" content="原文地址：廖雪峰的Python教程——递归函数">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-16T08:23:55.345Z">
+<meta property="og:updated_time" content="2018-10-17T02:40:06.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="尾递归优化">
-<meta name="twitter:description" content="原文地址：廖雪峰的Python教程——递归函数  阶乘 1234def fact(n):    if n == 1:        return 1    return n * fact(n - 1) 使用递归函数需要注意防止栈溢出。在计算机中，函数调用是通过栈（stack）这种数据结构实现的，每当进入一个函数调用，栈就会加一层栈帧，每当函数返回，栈就会减一层栈帧。由于栈的大小不是无限的，所以，递">
+<meta name="twitter:description" content="原文地址：廖雪峰的Python教程——递归函数">
 
 
 
@@ -355,6 +355,7 @@
       
         <p>原文地址：<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/00137473836826348026db722d9435483fa38c137b7e685000" target="_blank" rel="noopener">廖雪峰的Python教程——递归函数</a></p>
 <hr>
+<a id="more"></a>
 <p>阶乘</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> n * fact(n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <p>使用递归函数需要注意防止栈溢出。在计算机中，函数调用是通过栈（stack）这种数据结构实现的，每当进入一个函数调用，栈就会加一层栈帧，每当函数返回，栈就会减一层栈帧。由于栈的大小不是无限的，所以，递归调用的次数过多，会导致栈溢出。可以试试<code>fact(1000)</code>：</p>
@@ -734,6 +735,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

@@ -88,7 +88,7 @@
 <meta property="og:description" content="源出处：http://waret.iteye.com/blog/744169 线程安全函数 概念：线程安全的概念比较直观。一般说来，一个函数被称为线程安全的，当且仅当被多个并发线程反复调用时，它会一直产生正确的结果。 确保线程安全：要确保函数线程安全，主要需要考虑的是线程之间的共享变量。属于同一进程的不同线程会共享进程内存空间中的全局区和堆，而私有的线程空间则主要包括栈和寄存器。因此，对于同一进程">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://img-blog.csdn.net/20170414091711763?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDY4MDA5OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-10-16T08:38:08.343Z">
+<meta property="og:updated_time" content="2018-10-17T02:40:54.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程安全和可重入的区别">
 <meta name="twitter:description" content="源出处：http://waret.iteye.com/blog/744169 线程安全函数 概念：线程安全的概念比较直观。一般说来，一个函数被称为线程安全的，当且仅当被多个并发线程反复调用时，它会一直产生正确的结果。 确保线程安全：要确保函数线程安全，主要需要考虑的是线程之间的共享变量。属于同一进程的不同线程会共享进程内存空间中的全局区和堆，而私有的线程空间则主要包括栈和寄存器。因此，对于同一进程">
@@ -361,6 +361,7 @@
 <li>确保线程安全：<br>要确保函数线程安全，主要需要考虑的是线程之间的共享变量。属于同一进程的不同线程会共享进程内存空间中的全局区和堆，而私有的线程空间则主要包括栈和寄存器。因此，对于同一进程的不同线程来说，每个线程的局部变量都是私有的，而全局变量、局部静态变量、分配于堆的变量都是共享的。在对这些共享变量进行访 问时，如果要保证线程安全，则必须通过加锁的方式。</li>
 <li>线程不安全的后果：<br>线程不安全可能导致的后果是显而易见的——共享变量的值由于不同线程的访问，可能发生不可预料的变化，进而导致程序的错误，甚至崩溃。</li>
 </ul>
+<a id="more"></a>
 <h1 id="可重入函数"><a href="#可重入函数" class="headerlink" title="可重入函数"></a>可重入函数</h1><ul>
 <li>概念：<br>可重入的概念基本没有比较正式的完整解释，多数的文档都只是说明什么样的情况才能保证函数可重入，但没有完整定义。按照Wiki上的说法，“A computer program or routine is described as reentrant if it can be safely executed concurrently; that is, the routine can be re-entered while it is already running.”根据笔者的经验，所谓“重入”，常见的情况是，程序执行到某个函数foo()时，收到信号，于是暂停目前正在执行的函数，转到信号处理 函数，而这个信号处理函数的执行过程中，又恰恰也会进入到刚刚执行的函数foo()，这样便发生了所谓的重入。此时如果foo()能够正确的运行，而且处 理完成后，之前暂停的foo()也能够正确运行，则说明它是可重入的。</li>
 <li>确保可重入：<br>要确保函数可重入，需满足以下几个条件： <ol>
@@ -770,6 +771,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

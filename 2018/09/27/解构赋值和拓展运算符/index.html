@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="虾米俊">
 <meta property="og:description" content="用解构赋值过滤对象属性1234567891011// 过滤掉对象 types 中的 inner 和 outer 属性const &amp;#123; inner, outer, ...restProps &amp;#125; = &amp;#123;  inner: &apos;This is inner&apos;,  outer: &apos;This is outer&apos;,  v1: &apos;1&apos;,  v2: &apos;2&apos;,  v4: &apos;3&apos;&amp;#125;;c">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-12T07:00:47.309Z">
+<meta property="og:updated_time" content="2018-10-17T02:41:02.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解构赋值和拓展运算符">
 <meta name="twitter:description" content="用解构赋值过滤对象属性1234567891011// 过滤掉对象 types 中的 inner 和 outer 属性const &amp;#123; inner, outer, ...restProps &amp;#125; = &amp;#123;  inner: &apos;This is inner&apos;,  outer: &apos;This is outer&apos;,  v1: &apos;1&apos;,  v2: &apos;2&apos;,  v4: &apos;3&apos;&amp;#125;;c">
@@ -354,6 +354,7 @@
 
       
         <h2 id="用解构赋值过滤对象属性"><a href="#用解构赋值过滤对象属性" class="headerlink" title="用解构赋值过滤对象属性"></a>用解构赋值过滤对象属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 过滤掉对象 types 中的 inner 和 outer 属性</span></span><br><span class="line"><span class="keyword">const</span> &#123; inner, outer, ...restProps &#125; = &#123;</span><br><span class="line">  inner: <span class="string">'This is inner'</span>,</span><br><span class="line">  outer: <span class="string">'This is outer'</span>,</span><br><span class="line">  v1: <span class="string">'1'</span>,</span><br><span class="line">  v2: <span class="string">'2'</span>,</span><br><span class="line">  v4: <span class="string">'3'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(restProps);</span><br><span class="line"><span class="comment">// &#123;v1: "1", v2: "2", v4: "3"&#125;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="用解构赋值获取嵌套对象的属性"><a href="#用解构赋值获取嵌套对象的属性" class="headerlink" title="用解构赋值获取嵌套对象的属性"></a>用解构赋值获取嵌套对象的属性</h2><p>从一堆嵌套很深的对象属性中，很方便地拿到我们想要的那一个。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过解构赋值获取嵌套对象的值</span></span><br><span class="line"><span class="keyword">const</span> car = &#123;</span><br><span class="line">    model: <span class="string">'bmw 2018'</span>,</span><br><span class="line">    engine: &#123;</span><br><span class="line">        v6: <span class="literal">true</span>,</span><br><span class="line">        turbo: <span class="literal">true</span>,</span><br><span class="line">        vin: <span class="number">12345</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里使用 ES6 中的简单写法，使用 &#123; vin &#125; 替代 &#123; vin: vin &#125;</span></span><br><span class="line"><span class="keyword">const</span> modalAndVIN = <span class="function">(<span class="params">&#123; model, engine: &#123; vin &#125;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`model: <span class="subst">$&#123;model&#125;</span>, vin: <span class="subst">$&#123;vin&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">modalAndVIN(car);</span><br><span class="line"><span class="comment">// "model: bmw 2018, vin: 12345"</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="拓展运算符合并对象"><a href="#拓展运算符合并对象" class="headerlink" title="拓展运算符合并对象"></a>拓展运算符合并对象</h2><p>拓展运算符，可以用来解构数组，也可以用来解构对象，它可以将对象中的所有属性展开。</p>
 <p>通过这个特性，我们可以做一些对象合并的操作。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用拓展运算符合并对象，在后面的属性会重写前面相同属性的值</span></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: <span class="number">3</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> obj2 = &#123; <span class="attr">c</span>: <span class="number">5</span>, <span class="attr">d</span>: <span class="number">9</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> merged = &#123; ...obj1, ...obj2 &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(merged);</span><br><span class="line"><span class="comment">// &#123;a: 1, b: 2, c: 5, d: 9&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj3 = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> obj4 = &#123; <span class="attr">c</span>: <span class="number">3</span>, <span class="attr">d</span>: &#123; <span class="attr">e</span>: <span class="number">4</span>, ...obj3 &#125; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj4);</span><br><span class="line"><span class="comment">// &#123;c: 3, d: &#123;a: 1, b: 2, e: 4&#125; &#125;</span></span><br></pre></td></tr></table></figure></p>
@@ -387,8 +388,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/27/JOSN.stringfy小技巧/" rel="next" title="JOSN.stringfy小技巧">
-                <i class="fa fa-chevron-left"></i> JOSN.stringfy小技巧
+              <a href="/2018/09/27/从进程谈JS运行机制/" rel="next" title="从进程谈JS运行机制">
+                <i class="fa fa-chevron-left"></i> 从进程谈JS运行机制
               </a>
             
           </div>
@@ -748,6 +749,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

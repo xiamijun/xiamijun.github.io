@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="输入一个递增排序的数组和一个数字S，在数组中查找两个数，是的他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  输出描述:对应每个测试案例，输出两个数，小的先输出。 123456789101112131415161718192021function FindNumbersWithSum($array, $sum)&amp;#123;    //存放和为sum的数组    $sumArr">
+<meta name="description" content="输入一个递增排序的数组和一个数字S，在数组中查找两个数，是的他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  输出描述:对应每个测试案例，输出两个数，小的先输出。">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="和为S的两个数字">
 <meta property="og:url" content="http://yoursite.com/2018/10/16/和为S的两个数字/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="输入一个递增排序的数组和一个数字S，在数组中查找两个数，是的他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  输出描述:对应每个测试案例，输出两个数，小的先输出。 123456789101112131415161718192021function FindNumbersWithSum($array, $sum)&amp;#123;    //存放和为sum的数组    $sumArr">
+<meta property="og:description" content="输入一个递增排序的数组和一个数字S，在数组中查找两个数，是的他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  输出描述:对应每个测试案例，输出两个数，小的先输出。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-16T08:09:48.742Z">
+<meta property="og:updated_time" content="2018-10-17T02:39:43.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="和为S的两个数字">
-<meta name="twitter:description" content="输入一个递增排序的数组和一个数字S，在数组中查找两个数，是的他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  输出描述:对应每个测试案例，输出两个数，小的先输出。 123456789101112131415161718192021function FindNumbersWithSum($array, $sum)&amp;#123;    //存放和为sum的数组    $sumArr">
+<meta name="twitter:description" content="输入一个递增排序的数组和一个数字S，在数组中查找两个数，是的他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  输出描述:对应每个测试案例，输出两个数，小的先输出。">
 
 
 
@@ -355,6 +355,7 @@
       
         <p>输入一个递增排序的数组和一个数字S，在数组中查找两个数，是的他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。 </p>
 <p>输出描述:<br>对应每个测试案例，输出两个数，小的先输出。</p>
+<a id="more"></a>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindNumbersWithSum</span><span class="params">($array, $sum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//存放和为sum的数组</span></span><br><span class="line">    $sumArray = <span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">for</span> ($i=<span class="number">0</span>; $i&lt;count($array); $i++)&#123;</span><br><span class="line">        <span class="keyword">for</span> ($j=<span class="number">0</span>; $j&lt;count($array); $j++)&#123;</span><br><span class="line">            <span class="comment">//遍历。若和为sum，压入数组</span></span><br><span class="line">            <span class="keyword">if</span> (array_sum(<span class="keyword">array</span>($array[$i], $array[$j])) == $sum)&#123;</span><br><span class="line">                array_push($sumArray, <span class="keyword">array</span>($array[$i], $array[$j]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//若不存在和为sum，返回空数组</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($sumArray))&#123;</span><br><span class="line">        <span class="keyword">return</span> $sumArray;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//sumArray数组中两数乘积最小对应的键名</span></span><br><span class="line">    $key=array_keys($sumArray, min($sumArray))[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">//返回该两个数</span></span><br><span class="line">    <span class="keyword">return</span> $sumArray[$key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
@@ -722,6 +723,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

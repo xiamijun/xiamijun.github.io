@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在ES6中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。   其实，我们可以通过这个特性来做函数参数值的校验。   首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：123456789101112131415function fix(a = getA()) &amp;#123;  console.log(&apos;a&apos;, a)&amp;#125;function get">
+<meta name="description" content="在ES6中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。   其实，我们可以通过这个特性来做函数参数值的校验。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS函数参数值校验">
 <meta property="og:url" content="http://yoursite.com/2018/09/27/JS函数参数值校验/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="在ES6中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。   其实，我们可以通过这个特性来做函数参数值的校验。   首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：123456789101112131415function fix(a = getA()) &amp;#123;  console.log(&apos;a&apos;, a)&amp;#125;function get">
+<meta property="og:description" content="在ES6中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。   其实，我们可以通过这个特性来做函数参数值的校验。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-12T07:00:47.663Z">
+<meta property="og:updated_time" content="2018-10-17T02:38:53.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS函数参数值校验">
-<meta name="twitter:description" content="在ES6中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。   其实，我们可以通过这个特性来做函数参数值的校验。   首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：123456789101112131415function fix(a = getA()) &amp;#123;  console.log(&apos;a&apos;, a)&amp;#125;function get">
+<meta name="twitter:description" content="在ES6中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。   其实，我们可以通过这个特性来做函数参数值的校验。">
 
 
 
@@ -355,6 +355,7 @@
       
         <p>在<code>ES6</code>中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。  </p>
 <p>其实，我们可以通过这个特性来做函数参数值的校验。  </p>
+<a id="more"></a>
 <p>首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = getA(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getA</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'get a'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// get a</span></span><br><span class="line"><span class="comment">// a 2</span></span><br></pre></td></tr></table></figure></p>
 <p>可以看出，如果在调用<code>fix</code> <code>时传了参数</code>a<code></code>，则不会执行函数<code>getA</code>，只有当不传递参数<code>a</code>时，才会执行函数<code>getA</code>。</p>
 <p>这时候，我们可以利用这一特性，为参数<code>a</code>添加一个必传的校验，代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">a = require(</span>)) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'a'</span>, a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">require</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'缺少了参数 a'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fix(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// a 1</span></span><br><span class="line"></span><br><span class="line">fix();</span><br><span class="line"><span class="comment">// Uncaught Error: 缺少了参数 a</span></span><br></pre></td></tr></table></figure></p>
@@ -398,8 +399,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/27/background-attachment实现滚动视差/" rel="prev" title="background-attachment实现滚动视差">
-                background-attachment实现滚动视差 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/27/JOSN.stringfy小技巧/" rel="prev" title="JOSN.stringfy小技巧">
+                JOSN.stringfy小技巧 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -724,6 +725,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

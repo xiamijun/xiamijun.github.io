@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。 生成部署新SHH key输入命令1ssh-keygen -t rsa -C &amp;quot;xxxxx@xxxxx.com&amp;quot; 注意不要直接回车，第一步输入存储路径，可以找个其他路径先存放，再重命名后复制到.ssh目录下。   假设原有的自己的私">
+<meta name="description" content="前言公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一台电脑绑定两个git账号">
 <meta property="og:url" content="http://yoursite.com/2018/09/29/一台电脑绑定两个git账号/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="前言公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。 生成部署新SHH key输入命令1ssh-keygen -t rsa -C &amp;quot;xxxxx@xxxxx.com&amp;quot; 注意不要直接回车，第一步输入存储路径，可以找个其他路径先存放，再重命名后复制到.ssh目录下。   假设原有的自己的私">
+<meta property="og:description" content="前言公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-16T02:42:38.905Z">
+<meta property="og:updated_time" content="2018-10-17T02:39:29.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一台电脑绑定两个git账号">
-<meta name="twitter:description" content="前言公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。 生成部署新SHH key输入命令1ssh-keygen -t rsa -C &amp;quot;xxxxx@xxxxx.com&amp;quot; 注意不要直接回车，第一步输入存储路径，可以找个其他路径先存放，再重命名后复制到.ssh目录下。   假设原有的自己的私">
+<meta name="twitter:description" content="前言公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。">
 
 
 
@@ -354,6 +354,7 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。</p>
+<a id="more"></a>
 <h1 id="生成部署新SHH-key"><a href="#生成部署新SHH-key" class="headerlink" title="生成部署新SHH key"></a>生成部署新SHH key</h1><p>输入命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;xxxxx@xxxxx.com&quot;</span><br></pre></td></tr></table></figure></p>
 <p>注意不要直接回车，第一步输入存储路径，可以找个其他路径先存放，再重命名后复制到.ssh目录下。  </p>
 <p>假设原有的自己的私钥和公钥分别命名为id_rsa和id_rsa.pub，<br>新的公司的私钥和公钥分别命名为id_rsa_company和id_rsa_company.pub。  </p>
@@ -759,6 +760,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

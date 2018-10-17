@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用sonar进行代码扫描。而JavaScript是弱类型语言，其实很有扫描检查的必要。sonar支持JS和typeScript的扫描，不支持Vue。因此改用eslint进行代码扫描。平常在开发中，都是嫌麻烦把eslint关掉的。。   安装依赖除了安装eslint以外，还需安装eslint-plugin-vue插件来检查Vue代码。">
+<meta name="description" content="前言最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用sonar进行代码扫描。而JavaScript是弱类型语言，其实很有扫描检查的必要。sonar支持JS和typeScript的扫描，不支持Vue。因此改用eslint进行代码扫描。平常在开发中，都是嫌麻烦把eslint关掉的。。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="eslint进行代码检查">
 <meta property="og:url" content="http://yoursite.com/2018/09/28/eslint进行代码检查/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="前言最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用sonar进行代码扫描。而JavaScript是弱类型语言，其实很有扫描检查的必要。sonar支持JS和typeScript的扫描，不支持Vue。因此改用eslint进行代码扫描。平常在开发中，都是嫌麻烦把eslint关掉的。。   安装依赖除了安装eslint以外，还需安装eslint-plugin-vue插件来检查Vue代码。">
+<meta property="og:description" content="前言最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用sonar进行代码扫描。而JavaScript是弱类型语言，其实很有扫描检查的必要。sonar支持JS和typeScript的扫描，不支持Vue。因此改用eslint进行代码扫描。平常在开发中，都是嫌麻烦把eslint关掉的。。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-12T07:00:47.455Z">
+<meta property="og:updated_time" content="2018-10-17T02:38:14.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="eslint进行代码检查">
-<meta name="twitter:description" content="前言最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用sonar进行代码扫描。而JavaScript是弱类型语言，其实很有扫描检查的必要。sonar支持JS和typeScript的扫描，不支持Vue。因此改用eslint进行代码扫描。平常在开发中，都是嫌麻烦把eslint关掉的。。   安装依赖除了安装eslint以外，还需安装eslint-plugin-vue插件来检查Vue代码。">
+<meta name="twitter:description" content="前言最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用sonar进行代码扫描。而JavaScript是弱类型语言，其实很有扫描检查的必要。sonar支持JS和typeScript的扫描，不支持Vue。因此改用eslint进行代码扫描。平常在开发中，都是嫌麻烦把eslint关掉的。。">
 
 
 
@@ -354,6 +354,7 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用<code>sonar</code>进行代码扫描。而<code>JavaScript</code>是弱类型语言，其实很有扫描检查的必要。<br><code>sonar</code>支持<code>JS</code>和<code>typeScript</code>的扫描，不支持<code>Vue</code>。因此改用<code>eslint</code>进行代码扫描。<br>平常在开发中，都是嫌麻烦把<code>eslint</code>关掉的。。  </p>
+<a id="more"></a>
 <h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>除了安装<code>eslint</code>以外，还需安装<code>eslint-plugin-vue</code>插件来检查<code>Vue</code>代码。<br>直接<code>-g</code>吧。<br><code>npm install eslint eslint-plugin-vue -g</code></p>
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>一般推荐使用配置文件进行配置，在项目根目录下创建<code>.eslintrc.json</code>，其中写入各个配置项。<br>如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"root"</span>: <span class="literal">true</span>,</span><br><span class="line">    //此项是用来告诉eslint找当前配置文件不能往父级查找</span><br><span class="line">    "extends": ["plugin:vue/essential","eslint:recommended"],</span><br><span class="line">    //vue插件和推荐eslint规则</span><br><span class="line">    "parserOptions": &#123;</span><br><span class="line">        "ecmaVersion": 6,</span><br><span class="line">        "sourceType": "module",</span><br><span class="line">        "ecmaFeatures": &#123;</span><br><span class="line">            "jsx": true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    //指定为浏览器环境</span><br><span class="line">    "env": &#123;</span><br><span class="line">        "es6": true,</span><br><span class="line">        "browser": true,</span><br><span class="line">        "node": true</span><br><span class="line">    &#125;,</span><br><span class="line">    "rules": &#123;</span><br><span class="line">        "camelcase": "error",</span><br><span class="line">        "eqeqeq": "error",</span><br><span class="line">        "no-console": "error",</span><br><span class="line">        "no-alert": "error",</span><br><span class="line">        "require-jsdoc": ["error", &#123;</span><br><span class="line">            "require": &#123;</span><br><span class="line">                "FunctionDeclaration": false,</span><br><span class="line">                "MethodDefinition": false,</span><br><span class="line">                "ClassDeclaration": false,</span><br><span class="line">                "ArrowFunctionExpression": false</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;],</span><br><span class="line">        "new-cap": "error",</span><br><span class="line">        "brace-style": "error",</span><br><span class="line">        "comma-dangle": "error",</span><br><span class="line">        "no-param-reassign": "error"</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>注意json中不能有注释，复制下来记得删除注释。</p>
@@ -432,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/27/JS函数收藏/" rel="next" title="JS函数收藏">
-                <i class="fa fa-chevron-left"></i> JS函数收藏
+              <a href="/2018/09/27/JOSN.stringfy小技巧/" rel="next" title="JOSN.stringfy小技巧">
+                <i class="fa fa-chevron-left"></i> JOSN.stringfy小技巧
               </a>
             
           </div>
@@ -793,6 +794,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

@@ -88,7 +88,7 @@
 <meta property="og:description" content="[TOC] 什么是hexo基于Node.js的博客框架，使用Markdown解析文章 安装安装前提必须安装以下环境：  Node.js  Git   安装hexo$ npm install -g hexo-cli全局安装   123$ hexo init &amp;lt;folder&amp;gt;$ cd &amp;lt;folder&amp;gt;$ npm install 目录结构12345678.├── _config.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="e:/我的坚果云/讯飞/分享/图/hexo1.png">
-<meta property="og:updated_time" content="2018-10-16T02:39:32.377Z">
+<meta property="og:updated_time" content="2018-10-17T02:37:52.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo使用指南">
 <meta name="twitter:description" content="[TOC] 什么是hexo基于Node.js的博客框架，使用Markdown解析文章 安装安装前提必须安装以下环境：  Node.js  Git   安装hexo$ npm install -g hexo-cli全局安装   123$ hexo init &amp;lt;folder&amp;gt;$ cd &amp;lt;folder&amp;gt;$ npm install 目录结构12345678.├── _config.">
@@ -397,8 +397,35 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
 <p>在浏览器中打开<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a></p>
 <p><img src="E:\我的坚果云\讯飞\分享\图\hexo1.png" alt=""></p>
-<h2 id="部署到Github-Page"><a href="#部署到Github-Page" class="headerlink" title="部署到Github Page"></a>部署到Github Page</h2><p>新建一个名为<code>yourname.github.io</code>的库</p>
-<p>在<code>_config.yml</code>文件中，找到<code>Deployment</code>，然后按照如下修改，用户名改成你自己的GitHub信息：<br>需要注意的是：冒号后面记得空一格！</p>
+<h2 id="部署到Github-Page"><a href="#部署到Github-Page" class="headerlink" title="部署到Github Page"></a>部署到Github Page</h2><h3 id="创建库"><a href="#创建库" class="headerlink" title="创建库"></a>创建库</h3><p>新建一个名为<code>yourname.github.io</code>的库</p>
+<p>在<code>setting</code>中开启<code>github page</code></p>
+<h3 id="配置Deployment"><a href="#配置Deployment" class="headerlink" title="配置Deployment"></a>配置Deployment</h3><p>在<code>_config.yml</code>文件中，找到<code>Deployment</code>，然后按照如下修改，用户名改成自己的GitHub信息：<br>需要注意的是：冒号后面记得空一格！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:xiamijun/xiamijun.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h3 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 生成新的 public 文件</span><br><span class="line">hexo generate</span><br><span class="line">或者</span><br><span class="line">hexo g</span><br><span class="line">// 开始部署</span><br><span class="line">hexo deploye</span><br><span class="line">或者</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<h3 id="排错"><a href="#排错" class="headerlink" title="排错"></a>排错</h3><ul>
+<li><p>部署完毕后，<code>githubPage</code>打开显示<code>404</code>，项目<code>setting</code>中的<code>githubPage</code>项提示：<code>The tag fancybox on line 77 in theme/landspace/README.md is not recognized Liquid tag</code></p>
+<p>解决办法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf .deploy_git</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提示没有git仓库</p>
+<p>解决办法：</p>
+<p><code>git init</code></p>
+</li>
+<li><p>其他报错</p>
+<p><a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">github issue</a></p>
+</li>
+</ul>
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><h2 id="解析到个人域名"><a href="#解析到个人域名" class="headerlink" title="解析到个人域名"></a>解析到个人域名</h2><p>GitHub 仓库的根目录下建立一个 <code>CNAME</code> 的文本文件(注意：没有扩展名)，文件里面只能输入一个你的域名，不能加http://</p>
+<p><code>www.xxxxx.com</code></p>
+<p>进入域名提供商地址，添加解析</p>
+<ul>
+<li><p><strong>注意：</strong>CNAME文件在下次 hexo deploy的时候就消失了，需要重新创建，这样就很繁琐</p>
+<p>方法：通过安装插件实现永久保留</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-cname --save</span><br></pre></td></tr></table></figure>
+<p>之后在<code>_config.yml</code>中添加一条</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line">- hexo-generator-cname</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -597,7 +624,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是hexo"><span class="nav-number">1.</span> <span class="nav-text">什么是hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装前提"><span class="nav-number">2.1.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo"><span class="nav-number">2.2.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.3.</span> <span class="nav-text">目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#config-yml"><span class="nav-number">2.3.1.</span> <span class="nav-text">_config.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scaffolds"><span class="nav-number">2.3.2.</span> <span class="nav-text">scaffolds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#source"><span class="nav-number">2.3.3.</span> <span class="nav-text">source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#themes"><span class="nav-number">2.3.4.</span> <span class="nav-text">themes</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写作"><span class="nav-number">3.</span> <span class="nav-text">写作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布"><span class="nav-number">4.</span> <span class="nav-text">发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地部署"><span class="nav-number">4.1.</span> <span class="nav-text">本地部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到Github-Page"><span class="nav-number">4.2.</span> <span class="nav-text">部署到Github Page</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是hexo"><span class="nav-number">1.</span> <span class="nav-text">什么是hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装前提"><span class="nav-number">2.1.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo"><span class="nav-number">2.2.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.3.</span> <span class="nav-text">目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#config-yml"><span class="nav-number">2.3.1.</span> <span class="nav-text">_config.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scaffolds"><span class="nav-number">2.3.2.</span> <span class="nav-text">scaffolds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#source"><span class="nav-number">2.3.3.</span> <span class="nav-text">source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#themes"><span class="nav-number">2.3.4.</span> <span class="nav-text">themes</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写作"><span class="nav-number">3.</span> <span class="nav-text">写作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布"><span class="nav-number">4.</span> <span class="nav-text">发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地部署"><span class="nav-number">4.1.</span> <span class="nav-text">本地部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到Github-Page"><span class="nav-number">4.2.</span> <span class="nav-text">部署到Github Page</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建库"><span class="nav-number">4.2.1.</span> <span class="nav-text">创建库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Deployment"><span class="nav-number">4.2.2.</span> <span class="nav-text">配置Deployment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交"><span class="nav-number">4.2.3.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排错"><span class="nav-number">4.2.4.</span> <span class="nav-text">排错</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进阶"><span class="nav-number">5.</span> <span class="nav-text">进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解析到个人域名"><span class="nav-number">5.1.</span> <span class="nav-text">解析到个人域名</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -790,6 +817,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

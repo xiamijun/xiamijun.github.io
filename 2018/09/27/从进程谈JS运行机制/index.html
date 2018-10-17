@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="进程和线程 进程之间相互独立。 一个进程由一个或多个线程组成。 多个线程在进程中协作完成任务。 同一进程下的各个线程之间共享程序的内存空间。 进程是cpu资源分配的最小单位。 线程是cpu调度的最小单位。  浏览器是多进程的 浏览器每打开一个tab标签页，任务管理器会多加一条记录。  浏览器包含哪些进程 Browser进程主进程，只有一个作用：用户交互，如前进，后退。页面的管理，创建和销毁其他进程">
+<meta name="description" content="进程和线程 进程之间相互独立。 一个进程由一个或多个线程组成。 多个线程在进程中协作完成任务。 同一进程下的各个线程之间共享程序的内存空间。 进程是cpu资源分配的最小单位。 线程是cpu调度的最小单位。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从进程谈JS运行机制">
 <meta property="og:url" content="http://yoursite.com/2018/09/27/从进程谈JS运行机制/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="进程和线程 进程之间相互独立。 一个进程由一个或多个线程组成。 多个线程在进程中协作完成任务。 同一进程下的各个线程之间共享程序的内存空间。 进程是cpu资源分配的最小单位。 线程是cpu调度的最小单位。  浏览器是多进程的 浏览器每打开一个tab标签页，任务管理器会多加一条记录。  浏览器包含哪些进程 Browser进程主进程，只有一个作用：用户交互，如前进，后退。页面的管理，创建和销毁其他进程">
+<meta property="og:description" content="进程和线程 进程之间相互独立。 一个进程由一个或多个线程组成。 多个线程在进程中协作完成任务。 同一进程下的各个线程之间共享程序的内存空间。 进程是cpu资源分配的最小单位。 线程是cpu调度的最小单位。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/xiamijun/blog/blob/master/images/thread.png?raw=true">
 <meta property="og:image" content="https://github.com/xiamijun/blog/blob/master/images/eventLoop.png?raw=true">
 <meta property="og:image" content="http://yoursite.com/2018/09/27/从进程谈JS运行机制/(https://github.com/xiamijun/blog/blob/master/images/task.png?raw=true">
-<meta property="og:updated_time" content="2018-10-12T07:00:47.611Z">
+<meta property="og:updated_time" content="2018-10-17T02:39:36.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从进程谈JS运行机制">
-<meta name="twitter:description" content="进程和线程 进程之间相互独立。 一个进程由一个或多个线程组成。 多个线程在进程中协作完成任务。 同一进程下的各个线程之间共享程序的内存空间。 进程是cpu资源分配的最小单位。 线程是cpu调度的最小单位。  浏览器是多进程的 浏览器每打开一个tab标签页，任务管理器会多加一条记录。  浏览器包含哪些进程 Browser进程主进程，只有一个作用：用户交互，如前进，后退。页面的管理，创建和销毁其他进程">
+<meta name="twitter:description" content="进程和线程 进程之间相互独立。 一个进程由一个或多个线程组成。 多个线程在进程中协作完成任务。 同一进程下的各个线程之间共享程序的内存空间。 进程是cpu资源分配的最小单位。 线程是cpu调度的最小单位。">
 <meta name="twitter:image" content="https://github.com/xiamijun/blog/blob/master/images/thread.png?raw=true">
 
 
@@ -365,6 +365,7 @@
 <li>进程是cpu资源分配的最小单位。</li>
 <li>线程是cpu调度的最小单位。</li>
 </ul>
+<a id="more"></a>
 <h2 id="浏览器是多进程的"><a href="#浏览器是多进程的" class="headerlink" title="浏览器是多进程的"></a>浏览器是多进程的</h2><ul>
 <li>浏览器每打开一个tab标签页，任务管理器会多加一条记录。</li>
 </ul>
@@ -503,8 +504,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/21/hexo排坑实录/" rel="next" title="hexo排坑实录">
-                <i class="fa fa-chevron-left"></i> hexo排坑实录
+              <a href="/2018/09/27/JS函数收藏/" rel="next" title="JS函数收藏">
+                <i class="fa fa-chevron-left"></i> JS函数收藏
               </a>
             
           </div>
@@ -513,8 +514,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/27/JOSN.stringfy小技巧/" rel="prev" title="JOSN.stringfy小技巧">
-                JOSN.stringfy小技巧 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/27/解构赋值和拓展运算符/" rel="prev" title="解构赋值和拓展运算符">
+                解构赋值和拓展运算符 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -864,6 +865,48 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'xiamijun',
+            repo: 'https://xiamijun.github.io/',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '447cb16a66197014c56463445528a040662877c9',
+            
+                client_id: 'ae95d849a6c6391dee0b'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 
