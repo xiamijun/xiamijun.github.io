@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="原文地址：廖雪峰的Python教程——函数的参数  先定义一个函数，传入一个list，添加一个END再返回： 123def add_end(L = []):    L.append(&apos;END&apos;)    return L 当你正常调用时，结果似乎不错： 1234&amp;gt;&amp;gt;&amp;gt; add_end([1, 2, 3])[1, 2, 3, &apos;END&apos;]&amp;gt;&amp;gt;&amp;gt; add_end([&apos;">
+<meta name="description" content="原文地址：廖雪峰的Python教程——函数的参数  先定义一个函数，传入一个list，添加一个END再返回： 123def add_end(L = []):    L.append(&apos;END&apos;)    return L">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python坑之——默认参数必须指向不变对象">
 <meta property="og:url" content="http://yoursite.com/2018/10/16/Python坑之——默认参数必须指向不变对象/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="原文地址：廖雪峰的Python教程——函数的参数  先定义一个函数，传入一个list，添加一个END再返回： 123def add_end(L = []):    L.append(&apos;END&apos;)    return L 当你正常调用时，结果似乎不错： 1234&amp;gt;&amp;gt;&amp;gt; add_end([1, 2, 3])[1, 2, 3, &apos;END&apos;]&amp;gt;&amp;gt;&amp;gt; add_end([&apos;">
+<meta property="og:description" content="原文地址：廖雪峰的Python教程——函数的参数  先定义一个函数，传入一个list，添加一个END再返回： 123def add_end(L = []):    L.append(&apos;END&apos;)    return L">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-16T08:25:03.948Z">
+<meta property="og:updated_time" content="2018-11-12T05:52:32.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python坑之——默认参数必须指向不变对象">
-<meta name="twitter:description" content="原文地址：廖雪峰的Python教程——函数的参数  先定义一个函数，传入一个list，添加一个END再返回： 123def add_end(L = []):    L.append(&apos;END&apos;)    return L 当你正常调用时，结果似乎不错： 1234&amp;gt;&amp;gt;&amp;gt; add_end([1, 2, 3])[1, 2, 3, &apos;END&apos;]&amp;gt;&amp;gt;&amp;gt; add_end([&apos;">
+<meta name="twitter:description" content="原文地址：廖雪峰的Python教程——函数的参数  先定义一个函数，传入一个list，添加一个END再返回： 123def add_end(L = []):    L.append(&apos;END&apos;)    return L">
 
 
 
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -197,6 +197,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
           </a>
         </li>
       
@@ -356,6 +366,7 @@
 <hr>
 <p>先定义一个函数，传入一个list，添加一个<code>END</code>再返回：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_end</span><span class="params">(L = [])</span>:</span></span><br><span class="line">    L.append(<span class="string">'END'</span>)</span><br><span class="line">    <span class="keyword">return</span> L</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>当你正常调用时，结果似乎不错：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>add_end([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">'END'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add_end([<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>])</span><br><span class="line">[<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>, <span class="string">'END'</span>]</span><br></pre></td></tr></table></figure>
 <p>当你使用默认参数调用时，一开始结果也是对的：</p>
@@ -513,10 +524,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
-                
+                </a>
               </div>
             
 
@@ -571,15 +582,9 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -678,6 +683,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>

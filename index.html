@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -97,7 +97,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -197,6 +197,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
           </a>
         </li>
       
@@ -345,134 +355,16 @@
 
       
         
-          
-            <p>[TOC]</p>
-<h1 id="申请账号"><a href="#申请账号" class="headerlink" title="申请账号"></a>申请账号</h1><p>点击<a href="https://mp.weixin.qq.com/wxopen/waregister?action=step1" target="_blank" rel="noopener">https://mp.weixin.qq.com/wxopen/waregister?action=step1 </a>申请账号</p>
+          <h1 id="申请账号"><a href="#申请账号" class="headerlink" title="申请账号"></a>申请账号</h1><p>点击<a href="https://mp.weixin.qq.com/wxopen/waregister?action=step1" target="_blank" rel="noopener">https://mp.weixin.qq.com/wxopen/waregister?action=step1 </a>申请账号</p>
 <p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E6%B3%A8%E5%86%8C.png" alt="注册"></p>
 <p>注册成功后，可登陆微信公众平台<a href="https://mp.weixin.qq.com/" target="_blank" rel="noopener">https://mp.weixin.qq.com](https://mp.weixin.qq.com</a>)在菜单 <code>设置-开发设置</code> 看到小程序的 <strong>AppID</strong> 了 。</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/appid.png" alt=""></p>
-<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p>新建项目时，选择空白文件夹，可创建quickStart示例项目。</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E6%96%B0%E5%BB%BAquickStart.png" alt=""></p>
-<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>其目录结构如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">│  app.js		----------------------------程序入口</span><br><span class="line">│  app.json		--------------------------全局配置</span><br><span class="line">│  app.wxss		--------------------------全局样式</span><br><span class="line">│  project.config.json	----------------项目配置</span><br><span class="line">│  </span><br><span class="line">├─pages	--------------------------------页面文件夹</span><br><span class="line">│  ├─index</span><br><span class="line">│  │      index.js	--------------------js</span><br><span class="line">│  │      index.wxml	------------------html</span><br><span class="line">│  │      index.wxss	------------------css</span><br><span class="line">│  │      </span><br><span class="line">│  └─logs</span><br><span class="line">│          logs.js</span><br><span class="line">│          logs.json	------------------页面配置</span><br><span class="line">│          logs.wxml</span><br><span class="line">│          logs.wxss</span><br><span class="line">│          </span><br><span class="line">└─utils	--------------------------------工具类</span><br><span class="line">        util.js</span><br></pre></td></tr></table></figure>
-<h3 id="json配置"><a href="#json配置" class="headerlink" title="json配置"></a>json配置</h3><p>配置页面路径、窗口表现、设置多 tab 等。</p>
-<p>单个页面的json配置只有window一项。</p>
-<h3 id="app-js"><a href="#app-js" class="headerlink" title="app.js"></a>app.js</h3><p>程序入口。</p>
-<p><code>App()</code> 必须在<code>app.js</code>中调用，必须调用且只能调用一次。接受一个 <code>Object</code> 参数，其指定小程序的生命周期回调等。</p>
-<p>还可以在<code>app.js</code>中定义全局变量。</p>
-<p>示例代码中在初始化小程序时，做了如下几件事。</p>
-<p>1、调用  <a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html" target="_blank" rel="noopener">wx.login()</a>  获取临时登录凭证code，可回传到开发者服务器。</p>
-<p>2、使用  <a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/setting/wx.getSetting.html" target="_blank" rel="noopener">wx.getSetting()</a>  获取用户当前的授权状态。</p>
-<p>3、调用接口  <a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/wx.getUserInfo.html" target="_blank" rel="noopener">wx.getUserInfo()</a> ，获取用户信息。</p>
-<h1 id="发布准备"><a href="#发布准备" class="headerlink" title="发布准备"></a>发布准备</h1><h2 id="团队身份管理"><a href="#团队身份管理" class="headerlink" title="团队身份管理"></a>团队身份管理</h2><p>可在微信公众平台统一管理项目成员、设置项目成员的权限。</p>
-<p>入口：<code>用户身份 – 成员管理</code></p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD.png" alt=""></p>
-<p>权限说明：</p>
-<table>
-<thead>
-<tr>
-<th>权限</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>开发者权限</td>
-<td>可使用小程序开发者工具进行开发</td>
-</tr>
-<tr>
-<td>体验者权限</td>
-<td>可使用体验版小程序</td>
-</tr>
-<tr>
-<td>登录</td>
-<td>可登录小程序管理后台，无需管理员确认</td>
-</tr>
-<tr>
-<td>数据分析</td>
-<td>使用小程序数据分析功能查看小程序数据</td>
-</tr>
-<tr>
-<td>开发管理</td>
-<td>小程序提交审核、发布、回退</td>
-</tr>
-<tr>
-<td>开发设置</td>
-<td>设置小程序服务器域名、消息推送</td>
-</tr>
-<tr>
-<td>暂停服务设置</td>
-<td>暂停小程序线上服务</td>
-</tr>
-</tbody>
-</table>
-<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>每个小程序需要事先设置通讯域名，小程序可以跟指定的域名与进行网络通信。包括普通 HTTPS 请求（<code>request</code>）、上传文件（<code>uploadFile</code>）、下载文件（<code>downloadFile</code>) 和 WebSocket 通信（<code>connectSocket</code>）。</p>
-<p>在<code>微信公众平台 - 设置 - 开发设置 - 服务器域名</code>中，可配置服务器域名。</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E5%9F%9F%E5%90%8D.png" alt=""></p>
-<blockquote>
-<ul>
-<li>必须使用https请求</li>
-</ul>
-<ul>
-<li>域名不能使用 IP 地址或 localhost</li>
-<li>域名必须经过 ICP 备案</li>
-</ul>
-</blockquote>
-<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p>使用开发者工具可以预览小程序。 </p>
-<p>点击开发者工具顶部预览按钮，开发者工具会自动打包当前项目，并上传小程序代码至微信的服务器，成功之后会在界面上显示一个二维码。使用<strong>当前小程序开发者</strong>的微信扫码即可看到小程序在手机客户端上的真实表现。</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E9%A2%84%E8%A7%88.png" alt=""></p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E9%A2%84%E8%A7%882.png" alt=""></p>
-<h2 id="上传代码"><a href="#上传代码" class="headerlink" title="上传代码"></a>上传代码</h2><p>同预览不同，上传代码是用于提交体验或者审核使用的。</p>
-<p>点击开发者工具顶部操作栏的上传按钮，填写版本号以及项目备注。上传成功之后，登录<code>微信公众平台 - 开发管理 - 开发版本</code> 就可以找到刚提交上传的版本了。</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E4%B8%8A%E4%BC%A0.png" alt=""></p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E4%B8%8A%E4%BC%A02.png" alt=""></p>
-<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><table>
-<thead>
-<tr>
-<th>版本</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>开发版本</td>
-<td>使用开发者工具，可将代码上传到开发版本中。开发版本只保留每人最新的一份上传代码。可将代码提交审核。开发版本可删除，不影响线上版本和审核中版本的代码。</td>
-</tr>
-<tr>
-<td>体验版本</td>
-<td>供测试人员和产品经理测试的版本。可将开发版本选为体验版本。</td>
-</tr>
-<tr>
-<td>审核中版本</td>
-<td>只能有一份代码处于审核中。有审核结果后可以发布到线上，也可直接重新提交审核，覆盖原审核版本。</td>
-</tr>
-<tr>
-<td>线上版本</td>
-<td>线上所有用户使用的代码版本，该版本代码在新版本代码发布后被覆盖更新。</td>
-</tr>
-</tbody>
-</table>
-<h1 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h1><h2 id="填写基本信息"><a href="#填写基本信息" class="headerlink" title="填写基本信息"></a>填写基本信息</h2><p>小程序须先完成小程序基本资料填写后，方可提交审核。入口：<code>微信公众平台 - 设置 - 基本设置</code></p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E4%BF%A1%E6%81%AF.png" alt=""></p>
-<h2 id="提交审核"><a href="#提交审核" class="headerlink" title="提交审核"></a>提交审核</h2><p><code>微信公众平台 - 开发管理 - 开发版本</code>中提交审核，填写相关信息。</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E5%AE%A1%E6%A0%B8.png" alt=""></p>
-<p>提交完毕后，可在审核版本中看到相关信息。</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E5%AE%A1%E6%A0%B82.png" alt=""></p>
-<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>审核通过之后，管理员的微信中会收到审核通过的通知，此时登录 <code>微信公众平台 - 开发管理 - 审核版本</code>中可以看到通过审核的版本。</p>
-<p>请点击发布，即可发布小程序。</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E5%8F%91%E5%B8%83.png" alt=""></p>
-<p>发布完成后，可在 <code>微信公众平台 - 设置 - 基本设置</code>中下载自己小程序的二维码。（搜小程序名字暂时搜不到）</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E6%88%91%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg" alt=""></p>
-<h2 id="运营数据"><a href="#运营数据" class="headerlink" title="运营数据"></a>运营数据</h2><p>有两种方式可以方便的看到小程序的运营数据。</p>
-<p>方法一：</p>
-<p>登录 <code>微信公众平台 - 数据分析</code></p>
-<p>点击相应的 tab 可以看到相关的数据。</p>
-<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90.png" alt=""></p>
-<p>方法二：</p>
-<p>使用小程序数据助手，在微信中方便的查看运营数据。</p>
-<p><img src="https://developers.weixin.qq.com/miniprogram/dev/image/quickstart/mydata.jpeg?t=18110616" alt=""></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/12/小程序系列一——小程序部署手册/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -611,21 +503,15 @@
 
       
         
-          
-            <h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><h2 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h2><h3 id="Chinese-Simplified-Language-Pack-for-Visual-Studio-Code"><a href="#Chinese-Simplified-Language-Pack-for-Visual-Studio-Code" class="headerlink" title="Chinese (Simplified) Language Pack for Visual Studio Code"></a>Chinese (Simplified) Language Pack for Visual Studio Code</h3><p>适用于 VS Code 的中文（简体）语言包</p>
+          <h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><h2 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h2><h3 id="Chinese-Simplified-Language-Pack-for-Visual-Studio-Code"><a href="#Chinese-Simplified-Language-Pack-for-Visual-Studio-Code" class="headerlink" title="Chinese (Simplified) Language Pack for Visual Studio Code"></a>Chinese (Simplified) Language Pack for Visual Studio Code</h3><p>适用于 VS Code 的中文（简体）语言包</p>
 <p>安装后，在 <code>locale.json</code> 中添加 <code>&quot;locale&quot;: &quot;zh-cn&quot;</code>，即可载入中文（简体）语言包。要修改 <code>locale.json</code>，你可以同时按下 <code>Ctrl+Shift+P</code> 打开命令面板，之后输入config` 筛选</p>
-<h3 id="JetBrains-IDE-Keymap"><a href="#JetBrains-IDE-Keymap" class="headerlink" title="JetBrains IDE Keymap"></a>JetBrains IDE Keymap</h3><p>webStorm的快捷键</p>
-<h3 id="Path-Intellisense"><a href="#Path-Intellisense" class="headerlink" title="Path Intellisense"></a>Path Intellisense</h3><p>文件路径提示</p>
-<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><h3 id="beautify"><a href="#beautify" class="headerlink" title="beautify"></a>beautify</h3><p>美化<code>JS</code>, <code>JSON</code>, <code>CSS</code>, <code>Sass</code>, 和<code>HTML</code>代码</p>
-<p>按<code>F1</code>键选择<code>Beautify file</code></p>
-<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><h3 id="Vetur"><a href="#Vetur" class="headerlink" title="Vetur"></a>Vetur</h3><p>Vue代码高亮、格式化、自动补全、eslint检查</p>
-<h2 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h2><h3 id="minapp"><a href="#minapp" class="headerlink" title="minapp"></a>minapp</h3><p>小程序标签、属性自动补全</p>
-<h3 id="vscode-weapp-api"><a href="#vscode-weapp-api" class="headerlink" title="vscode weapp api"></a>vscode weapp api</h3><p>小程序 API 提示及代码片段</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="自动保存"><a href="#自动保存" class="headerlink" title="自动保存"></a>自动保存</h2><p>勾选<code>文件-自动保存</code></p>
-<h2 id="代码片段"><a href="#代码片段" class="headerlink" title="代码片段"></a>代码片段</h2><h3 id="Vue模板"><a href="#Vue模板" class="headerlink" title="Vue模板"></a>Vue模板</h3><p><code>文件-首选项-用户代码片段-vue.json</code>：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"Print to console"</span>: &#123;</span><br><span class="line">		<span class="attr">"prefix"</span>: <span class="string">"vue"</span>,</span><br><span class="line">		<span class="attr">"body"</span>: [</span><br><span class="line">			<span class="string">"&lt;template&gt;"</span>,</span><br><span class="line">			<span class="string">"  &lt;div&gt;\n"</span>,</span><br><span class="line">			<span class="string">"  &lt;/div&gt;"</span>,</span><br><span class="line">			<span class="string">"&lt;/template&gt;\n"</span>,</span><br><span class="line">			<span class="string">"&lt;script&gt;"</span>,</span><br><span class="line">			<span class="string">"  export default &#123;"</span>,</span><br><span class="line">			<span class="string">"    data () &#123;"</span>,</span><br><span class="line">			<span class="string">"      return &#123;\n"</span>,</span><br><span class="line">			<span class="string">"      &#125;"</span>,</span><br><span class="line">			<span class="string">"    &#125;,"</span>,</span><br><span class="line">			<span class="string">"  &#125;"</span>,</span><br><span class="line">			<span class="string">"&lt;/script&gt;\n"</span>,</span><br><span class="line">			<span class="string">"&lt;style&gt;\n"</span>,</span><br><span class="line">			<span class="string">"  "</span>,</span><br><span class="line">			<span class="string">"&lt;/style&gt;"</span>,</span><br><span class="line">			<span class="string">"$2"</span></span><br><span class="line">		],</span><br><span class="line">		<span class="attr">"description"</span>: <span class="string">"output Vue template"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/12/VsCode插件和配置/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1058,28 +944,17 @@
 
       
         
-          
-            <p>原文地址：<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001374738449338c8a122a7f2e047899fc162f4a7205ea3000" target="_blank" rel="noopener">廖雪峰的Python教程——函数的参数</a></p>
+          <p>原文地址：<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001374738449338c8a122a7f2e047899fc162f4a7205ea3000" target="_blank" rel="noopener">廖雪峰的Python教程——函数的参数</a></p>
 <hr>
 <p>先定义一个函数，传入一个list，添加一个<code>END</code>再返回：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_end</span><span class="params">(L = [])</span>:</span></span><br><span class="line">    L.append(<span class="string">'END'</span>)</span><br><span class="line">    <span class="keyword">return</span> L</span><br></pre></td></tr></table></figure>
-<p>当你正常调用时，结果似乎不错：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>add_end([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">'END'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add_end([<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>])</span><br><span class="line">[<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>, <span class="string">'END'</span>]</span><br></pre></td></tr></table></figure>
-<p>当你使用默认参数调用时，一开始结果也是对的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>add_end()</span><br><span class="line">[<span class="string">'END'</span>]</span><br></pre></td></tr></table></figure>
-<p>但是，再次调用<code>add_end()</code>时，结果就不对了：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>add_end()</span><br><span class="line">[<span class="string">'END'</span>, <span class="string">'END'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add_end()</span><br><span class="line">[<span class="string">'END'</span>, <span class="string">'END'</span>, <span class="string">'END'</span>]</span><br></pre></td></tr></table></figure>
-<p>默认参数是<code>[]</code>，但是函数似乎每次都“记住了”上次添加了<code>&#39;END&#39;</code>后的list。</p>
-<hr>
-<p>原因解释如下：</p>
-<p>Python函数在定义的时候，默认参数L的值就被计算出来了，即<code>[]</code>，因为默认参数<code>L</code>也是一个变量，它指向对象<code>[]</code>，每次调用该函数，如果改变了<code>L</code>的内容，则下次调用时，默认参数的内容就变了，不再是函数定义时的<code>[]</code>了。</p>
-<p>所以，定义默认参数要牢记一点：默认参数必须指向不变对象！</p>
-<p>要修改上面的例子，我们可以用<code>None</code>这个不变对象来实现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_end</span><span class="params">(L = None)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> L <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        L = []</span><br><span class="line">    L.append(<span class="string">'END'</span>)</span><br><span class="line">    <span class="keyword">return</span> L</span><br></pre></td></tr></table></figure>
-<p>现在，无论调用多少次，都不会有问题：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>add_end()</span><br><span class="line">[<span class="string">'END'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add_end()</span><br><span class="line">[<span class="string">'END'</span>]</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/16/Python坑之——默认参数必须指向不变对象/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1365,26 +1240,16 @@
 
       
         
-          
-            <ul>
+          <ul>
 <li><p>求1到10中所有偶数的平方</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = [i*i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">print(L)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成全排列</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = [m+n <span class="keyword">for</span> m <span class="keyword">in</span> <span class="string">'ABC'</span> <span class="keyword">for</span> n <span class="keyword">in</span> <span class="string">'XYZ'</span>]</span><br><span class="line">print(L)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>列出当前目录下的所有文件和目录名</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">L = [d <span class="keyword">for</span> d <span class="keyword">in</span> os.listdir(<span class="string">'.'</span>)]</span><br><span class="line">print(L)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>把序列<code>[1, 3, 5, 7, 9]</code>变换成整数13579</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x*<span class="number">10</span>+y</span><br><span class="line">print(reduce(f, [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>求1到100的素数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prime</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">2</span>,s):</span><br><span class="line">        <span class="keyword">if</span> s % n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> filter(prime,range(<span class="number">2</span>,<span class="number">101</span>))</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/16/Python一行代码可以做的事/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1931,10 +1796,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
-                
+                </a>
               </div>
             
 
@@ -1989,15 +1854,9 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -2096,6 +1955,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
 
