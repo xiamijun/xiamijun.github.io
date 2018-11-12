@@ -369,7 +369,7 @@
           <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>公司最近在推公共组件，要求每人分享自己组件到公司的git服务上。由于之前在公司电脑上绑定了自己的git，因此需要在一台电脑上绑定两个git账号。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/09/29/一台电脑绑定两个git账号/#more" rel="contents">
+            <a class="btn" href="/2018/09/29/一台电脑绑定两个git账号/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -526,7 +526,7 @@
           <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目进行到收尾阶段，公司对于代码质量抓的比较严，后端一般使用<code>sonar</code>进行代码扫描。而<code>JavaScript</code>是弱类型语言，其实很有扫描检查的必要。<br><code>sonar</code>支持<code>JS</code>和<code>typeScript</code>的扫描，不支持<code>Vue</code>。因此改用<code>eslint</code>进行代码扫描。<br>平常在开发中，都是嫌麻烦把<code>eslint</code>关掉的。。  </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/09/28/eslint进行代码检查/#more" rel="contents">
+            <a class="btn" href="/2018/09/28/eslint进行代码检查/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -690,11 +690,165 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/09/27/从进程谈JS运行机制/#more" rel="contents">
+            <a class="btn" href="/2018/09/27/从进程谈JS运行机制/" rel="contents">
               Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/JS函数收藏/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/27/JS函数收藏/" itemprop="url">JS函数收藏</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T15:22:55+08:00">
+                2018-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/27/JS函数收藏/" class="leancloud_visitors" data-flag-title="JS函数收藏">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Array-prototype-findIndex"><a href="#Array-prototype-findIndex" class="headerlink" title="Array.prototype.findIndex()"></a>Array.prototype.findIndex()</h1><p>返回数组中满足回调函数函数的第一个元素的索引。否则返回-1。</p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p><code>arr.findIndex(callback)</code><br>举例：返回对象数组中value出现的索引<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> index=arr.findIndex(<span class="function">(<span class="params">item</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.value===value;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -913,160 +1067,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/JS函数收藏/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="虾米俊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/myAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="虾米俊">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/27/JS函数收藏/" itemprop="url">JS函数收藏</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T15:22:55+08:00">
-                2018-09-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/27/JS函数收藏/" class="leancloud_visitors" data-flag-title="JS函数收藏">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Array-prototype-findIndex"><a href="#Array-prototype-findIndex" class="headerlink" title="Array.prototype.findIndex()"></a>Array.prototype.findIndex()</h1><p>返回数组中满足回调函数函数的第一个元素的索引。否则返回-1。</p>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p><code>arr.findIndex(callback)</code><br>举例：返回对象数组中value出现的索引<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> index=arr.findIndex(<span class="function">(<span class="params">item</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.value===value;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/JS函数参数值校验/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1174,164 +1174,7 @@
 <p>其实，我们可以通过这个特性来做函数参数值的校验。  </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/09/27/JS函数参数值校验/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/解构赋值和拓展运算符/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="虾米俊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/myAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="虾米俊">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/27/解构赋值和拓展运算符/" itemprop="url">解构赋值和拓展运算符</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T15:22:55+08:00">
-                2018-09-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/27/解构赋值和拓展运算符/" class="leancloud_visitors" data-flag-title="解构赋值和拓展运算符">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="用解构赋值过滤对象属性"><a href="#用解构赋值过滤对象属性" class="headerlink" title="用解构赋值过滤对象属性"></a>用解构赋值过滤对象属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 过滤掉对象 types 中的 inner 和 outer 属性</span></span><br><span class="line"><span class="keyword">const</span> &#123; inner, outer, ...restProps &#125; = &#123;</span><br><span class="line">  inner: <span class="string">'This is inner'</span>,</span><br><span class="line">  outer: <span class="string">'This is outer'</span>,</span><br><span class="line">  v1: <span class="string">'1'</span>,</span><br><span class="line">  v2: <span class="string">'2'</span>,</span><br><span class="line">  v4: <span class="string">'3'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(restProps);</span><br><span class="line"><span class="comment">// &#123;v1: "1", v2: "2", v4: "3"&#125;</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/27/解构赋值和拓展运算符/#more" rel="contents">
+            <a class="btn" href="/2018/09/27/JS函数参数值校验/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1493,7 +1336,164 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/09/27/JOSN.stringfy小技巧/#more" rel="contents">
+            <a class="btn" href="/2018/09/27/JOSN.stringfy小技巧/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/解构赋值和拓展运算符/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/27/解构赋值和拓展运算符/" itemprop="url">解构赋值和拓展运算符</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T15:22:55+08:00">
+                2018-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/27/解构赋值和拓展运算符/" class="leancloud_visitors" data-flag-title="解构赋值和拓展运算符">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="用解构赋值过滤对象属性"><a href="#用解构赋值过滤对象属性" class="headerlink" title="用解构赋值过滤对象属性"></a>用解构赋值过滤对象属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 过滤掉对象 types 中的 inner 和 outer 属性</span></span><br><span class="line"><span class="keyword">const</span> &#123; inner, outer, ...restProps &#125; = &#123;</span><br><span class="line">  inner: <span class="string">'This is inner'</span>,</span><br><span class="line">  outer: <span class="string">'This is outer'</span>,</span><br><span class="line">  v1: <span class="string">'1'</span>,</span><br><span class="line">  v2: <span class="string">'2'</span>,</span><br><span class="line">  v4: <span class="string">'3'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(restProps);</span><br><span class="line"><span class="comment">// &#123;v1: "1", v2: "2", v4: "3"&#125;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/27/解构赋值和拓展运算符/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1650,7 +1650,7 @@
           <h2 id="hexo是什么"><a href="#hexo是什么" class="headerlink" title="hexo是什么"></a>hexo是什么</h2><p>hexo是基于Node.js的博客框架，支持 Markdown，可部署到 GitHub Pages。<br>由于是基于Node.js的，因此对前端程序员天然友好。<br>官网：<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a><br>安装部署教程网上较多，在此不再赘述，仅记录安装部署过程中遇到的坑及解决办法。  </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/09/21/hexo排坑实录/#more" rel="contents">
+            <a class="btn" href="/2018/09/21/hexo排坑实录/" rel="contents">
               Read more &raquo;
             </a>
           </div>
