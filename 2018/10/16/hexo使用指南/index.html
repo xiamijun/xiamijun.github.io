@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fu3jqrsv2qj313f0iutca.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fu3lif3vzoj302y00tgle.jpg">
 <meta property="og:image" content="https://wuwhs.github.io/gb/%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/baidu_analytics.png">
-<meta property="og:updated_time" content="2018-11-12T07:08:21.378Z">
+<meta property="og:updated_time" content="2018-11-12T07:24:03.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo使用指南">
 <meta name="twitter:description" content="什么是hexo基于Node.js的博客框架，使用Markdown解析文章 安装安装前提必须安装以下环境：  Node.js Git">
@@ -355,6 +355,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -401,11 +432,13 @@
 <p>自动生成名为<code>test.md</code>的<code>markdown</code>文件到<code>_post</code>文件夹下。</p>
 <p>或者手动复制markdown文件至<code>_post</code>文件夹下，但需要手动添加头部信息：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hexo使用指南</span><br><span class="line">date: 2018-10-16 10:39:26</span><br><span class="line">tags: 博客</span><br><span class="line">categories: 博客</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<p>展示在首页，多余部分隐藏：</p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p>展示在首页，多余部分隐藏：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>markdown语法的<code>[TOC]</code>目录，在hexo中无法展示</p>
 </blockquote>
+<p>点击更多时，从头开始阅读：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scroll_to_more: false</span><br></pre></td></tr></table></figure>
 <h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><h2 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h2><p>生成静态页面：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$ hexo generate`</span><br></pre></td></tr></table></figure>
 <p>或者简写：</p>
@@ -701,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是hexo"><span class="nav-number">1.</span> <span class="nav-text">什么是hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装前提"><span class="nav-number">2.1.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo"><span class="nav-number">2.2.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.3.</span> <span class="nav-text">目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#config-yml"><span class="nav-number">2.3.1.</span> <span class="nav-text">_config.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scaffolds"><span class="nav-number">2.3.2.</span> <span class="nav-text">scaffolds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#source"><span class="nav-number">2.3.3.</span> <span class="nav-text">source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#themes"><span class="nav-number">2.3.4.</span> <span class="nav-text">themes</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写作"><span class="nav-number">3.</span> <span class="nav-text">写作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布"><span class="nav-number">4.</span> <span class="nav-text">发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地部署"><span class="nav-number">4.1.</span> <span class="nav-text">本地部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到Github-Page"><span class="nav-number">4.2.</span> <span class="nav-text">部署到Github Page</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建库"><span class="nav-number">4.2.1.</span> <span class="nav-text">创建库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Deployment"><span class="nav-number">4.2.2.</span> <span class="nav-text">配置Deployment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交"><span class="nav-number">4.2.3.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排错"><span class="nav-number">4.2.4.</span> <span class="nav-text">排错</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进阶"><span class="nav-number">5.</span> <span class="nav-text">进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解析到个人域名"><span class="nav-number">5.1.</span> <span class="nav-text">解析到个人域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next主题"><span class="nav-number">5.2.</span> <span class="nav-text">Next主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主题风格"><span class="nav-number">5.2.1.</span> <span class="nav-text">主题风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换头像"><span class="nav-number">5.2.2.</span> <span class="nav-text">更换头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码高亮"><span class="nav-number">5.2.3.</span> <span class="nav-text">代码高亮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类页"><span class="nav-number">5.2.4.</span> <span class="nav-text">分类页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标签页"><span class="nav-number">5.2.5.</span> <span class="nav-text">标签页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改底部建站信息"><span class="nav-number">5.2.6.</span> <span class="nav-text">修改底部建站信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计阅读次数"><span class="nav-number">5.2.7.</span> <span class="nav-text">统计阅读次数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#404页"><span class="nav-number">5.3.</span> <span class="nav-text">404页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#站点分析"><span class="nav-number">5.4.</span> <span class="nav-text">站点分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评论功能"><span class="nav-number">5.5.</span> <span class="nav-text">评论功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册-OAuth-Application"><span class="nav-number">5.5.1.</span> <span class="nav-text">注册 OAuth Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitment配置"><span class="nav-number">5.5.2.</span> <span class="nav-text">gitment配置</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是hexo"><span class="nav-number">1.</span> <span class="nav-text">什么是hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装前提"><span class="nav-number">2.1.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo"><span class="nav-number">2.2.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.3.</span> <span class="nav-text">目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#config-yml"><span class="nav-number">2.3.1.</span> <span class="nav-text">_config.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scaffolds"><span class="nav-number">2.3.2.</span> <span class="nav-text">scaffolds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#source"><span class="nav-number">2.3.3.</span> <span class="nav-text">source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#themes"><span class="nav-number">2.3.4.</span> <span class="nav-text">themes</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写作"><span class="nav-number">3.</span> <span class="nav-text">写作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#更多"><span class="nav-number">3.1.</span> <span class="nav-text">更多</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布"><span class="nav-number">4.</span> <span class="nav-text">发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地部署"><span class="nav-number">4.1.</span> <span class="nav-text">本地部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到Github-Page"><span class="nav-number">4.2.</span> <span class="nav-text">部署到Github Page</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建库"><span class="nav-number">4.2.1.</span> <span class="nav-text">创建库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Deployment"><span class="nav-number">4.2.2.</span> <span class="nav-text">配置Deployment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交"><span class="nav-number">4.2.3.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排错"><span class="nav-number">4.2.4.</span> <span class="nav-text">排错</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进阶"><span class="nav-number">5.</span> <span class="nav-text">进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解析到个人域名"><span class="nav-number">5.1.</span> <span class="nav-text">解析到个人域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next主题"><span class="nav-number">5.2.</span> <span class="nav-text">Next主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主题风格"><span class="nav-number">5.2.1.</span> <span class="nav-text">主题风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换头像"><span class="nav-number">5.2.2.</span> <span class="nav-text">更换头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码高亮"><span class="nav-number">5.2.3.</span> <span class="nav-text">代码高亮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类页"><span class="nav-number">5.2.4.</span> <span class="nav-text">分类页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标签页"><span class="nav-number">5.2.5.</span> <span class="nav-text">标签页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改底部建站信息"><span class="nav-number">5.2.6.</span> <span class="nav-text">修改底部建站信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计阅读次数"><span class="nav-number">5.2.7.</span> <span class="nav-text">统计阅读次数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#404页"><span class="nav-number">5.3.</span> <span class="nav-text">404页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#站点分析"><span class="nav-number">5.4.</span> <span class="nav-text">站点分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评论功能"><span class="nav-number">5.5.</span> <span class="nav-text">评论功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册-OAuth-Application"><span class="nav-number">5.5.1.</span> <span class="nav-text">注册 OAuth Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitment配置"><span class="nav-number">5.5.2.</span> <span class="nav-text">gitment配置</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -727,6 +760,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">虾米俊</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
   
 </div>
 
