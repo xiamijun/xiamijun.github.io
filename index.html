@@ -253,6 +253,272 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/小程序系列一——小程序部署手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/12/小程序系列一——小程序部署手册/" itemprop="url">小程序系列一——小程序部署手册</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-12T13:43:10+08:00">
+                2018-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">小程序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h1 id="申请账号"><a href="#申请账号" class="headerlink" title="申请账号"></a>申请账号</h1><p>点击<a href="https://mp.weixin.qq.com/wxopen/waregister?action=step1" target="_blank" rel="noopener">https://mp.weixin.qq.com/wxopen/waregister?action=step1 </a>申请账号</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E6%B3%A8%E5%86%8C.png" alt="注册"></p>
+<p>注册成功后，可登陆微信公众平台<a href="https://mp.weixin.qq.com/" target="_blank" rel="noopener">https://mp.weixin.qq.com](https://mp.weixin.qq.com</a>)在菜单 <code>设置-开发设置</code> 看到小程序的 <strong>AppID</strong> 了 。</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/appid.png" alt=""></p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p>新建项目时，选择空白文件夹，可创建quickStart示例项目。</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E6%96%B0%E5%BB%BAquickStart.png" alt=""></p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>其目录结构如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">│  app.js		----------------------------程序入口</span><br><span class="line">│  app.json		--------------------------全局配置</span><br><span class="line">│  app.wxss		--------------------------全局样式</span><br><span class="line">│  project.config.json	----------------项目配置</span><br><span class="line">│  </span><br><span class="line">├─pages	--------------------------------页面文件夹</span><br><span class="line">│  ├─index</span><br><span class="line">│  │      index.js	--------------------js</span><br><span class="line">│  │      index.wxml	------------------html</span><br><span class="line">│  │      index.wxss	------------------css</span><br><span class="line">│  │      </span><br><span class="line">│  └─logs</span><br><span class="line">│          logs.js</span><br><span class="line">│          logs.json	------------------页面配置</span><br><span class="line">│          logs.wxml</span><br><span class="line">│          logs.wxss</span><br><span class="line">│          </span><br><span class="line">└─utils	--------------------------------工具类</span><br><span class="line">        util.js</span><br></pre></td></tr></table></figure>
+<h3 id="json配置"><a href="#json配置" class="headerlink" title="json配置"></a>json配置</h3><p>配置页面路径、窗口表现、设置多 tab 等。</p>
+<p>单个页面的json配置只有window一项。</p>
+<h3 id="app-js"><a href="#app-js" class="headerlink" title="app.js"></a>app.js</h3><p>程序入口。</p>
+<p><code>App()</code> 必须在<code>app.js</code>中调用，必须调用且只能调用一次。接受一个 <code>Object</code> 参数，其指定小程序的生命周期回调等。</p>
+<p>还可以在<code>app.js</code>中定义全局变量。</p>
+<p>示例代码中在初始化小程序时，做了如下几件事。</p>
+<p>1、调用  <a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html" target="_blank" rel="noopener">wx.login()</a>  获取临时登录凭证code，可回传到开发者服务器。</p>
+<p>2、使用  <a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/setting/wx.getSetting.html" target="_blank" rel="noopener">wx.getSetting()</a>  获取用户当前的授权状态。</p>
+<p>3、调用接口  <a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/wx.getUserInfo.html" target="_blank" rel="noopener">wx.getUserInfo()</a> ，获取用户信息。</p>
+<h1 id="发布准备"><a href="#发布准备" class="headerlink" title="发布准备"></a>发布准备</h1><h2 id="团队身份管理"><a href="#团队身份管理" class="headerlink" title="团队身份管理"></a>团队身份管理</h2><p>可在微信公众平台统一管理项目成员、设置项目成员的权限。</p>
+<p>入口：<code>用户身份 – 成员管理</code></p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD.png" alt=""></p>
+<p>权限说明：</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开发者权限</td>
+<td>可使用小程序开发者工具进行开发</td>
+</tr>
+<tr>
+<td>体验者权限</td>
+<td>可使用体验版小程序</td>
+</tr>
+<tr>
+<td>登录</td>
+<td>可登录小程序管理后台，无需管理员确认</td>
+</tr>
+<tr>
+<td>数据分析</td>
+<td>使用小程序数据分析功能查看小程序数据</td>
+</tr>
+<tr>
+<td>开发管理</td>
+<td>小程序提交审核、发布、回退</td>
+</tr>
+<tr>
+<td>开发设置</td>
+<td>设置小程序服务器域名、消息推送</td>
+</tr>
+<tr>
+<td>暂停服务设置</td>
+<td>暂停小程序线上服务</td>
+</tr>
+</tbody>
+</table>
+<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>每个小程序需要事先设置通讯域名，小程序可以跟指定的域名与进行网络通信。包括普通 HTTPS 请求（<code>request</code>）、上传文件（<code>uploadFile</code>）、下载文件（<code>downloadFile</code>) 和 WebSocket 通信（<code>connectSocket</code>）。</p>
+<p>在<code>微信公众平台 - 设置 - 开发设置 - 服务器域名</code>中，可配置服务器域名。</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E5%9F%9F%E5%90%8D.png" alt=""></p>
+<blockquote>
+<ul>
+<li>必须使用https请求</li>
+</ul>
+<ul>
+<li>域名不能使用 IP 地址或 localhost</li>
+<li>域名必须经过 ICP 备案</li>
+</ul>
+</blockquote>
+<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p>使用开发者工具可以预览小程序。 </p>
+<p>点击开发者工具顶部预览按钮，开发者工具会自动打包当前项目，并上传小程序代码至微信的服务器，成功之后会在界面上显示一个二维码。使用<strong>当前小程序开发者</strong>的微信扫码即可看到小程序在手机客户端上的真实表现。</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E9%A2%84%E8%A7%88.png" alt=""></p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E9%A2%84%E8%A7%882.png" alt=""></p>
+<h2 id="上传代码"><a href="#上传代码" class="headerlink" title="上传代码"></a>上传代码</h2><p>同预览不同，上传代码是用于提交体验或者审核使用的。</p>
+<p>点击开发者工具顶部操作栏的上传按钮，填写版本号以及项目备注。上传成功之后，登录<code>微信公众平台 - 开发管理 - 开发版本</code> 就可以找到刚提交上传的版本了。</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E4%B8%8A%E4%BC%A0.png" alt=""></p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E4%B8%8A%E4%BC%A02.png" alt=""></p>
+<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开发版本</td>
+<td>使用开发者工具，可将代码上传到开发版本中。开发版本只保留每人最新的一份上传代码。可将代码提交审核。开发版本可删除，不影响线上版本和审核中版本的代码。</td>
+</tr>
+<tr>
+<td>体验版本</td>
+<td>供测试人员和产品经理测试的版本。可将开发版本选为体验版本。</td>
+</tr>
+<tr>
+<td>审核中版本</td>
+<td>只能有一份代码处于审核中。有审核结果后可以发布到线上，也可直接重新提交审核，覆盖原审核版本。</td>
+</tr>
+<tr>
+<td>线上版本</td>
+<td>线上所有用户使用的代码版本，该版本代码在新版本代码发布后被覆盖更新。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h1><h2 id="填写基本信息"><a href="#填写基本信息" class="headerlink" title="填写基本信息"></a>填写基本信息</h2><p>小程序须先完成小程序基本资料填写后，方可提交审核。入口：<code>微信公众平台 - 设置 - 基本设置</code></p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E4%BF%A1%E6%81%AF.png" alt=""></p>
+<h2 id="提交审核"><a href="#提交审核" class="headerlink" title="提交审核"></a>提交审核</h2><p><code>微信公众平台 - 开发管理 - 开发版本</code>中提交审核，填写相关信息。</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E5%AE%A1%E6%A0%B8.png" alt=""></p>
+<p>提交完毕后，可在审核版本中看到相关信息。</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E5%AE%A1%E6%A0%B82.png" alt=""></p>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>审核通过之后，管理员的微信中会收到审核通过的通知，此时登录 <code>微信公众平台 - 开发管理 - 审核版本</code>中可以看到通过审核的版本。</p>
+<p>请点击发布，即可发布小程序。</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E5%8F%91%E5%B8%83.png" alt=""></p>
+<p>发布完成后，可在 <code>微信公众平台 - 设置 - 基本设置</code>中下载自己小程序的二维码。（搜小程序名字暂时搜不到）</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E6%88%91%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg" alt=""></p>
+<h2 id="运营数据"><a href="#运营数据" class="headerlink" title="运营数据"></a>运营数据</h2><p>有两种方式可以方便的看到小程序的运营数据。</p>
+<p>方法一：</p>
+<p>登录 <code>微信公众平台 - 数据分析</code></p>
+<p>点击相应的 tab 可以看到相关的数据。</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90.png" alt=""></p>
+<p>方法二：</p>
+<p>使用小程序数据助手，在微信中方便的查看运营数据。</p>
+<p><img src="https://developers.weixin.qq.com/miniprogram/dev/image/quickstart/mydata.jpeg?t=18110616" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/VsCode插件和配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -272,7 +538,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/12/VsCode插件和配置/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/11/12/VsCode插件和配置/" itemprop="url">VsCode插件和配置</a></h1>
         
 
         <div class="post-meta">
@@ -284,7 +550,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-12T10:57:51+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-12T11:38:35+08:00">
                 2018-11-12
               </time>
             
@@ -294,6 +560,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编辑器/" itemprop="url" rel="index">
+                    <span itemprop="name">编辑器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -985,7 +1273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/16/Python-一行代码可以做的事/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/16/Python一行代码可以做的事/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="虾米俊">
@@ -1004,7 +1292,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/16/Python-一行代码可以做的事/" itemprop="url">Python 一行代码可以做的事</a></h1>
+                <a class="post-title-link" href="/2018/10/16/Python一行代码可以做的事/" itemprop="url">Python 一行代码可以做的事</a></h1>
         
 
         <div class="post-meta">
@@ -1568,153 +1856,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/16/和为S的连续正数序列/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="虾米俊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/myAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="虾米俊">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/16/和为S的连续正数序列/" itemprop="url">和为S的连续正数序列</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-16T15:54:48+08:00">
-                2018-10-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>小明很喜欢数学,有一天他在做数学作业时,要求计算出9~16的和,他马上就写出了正确答案是100。但是他并不满足于此,他在想究竟有多少种连续的正数序列的和为100(至少包括两个数)。没多久,他就得到另一组连续正数和为100的序列:18,19,20,21,22。现在把问题交给你,你能不能也很快的找出所有和为S的连续正数序列? Good Luck! </p>
-<p>输出描述:<br>输出所有和为S的连续正数序列。序列内按照从小至大的顺序，序列间按照开始数字从小到大的顺序</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/16/和为S的连续正数序列/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1769,7 +1910,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1780,7 +1921,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1791,7 +1932,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
