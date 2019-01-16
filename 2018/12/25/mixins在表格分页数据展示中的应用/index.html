@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="虾米俊">
 <meta property="og:description" content="当系统中存在很多带分页的表格数据展示时，可以使用混入（mixins）减少代码量。 在混入中设置表格的设置表格最小高度，并预先设置好分页。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-16T01:52:59.593Z">
+<meta property="og:updated_time" content="2019-01-16T02:49:03.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mixins在表格分页数据展示中的应用">
 <meta name="twitter:description" content="当系统中存在很多带分页的表格数据展示时，可以使用混入（mixins）减少代码量。 在混入中设置表格的设置表格最小高度，并预先设置好分页。">
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  508 字
+                  568 字
                 </span>
               
 
@@ -417,7 +417,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -447,6 +447,10 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> WindowSize <span class="keyword">from</span> <span class="string">'./windowResize'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; WindowSize&#125;;</span><br></pre></td></tr></table></figure>
 <p><code>example.vue:</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&apos;tableInfoBox&apos; :class=&quot;&#123;hasDataAndPage:!!tableData.length&#125;&quot;&gt;</span><br><span class="line">    &lt;Table v-scoped</span><br><span class="line">           border</span><br><span class="line">           :columns=&quot;columnsData&quot;</span><br><span class="line">           :data=&quot;tableData&quot;</span><br><span class="line">           no-data-text=&quot;&quot;&gt;</span><br><span class="line">    &lt;/Table&gt;</span><br><span class="line">    &lt;div class=&quot;webPage&quot; style=&quot;border: 0;&quot;&gt;</span><br><span class="line">      &lt;Page v-if=&quot;tableData &amp;&amp; tableData.length !== 0&quot;</span><br><span class="line">            class=&quot;Pager&quot;</span><br><span class="line">            placement=&quot;top&quot;</span><br><span class="line">            :total=&quot;page.total&quot;</span><br><span class="line">            :page-size=&quot;page.size&quot;</span><br><span class="line">            :current=&quot;page.index&quot;</span><br><span class="line">            :page-size-opts=&quot;page.list&quot;</span><br><span class="line">            show-sizer</span><br><span class="line">            show-elevator</span><br><span class="line">            show-total</span><br><span class="line">            @on-change=&quot;go&quot;</span><br><span class="line">            @on-page-size-change=&quot;size&quot;&gt;</span><br><span class="line">    	&lt;/Page&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import &#123; WindowSize&#125; from &apos;@/views/mixins&apos;;</span><br><span class="line">  mixins: [WindowSize],</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      // data中不必再定义page</span><br><span class="line">      columnsData: [],</span><br><span class="line">      tableData: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;，</span><br><span class="line">  created()&#123;</span><br><span class="line">    this.loadData();	// 获取table数据方法必须为loadData</span><br><span class="line">  &#125;，</span><br><span class="line">  methods:&#123;</span><br><span class="line">    loadData(pageIndex = 1) &#123;</span><br><span class="line">      if (pageIndex) this.page.index = pageIndex; //重置表格的页码</span><br><span class="line">      let queryData = &#123;</span><br><span class="line">        page: this.page.index, //传递分页参数</span><br><span class="line">        pageSize: this.page.size</span><br><span class="line">      &#125;;</span><br><span class="line">      Object.assign(queryData, this.searchData);</span><br><span class="line">      this.$api[&apos;accurateTeaching/tableData&apos;](queryData).then(data =&gt; &#123;</span><br><span class="line">        this.page.total = data.totalCount;</span><br><span class="line">        this.tableData = data.dataList;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><code>@/utils/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">HTMLElement.prototype.getOffset = <span class="function"><span class="keyword">function</span>(<span class="params">stopSelectorElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> offsetParent = <span class="keyword">this</span>.offsetParent;</span><br><span class="line">  <span class="keyword">let</span> top = <span class="keyword">this</span>.offsetTop,</span><br><span class="line">    left = <span class="keyword">this</span>.offsetLeft;</span><br><span class="line">  <span class="keyword">while</span> (offsetParent) &#123;</span><br><span class="line">    top += offsetParent.offsetTop;</span><br><span class="line">    left += offsetParent.offsetLeft;</span><br><span class="line">    offsetParent = offsetParent.offsetParent;</span><br><span class="line">    <span class="keyword">if</span> (stopSelectorElement &amp;&amp; offsetParent === stopSelectorElement) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    top: top,</span><br><span class="line">    left: left,</span><br><span class="line">    width: <span class="keyword">this</span>.offsetWidth,</span><br><span class="line">    height: <span class="keyword">this</span>.offsetHeight</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>@/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'@/utils'</span>;</span><br></pre></td></tr></table></figure>
 <p>注意点：</p>
 <ol>
 <li>类名为<code>tableInfoBox</code>、<code>hasDataAndPage</code>、<code>webPage</code>。详见<a href="">Vue项目中封装css</a></li>
@@ -564,7 +568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -647,7 +651,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">22.6k</span>
+    <span title="Site words total count">23.4k</span>
   
 </div>
 
