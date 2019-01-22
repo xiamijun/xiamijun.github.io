@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="虾米俊">
 <meta property="og:description" content="按钮级权限控制。需后端配合给出接口，前端控制按钮的显隐性。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-16T03:32:46.465Z">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/hexo/%E6%8C%89%E9%92%AE%E6%9D%83%E9%99%90%E6%8E%A5%E5%8F%A3.png">
+<meta property="og:updated_time" content="2019-01-22T06:25:46.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="按钮级权限控制">
 <meta name="twitter:description" content="按钮级权限控制。需后端配合给出接口，前端控制按钮的显隐性。">
+<meta name="twitter:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/hexo/%E6%8C%89%E9%92%AE%E6%9D%83%E9%99%90%E6%8E%A5%E5%8F%A3.png">
 
 
 
@@ -401,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  26 字
+                  433 字
                 </span>
               
 
@@ -417,7 +419,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -440,6 +442,22 @@
       
         <p>按钮级权限控制。需后端配合给出接口，前端控制按钮的显隐性。</p>
 <a id="more"></a>
+<h1 id="接口参数及返回格式"><a href="#接口参数及返回格式" class="headerlink" title="接口参数及返回格式"></a>接口参数及返回格式</h1><p>接口参数：当前url</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url: <span class="string">"/jgpt/schoolCount/schoolManage"</span></span><br></pre></td></tr></table></figure>
+<p>后台接口格式：</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/hexo/%E6%8C%89%E9%92%AE%E6%9D%83%E9%99%90%E6%8E%A5%E5%8F%A3.png" alt=""></p>
+<p>包含按钮名称、唯一的<code>code</code>、是否展示的布尔值。</p>
+<h1 id="按钮权限的封装"><a href="#按钮权限的封装" class="headerlink" title="按钮权限的封装"></a>按钮权限的封装</h1><p><code>@/utils/btn-authority.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> API <span class="keyword">from</span> <span class="string">'@/plugins/api'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// config &#123;按钮的集合&#125;</span></span><br><span class="line"><span class="keyword">const</span> getAuthority = <span class="function">(<span class="params">config, item = []</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//深拷贝一次 不改变函数的形参</span></span><br><span class="line">  <span class="keyword">let</span> myConfig = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(config));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    item.forEach(<span class="function"><span class="params">t</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">Object</span>.keys(myConfig).forEach(<span class="function"><span class="params">i</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (myConfig[i].actionCode === t.actionCode) &#123;</span><br><span class="line">          myConfig[i].display = t.display;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'权限配置失败，功能ID验证失败。'</span>);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="comment">// 无法在finally 使用 return语句</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> myConfig;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 配置按钮的权限服务器端URL地址</span></span><br><span class="line"><span class="comment"> * 返回的结果是[&#123;id,display&#125;,]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> fetchAuthority = <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> queryData = &#123;</span><br><span class="line">    url: <span class="string">''</span></span><br><span class="line">  &#125;;</span><br><span class="line">  queryData.url = <span class="built_in">window</span>.currentRoute.path;</span><br><span class="line">  <span class="keyword">return</span> API[<span class="string">'permission/btn'</span>](queryData).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> authority = getAuthority(config, data);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> authority;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>接口调用的封装参见<a href="">axios封装</a></p>
+</blockquote>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>定义配置文件<code>config.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  authority: &#123;</span><br><span class="line">    <span class="comment">// 学校管理详情</span></span><br><span class="line">    schoolManage: &#123;</span><br><span class="line">      func: &#123;</span><br><span class="line">        edit: &#123;</span><br><span class="line">          display: <span class="literal">false</span>,</span><br><span class="line">          id: <span class="number">12</span>,</span><br><span class="line">          name: <span class="string">'编辑'</span>,</span><br><span class="line">          actionCode: <span class="string">'schoolList_base_modify'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        search: &#123;</span><br><span class="line">          display: <span class="literal">false</span>,</span><br><span class="line">          id: <span class="number">81</span>,</span><br><span class="line">          name: <span class="string">'查询'</span>,</span><br><span class="line">          actionCode: <span class="string">'schoolList_search'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">export</span>: &#123;</span><br><span class="line">          display: <span class="literal">false</span>,</span><br><span class="line">          id: <span class="number">83</span>,</span><br><span class="line">          name: <span class="string">'导出'</span>,</span><br><span class="line">          actionCode: <span class="string">'schoolList_export'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">import</span>: &#123;</span><br><span class="line">          display: <span class="literal">false</span>,</span><br><span class="line">          id: <span class="number">82</span>,</span><br><span class="line">          name: <span class="string">'导入'</span>,</span><br><span class="line">          actionCode: <span class="string">'schoolList_import'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">delete</span>: &#123;</span><br><span class="line">          display: <span class="literal">false</span>,</span><br><span class="line">          id: <span class="number">3100</span>,</span><br><span class="line">          name: <span class="string">'删除'</span>,</span><br><span class="line">          actionCode: <span class="string">'schoolList_delete'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      pageName: <span class="string">'学校管理'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>页面<code>index.vue:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; fetchAuthority &#125; <span class="keyword">from</span> <span class="string">'@/utils/btn-authority'</span>;</span><br><span class="line"><span class="keyword">import</span> config <span class="keyword">from</span> <span class="string">'../config.js'</span>;</span><br><span class="line"></span><br><span class="line">data() &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    authority: config.authority.schoolManage.func</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">created() &#123;</span><br><span class="line">  <span class="comment">// 获取按钮的权限</span></span><br><span class="line">  fetchAuthority(<span class="keyword">this</span>.authority).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.authority = data;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>模板：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button v-if=&quot;authority.export.display&quot;&gt;导出&lt;/Button&gt;</span><br><span class="line">&lt;Button v-if=&quot;authority.import.display&quot;&gt;导入&lt;/Button&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -531,8 +549,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -551,7 +578,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -607,6 +634,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#接口参数及返回格式"><span class="nav-number">1.</span> <span class="nav-text">接口参数及返回格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按钮权限的封装"><span class="nav-number">2.</span> <span class="nav-text">按钮权限的封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用方法"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -634,7 +677,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">23.4k</span>
+    <span title="Site words total count">24.4k</span>
   
 </div>
 
