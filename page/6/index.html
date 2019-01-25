@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/05/语法推导树之短语，直接短语，句柄/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/18/PHP缓存机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="虾米俊">
@@ -316,7 +316,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/05/语法推导树之短语，直接短语，句柄/" itemprop="url">语法推导树之短语，直接短语，句柄</a></h1>
+                <a class="post-title-link" href="/2016/10/18/PHP缓存机制/" itemprop="url">PHP缓存机制</a></h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-05T14:27:19+08:00">
-                2015-03-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-18T18:41:35+08:00">
+                2016-10-18
               </time>
             
 
@@ -351,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机基础</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -369,8 +369,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2015/03/05/语法推导树之短语，直接短语，句柄/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2015/03/05/语法推导树之短语，直接短语，句柄/" itemprop="commentCount"></span>
+                <a href="/2016/10/18/PHP缓存机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/10/18/PHP缓存机制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -378,7 +378,7 @@
 
           
           
-             <span id="/2015/03/05/语法推导树之短语，直接短语，句柄/" class="leancloud_visitors" data-flag-title="语法推导树之短语，直接短语，句柄">
+             <span id="/2016/10/18/PHP缓存机制/" class="leancloud_visitors" data-flag-title="PHP缓存机制">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  374 字
+                  278 字
                 </span>
               
 
@@ -442,42 +442,632 @@
       
         
           
-            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ul>
-<li>短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语</li>
-<li>直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语</li>
-<li>句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语</li>
-</ul>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>找出下面的这颗语法推导树的短语，直接短语，句柄。</p>
-<p><img src="https://img-blog.csdn.net/20131015151004656?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2pyMTUyMzM2NjExNDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<ol>
-<li><strong>找出这棵树的所有子树</strong></li>
+            <p>使用php自身的缓存机制</p>
+<p>如果要测试php自己的缓存机制, 需要配置<code>php.ini</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display_errors=On</span><br><span class="line">output_buffering=Off</span><br><span class="line">error_reporting= 设置错误级别</span><br></pre></td></tr></table></figure>
+<hr>
+<p>两种缓冲区：<code>outputbuffer</code>和程序缓存<br><code>ob</code>缓存关闭以后就放到程序缓存，程序缓存必须放到<code>header</code>后面，否则报错</p>
+<hr>
+<p>函数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ob_start(); <span class="comment">//开启缓存</span></span><br><span class="line">ob_clean(); <span class="comment">//清空 outputbuffer的内容</span></span><br><span class="line">ob_end_clean(); <span class="comment">//关闭ob缓存，同时清空</span></span><br><span class="line">ob_flush(); <span class="comment">//输出ob内容，并清空,但不关闭</span></span><br><span class="line">ob_end_flush(); <span class="comment">//把ob缓存的内容输出,并关闭ob</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>测试题：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">ob_start();</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"abc"</span>;</span><br><span class="line">header(<span class="string">"content-type:text/html;charset=utf-8"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"hello"</span>;       </span><br><span class="line">ob_clean();</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"aa"</span>;</span><br><span class="line">header(<span class="string">"content-type:text/html;charset=utf-8"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>输出：aa<br>不报错<br>没有关闭，aa放入ob</p>
+<hr>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">ob_start(); </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"abc"</span>;</span><br><span class="line">header(<span class="string">"content-type:text/html;charset=utf-8"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"hello"</span>;       </span><br><span class="line">ob_end_clean();</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"aa"</span>;</span><br><span class="line">header(<span class="string">"content-type:text/html;charset=utf-8"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>输出：aa<br>报错<br>aa放入的是程序缓存</p>
+<hr>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">ob_start(); </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"abc"</span>;</span><br><span class="line">header(<span class="string">"content-type:text/html;charset=utf-8"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"hello"</span>;       </span><br><span class="line">ob_flush();</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"aa"</span>;</span><br><span class="line"><span class="keyword">echo</span> ob_get_contents();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>输出：abchelloaaaa<br>等待后面的一起输出</p>
+<hr>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">ob_start(); </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"abc"</span>;</span><br><span class="line">header(<span class="string">"content-type:text/html;charset=utf-8"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"hello"</span>;       </span><br><span class="line">ob_end_flush();</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"aa"</span>;</span><br><span class="line"><span class="keyword">echo</span> ob_get_contents();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>输出：abchelloaaabchelloaa<br>最后再关闭</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/11/require、require_once、include、include_once区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/11/require、require_once、include、include_once区别/" itemprop="url">require、require_once、include、include_once区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-11T21:35:53+08:00">
+                2016-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/11/require、require_once、include、include_once区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/10/11/require、require_once、include、include_once区别/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/10/11/require、require_once、include、include_once区别/" class="leancloud_visitors" data-flag-title="require、require_once、include、include_once区别">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  119 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p><code>require_once</code> 和 <code>include_once</code> 在执行时只对包含的文件执行一次，即使在代码中调用多次。</p>
+</li>
+<li><p><code>include</code>和<code>include_once</code>若包含失败，显示警告错误（<code>warning error</code>），然后继续执行。<br><code>require</code>和<code>require_once</code>若包含失败，抛出致命错误（<code>fatal error</code>），中止执行。<br>开发严谨应用时，应用<code>require</code>和<code>require_once</code>。 </p>
+<blockquote>
+<p>实际中，千万别把错误信息抛给用户，可在代码中使用<code>error_reporting(0)</code>禁止错误显示。</p>
+</blockquote>
+</li>
+<li><p>性能角度，使用<code>require</code>要快于<code>require_once</code></p>
+</li>
 </ol>
-<p><img src="https://img-blog.csdn.net/20131015151017250?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2pyMTUyMzM2NjExNDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<ol start="2">
-<li><strong>找出每一颗子树的短语</strong></li>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/11/empty、isset、is_null的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/11/empty、isset、is_null的区别/" itemprop="url">empty、isset、is_null的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-11T21:04:51+08:00">
+                2016-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/11/empty、isset、is_null的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/10/11/empty、isset、is_null的区别/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/10/11/empty、isset、is_null的区别/" class="leancloud_visitors" data-flag-title="empty、isset、is_null的区别">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  115 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p><code>isset()</code>用来检测一个变量是否已声明且值不为<code>NULL</code>。即，只有在变量值不为<code>NULL</code>时返回真。</p>
+</li>
+<li><p><code>empty()</code>用来检测一个变量是否为空，即如下情况返回真：变量是空字符串，<code>false</code>，空数组<code>[array()]</code>，<code>NULL</code>，<code>0</code>，<code>’‘</code>，以及被<code>unset</code>删除后的变量。</p>
+</li>
+<li><p><code>is_null()</code>用来判断变量内容是否为<code>NULL</code>值，即仅为变量是<code>NULL</code>时返回真。</p>
+</li>
 </ol>
-<p>第1棵：a1ɛb1b2a2a3  </p>
-<p>第2棵：ɛb1b2</p>
-<p>第3棵：a2a3</p>
-<p>第4棵：a1</p>
-<p>第5棵：ɛ</p>
-<p>第6棵：b1  </p>
-<p>第7棵：b2</p>
-<p>第8棵：a2</p>
-<ol start="3">
-<li><strong>找出每一颗子树的直接短语</strong></li>
-</ol>
-<p>第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 </p>
-<p> 第2棵：同上</p>
-<p>第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语</p>
-<p>第4棵：a1</p>
-<p> 第5棵：ɛ</p>
-<p>第6棵：b1  </p>
-<p>第7棵：b2</p>
-<p>第8棵：a2</p>
-<ol start="4">
-<li><strong>从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1</strong></li>
-</ol>
+<p>如表格所示，空白表示返回<code>false</code> </p>
+<p><img src="https://img-blog.csdn.net/20161011210419147" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/20/Struts2环境配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/20/Struts2环境配置/" itemprop="url">Struts2环境配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-20T16:35:34+08:00">
+                2016-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/05/20/Struts2环境配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/05/20/Struts2环境配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/05/20/Struts2环境配置/" class="leancloud_visitors" data-flag-title="Struts2环境配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  137 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="导入jar包"><a href="#导入jar包" class="headerlink" title="导入jar包"></a>导入jar包</h1><h1 id="导入struts-xml文件"><a href="#导入struts-xml文件" class="headerlink" title="导入struts.xml文件"></a>导入struts.xml文件</h1><p>删除多余代码。<br>若得不到相应提示，<code>http://struts.apache.org/dtds/struts-2.3.dtd</code> dtd文件未找到。会在联网时自动下载dtd文件。</p>
+<p>dtd文件手动导入。<br>打开<code>Window—Perferences</code>，进入<code>XML Catalog</code>，点击<code>add</code>。</p>
+<p><img src="https://img-blog.csdn.net/20160520162520247" alt=""></p>
+<h1 id="配置web-xml文件，配置核心过滤器"><a href="#配置web-xml文件，配置核心过滤器" class="headerlink" title="配置web.xml文件，配置核心过滤器"></a>配置web.xml文件，配置核心过滤器</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>Struts2Filter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span></span><br><span class="line">    org.apache.struts.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</span><br><span class="line">  <span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>Struts2Filter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdn.net/20160526141905299" alt=""></p>
 
           
         
@@ -768,6 +1358,235 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/05/语法推导树之短语，直接短语，句柄/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/05/语法推导树之短语，直接短语，句柄/" itemprop="url">语法推导树之短语，直接短语，句柄</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-05T14:27:19+08:00">
+                2015-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/03/05/语法推导树之短语，直接短语，句柄/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2015/03/05/语法推导树之短语，直接短语，句柄/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015/03/05/语法推导树之短语，直接短语，句柄/" class="leancloud_visitors" data-flag-title="语法推导树之短语，直接短语，句柄">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  374 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ul>
+<li>短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语</li>
+<li>直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语</li>
+<li>句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语</li>
+</ul>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>找出下面的这颗语法推导树的短语，直接短语，句柄。</p>
+<p><img src="https://img-blog.csdn.net/20131015151004656?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2pyMTUyMzM2NjExNDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<ol>
+<li><strong>找出这棵树的所有子树</strong></li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20131015151017250?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2pyMTUyMzM2NjExNDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<ol start="2">
+<li><strong>找出每一颗子树的短语</strong></li>
+</ol>
+<p>第1棵：a1ɛb1b2a2a3  </p>
+<p>第2棵：ɛb1b2</p>
+<p>第3棵：a2a3</p>
+<p>第4棵：a1</p>
+<p>第5棵：ɛ</p>
+<p>第6棵：b1  </p>
+<p>第7棵：b2</p>
+<p>第8棵：a2</p>
+<ol start="3">
+<li><strong>找出每一颗子树的直接短语</strong></li>
+</ol>
+<p>第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 </p>
+<p> 第2棵：同上</p>
+<p>第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语</p>
+<p>第4棵：a1</p>
+<p> 第5棵：ɛ</p>
+<p>第6棵：b1  </p>
+<p>第7棵：b2</p>
+<p>第8棵：a2</p>
+<ol start="4">
+<li><strong>从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1</strong></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -822,7 +1641,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -905,7 +1724,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">24.4k</span>
+    <span title="Site words total count">30.8k</span>
   
 </div>
 

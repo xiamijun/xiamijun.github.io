@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="虾米俊">
 <meta property="og:description" content="改变iVIew默认样式的方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-16T08:37:45.763Z">
+<meta property="og:updated_time" content="2019-01-24T08:02:46.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="改变iVIew默认样式的方法">
 <meta name="twitter:description" content="改变iVIew默认样式的方法">
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  411 字
+                  442 字
                 </span>
               
 
@@ -445,6 +445,9 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> install = &#123;</span><br><span class="line">  install(Vue) &#123;</span><br><span class="line">    <span class="keyword">var</span> directiveFun = &#123;</span><br><span class="line">      eachChild(el, scoped) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!(el <span class="keyword">instanceof</span> HTMLElement)) <span class="keyword">return</span>;</span><br><span class="line">        scoped.forEach(<span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">          el.setAttribute(name, <span class="string">''</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">if</span> (el.childNodes.length) &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; el.childNodes.length; i++) &#123;</span><br><span class="line">            directiveFun.eachChild(el.childNodes[i], scoped);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      getParentScoped(dom, layer) &#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getScoped</span>(<span class="params">dom</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">var</span> scoped = [];</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; dom.attributes.length; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> nodedate = dom.attributes[i];</span><br><span class="line">            <span class="keyword">if</span> (nodedate &amp;&amp; <span class="built_in">String</span>(nodedate.nodeName).substr(<span class="number">0</span>, <span class="number">7</span>) === <span class="string">'data-v-'</span>) &#123;</span><br><span class="line">              scoped.push(nodedate.nodeName);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> scoped;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!dom) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">var</span> domLayer = <span class="built_in">isNaN</span>(layer) ? <span class="number">0</span> : <span class="built_in">parseInt</span>(layer);</span><br><span class="line">        <span class="keyword">var</span> scoped = [];</span><br><span class="line">        <span class="keyword">var</span> parent = dom;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> scopedList = getScoped(parent);</span><br><span class="line">          scoped = scoped.concat(scopedList);</span><br><span class="line">          parent = parent.parentNode;</span><br><span class="line">          domLayer--;</span><br><span class="line">        &#125; <span class="keyword">while</span> (parent &amp;&amp; domLayer &gt; <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> scoped;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 全局注册 自定义指令</span></span><br><span class="line">    Vue.directive(<span class="string">'scoped'</span>, &#123;</span><br><span class="line">      inserted: <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> scoped = directiveFun.getParentScoped(el, <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (scoped.length) &#123;</span><br><span class="line">          directiveFun.eachChild(el, scoped); <span class="comment">//批量追加</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> install;</span><br></pre></td></tr></table></figure>
 <p><code>@/directives/index.js:</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> vScoped <span class="keyword">from</span> <span class="string">'./v-scope'</span>;</span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(vScoped);</span><br></pre></td></tr></table></figure>
+<p>注册自定义指令：</p>
+<p><code>@/idnex.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入自定义指令 index.js 会使用Vue.use()来注册指令</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'@/directives'</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><ol>
 <li><code>F12</code>找到含有<code>data-v</code>的<code>dom</code>，手动添加<code>class</code></li>
 <li>在含有<code>scoped</code>的<code>style</code>里写上样式</li>
@@ -579,7 +582,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -678,7 +681,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">24.4k</span>
+    <span title="Site words total count">30.8k</span>
   
 </div>
 
