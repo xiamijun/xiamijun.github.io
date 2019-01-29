@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="记录项目中axios的封装及api调用方法">
+<meta name="keywords" content="JavaScript Vue Css Web Node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="axios封装及api调用方法">
+<meta property="og:url" content="http://yoursite.com/2019/01/25/axios封装及api调用方法/index.html">
+<meta property="og:site_name" content="虾米俊">
+<meta property="og:description" content="记录项目中axios的封装及api调用方法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-29T08:01:27.053Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="axios封装及api调用方法">
+<meta name="twitter:description" content="记录项目中axios的封装及api调用方法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/25/axios封装及api调用方法/"/>
+
+
+
+
+
+  <title>axios封装及api调用方法 | 虾米俊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?caad3bfc73b6c3f9a50f328ed093e127";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">虾米俊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">虾米俊的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/axios封装及api调用方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">axios封装及api调用方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T09:37:52+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/25/axios封装及api调用方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/25/axios封装及api调用方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/25/axios封装及api调用方法/" class="leancloud_visitors" data-flag-title="axios封装及api调用方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>记录项目中axios的封装及api调用方法</p>
+<a id="more"></a>
+<h1 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h1><p><code>@/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="comment">// 导入插件</span></span><br><span class="line"><span class="keyword">import</span> plugin <span class="keyword">from</span> <span class="string">'@/plugins'</span>;</span><br><span class="line">Vue.use(plugin);</span><br><span class="line"><span class="built_in">window</span>.app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  <span class="comment">// store,</span></span><br><span class="line">  <span class="comment">// router,</span></span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="axios封装"><a href="#axios封装" class="headerlink" title="axios封装"></a>axios封装</h1><p><code>@/plugins/axios.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; AXIOS_DEFAULT_CONFIG &#125; <span class="keyword">from</span> <span class="string">'@/config'</span>;	<span class="comment">// axios 默认配置</span></span><br><span class="line"><span class="keyword">import</span> &#123; requestSuccessFunc, requestFailFunc, responseSuccessFunc, responseFailFunc &#125; <span class="keyword">from</span> <span class="string">'@/config/interceptor/axios'</span>;	<span class="comment">// 各个拦截器</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> axiosInstance = &#123;&#125;;</span><br><span class="line">axiosInstance = axios.create(AXIOS_DEFAULT_CONFIG);	<span class="comment">// axios实例</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注入请求拦截</span></span><br><span class="line">axiosInstance.interceptors.request.use(requestSuccessFunc, requestFailFunc);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注入返回拦截</span></span><br><span class="line">axiosInstance.interceptors.response.use(responseSuccessFunc, responseFailFunc);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> axiosInstance;</span><br></pre></td></tr></table></figure>
+<h2 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h2><p><code>@/config/interceptor/axios.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; getToken &#125; <span class="keyword">from</span> <span class="string">'@/utils/auth'</span>;</span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'@/store'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CONSOLE_REQUEST_ENABLE, CONSOLE_RESPONSE_ENABLE &#125; <span class="keyword">from</span> <span class="string">'../index'</span>;	<span class="comment">// 是否开启请求、响应参数打印</span></span><br><span class="line"><span class="keyword">import</span> iView <span class="keyword">from</span> <span class="string">'iview'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> CancelToken = axios.CancelToken;</span><br><span class="line"><span class="keyword">const</span> source = CancelToken.source();</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> loadCount = <span class="number">0</span>,	<span class="comment">// 做loadingView的唯一标识</span></span><br><span class="line">  loadingNameArray = [];</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 请求成功拦截器</span></span><br><span class="line"><span class="comment"> * @param req 请求参数</span></span><br><span class="line"><span class="comment"> * @returns &#123;*&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">requestSuccessFunc</span>(<span class="params">req</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//展示模态对话框</span></span><br><span class="line">  loadCount++;</span><br><span class="line">  <span class="keyword">let</span> loadingName = <span class="string">`load<span class="subst">$&#123;loadCount&#125;</span>`</span>;</span><br><span class="line">  <span class="comment">// show方法需要个 全局唯一的名字</span></span><br><span class="line">  <span class="built_in">window</span>.loadingView.show(loadingName);</span><br><span class="line">  loadingNameArray.push(loadingName);</span><br><span class="line">  req.cancelToken = source.token; <span class="comment">// 所有请求使用 同一个token，出现网络错误时一起取消</span></span><br><span class="line">  CONSOLE_REQUEST_ENABLE &amp;&amp; <span class="built_in">console</span>.info(<span class="string">'requestInterceptorFunc'</span>, <span class="string">`url:<span class="subst">$&#123;req.url&#125;</span>`</span>, req);</span><br><span class="line">  <span class="comment">// 自定义请求拦截逻辑，处理权限，请求发送监控等</span></span><br><span class="line">  <span class="keyword">if</span> (store.getters.token) &#123;</span><br><span class="line">    req.headers[<span class="string">'token'</span>] = getToken(); <span class="comment">// 让每个请求携带token--['token']为自定义key 请根据实际情况自行修改</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> req;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 请求失败拦截器</span></span><br><span class="line"><span class="comment"> * @param reqError 失败信息</span></span><br><span class="line"><span class="comment"> * @returns &#123;Promise.&lt;*&gt;&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">requestFailFunc</span>(<span class="params">reqError</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 关闭模态对话框</span></span><br><span class="line">  loadCount--;</span><br><span class="line">  <span class="keyword">if</span> (!loadCount) &#123;</span><br><span class="line">    loadingNameArray.forEach(<span class="function"><span class="params">item</span> =&gt;</span> <span class="built_in">window</span>.loadingView.hide(item));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 自定义请求失败逻辑，处理断网，请求发送监控等</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(reqError);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 响应成功拦截器</span></span><br><span class="line"><span class="comment"> * @param res 返回数据</span></span><br><span class="line"><span class="comment"> * @returns &#123;*&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">responseSuccessFunc</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 关闭模态对话框</span></span><br><span class="line">  loadCount--;</span><br><span class="line">  <span class="keyword">if</span> (!loadCount) &#123;</span><br><span class="line">    loadingNameArray.forEach(<span class="function"><span class="params">item</span> =&gt;</span> <span class="built_in">window</span>.loadingView.hide(item));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 自定义响应成功逻辑，全局拦截接口，根据不同业务做不同处理，响应成功监控等</span></span><br><span class="line">  CONSOLE_RESPONSE_ENABLE &amp;&amp; <span class="built_in">console</span>.info(<span class="string">'responseInterceptorFunc'</span>, response);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> httpStatusCode = &#123;</span><br><span class="line">    <span class="number">300</span>: <span class="string">'资源已被转移至其他位置'</span>,</span><br><span class="line">    <span class="number">301</span>: <span class="string">'请求的资源已被永久移动到新URI'</span>,</span><br><span class="line">    <span class="number">302</span>: <span class="string">'请求的资源已被临时移动到新URI'</span>,</span><br><span class="line">    <span class="number">305</span>: <span class="string">'请求的资源必须通过代理访问'</span>,</span><br><span class="line">    <span class="number">400</span>: <span class="string">'错误资源访问请求'</span>,</span><br><span class="line">    <span class="number">401</span>: <span class="string">'资源访问未授权'</span>,</span><br><span class="line">    <span class="number">403</span>: <span class="string">'资源禁止访问'</span>,</span><br><span class="line">    <span class="number">404</span>: <span class="string">'未找到要访问的资源'</span>,</span><br><span class="line">    <span class="number">405</span>: <span class="string">'请更换请求方法'</span>,</span><br><span class="line">    <span class="number">406</span>: <span class="string">'无法访问'</span>,</span><br><span class="line">    <span class="number">408</span>: <span class="string">'请求超时'</span>,</span><br><span class="line">    <span class="number">413</span>: <span class="string">'请求实体过大'</span>,</span><br><span class="line">    <span class="number">414</span>: <span class="string">'请求URI过长'</span>,</span><br><span class="line">    <span class="number">500</span>: <span class="string">'内部服务器错误'</span>,</span><br><span class="line">    <span class="number">501</span>: <span class="string">'未实现'</span>,</span><br><span class="line">    <span class="number">503</span>: <span class="string">'服务无法获得'</span>,</span><br><span class="line">    <span class="number">504</span>: <span class="string">'接口访问超时'</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (response.status &gt;= <span class="number">300</span> &amp;&amp; response.status &lt; <span class="number">600</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> errorMessage = <span class="string">'未知的访问错误，状态吗：'</span> + <span class="built_in">String</span>(res.status);</span><br><span class="line">    <span class="keyword">if</span> (httpStatusCode[<span class="built_in">String</span>(res.status)]) &#123;</span><br><span class="line">      errorMessage = httpStatusCode[<span class="built_in">String</span>(res.status)];</span><br><span class="line">      iView.Message.error(errorMessage); <span class="comment">//展示错误信息</span></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'error：'</span> + errorMessage);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 自定义状态码</span></span><br><span class="line">  <span class="keyword">let</span> statusCode = &#123;</span><br><span class="line">    <span class="number">301</span>: <span class="string">'登录失败'</span>,</span><br><span class="line">    <span class="number">303</span>: <span class="string">'退出失败'</span>,</span><br><span class="line">    <span class="number">304</span>: <span class="string">'用户或密码错误'</span>,</span><br><span class="line">    <span class="number">400</span>: <span class="string">'未查询到角色数据'</span>,</span><br><span class="line">    <span class="number">401</span>: <span class="string">'资源访问未授权'</span>,</span><br><span class="line">    <span class="number">403</span>: <span class="string">'验证码错误'</span>,</span><br><span class="line">    <span class="number">405</span>: <span class="string">'验证码已过期'</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> res = response.data;</span><br><span class="line">  <span class="keyword">let</span> code = res.code;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Object</span>.keys(statusCode).includes(<span class="built_in">String</span>(code))) &#123;</span><br><span class="line">    <span class="comment">// 异常处理</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'warning'</span>, res.message);</span><br><span class="line">    <span class="comment">// iView.Message.error(res.message); //展示错误信息</span></span><br><span class="line">    iView.Message.error(&#123;</span><br><span class="line">      content: res.message,</span><br><span class="line">      duration: <span class="number">10</span>,</span><br><span class="line">      closable: <span class="literal">true</span></span><br><span class="line">    &#125;); <span class="comment">//展示错误信息</span></span><br><span class="line">    <span class="keyword">switch</span> (code) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">301</span>:</span><br><span class="line">        &#123;</span><br><span class="line">          location.href = <span class="string">'/login'</span>; <span class="comment">// 回退到登录界面</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">303</span>:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">304</span>:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">401</span>:</span><br><span class="line">        &#123;</span><br><span class="line">          location.href = <span class="string">'/401'</span>; <span class="comment">// 跳转到未授权界面</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'error：'</span> + (response &amp;&amp; response.data &amp;&amp; response.data.message));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ([<span class="string">'blob'</span>, <span class="string">'arraybuffer'</span>].includes(response.request.responseType)) &#123;</span><br><span class="line">    <span class="keyword">let</span> fileNameIndex = response.headers[<span class="string">'content-disposition'</span>].indexOf(<span class="string">'='</span>);</span><br><span class="line">    <span class="keyword">let</span> fileName = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">if</span> (fileNameIndex) &#123;</span><br><span class="line">      <span class="keyword">let</span> tmpName = response.headers[<span class="string">'content-disposition'</span>].slice(fileNameIndex + <span class="number">1</span>);</span><br><span class="line">      fileName = <span class="built_in">window</span>.decodeURIComponent(tmpName);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">data</span>: res, fileName &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> res.data;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 响应失败拦截器</span></span><br><span class="line"><span class="comment"> * @param resError 失败信息</span></span><br><span class="line"><span class="comment"> * @returns &#123;Promise.&lt;*&gt;&#125;</span></span><br><span class="line"><span class="comment"> * 请求的404 接口会返回这个handler中</span></span><br><span class="line"><span class="comment"> * 请求超时 触发失败的回调</span></span><br><span class="line"><span class="comment"> * 重复的接口取消</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">responseFailFunc</span>(<span class="params">resError</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 关闭模态对话框</span></span><br><span class="line">  loadCount--;</span><br><span class="line">  <span class="keyword">if</span> (!loadCount) &#123;</span><br><span class="line">    loadingNameArray.forEach(<span class="function"><span class="params">item</span> =&gt;</span> <span class="built_in">window</span>.loadingView.hide(item));</span><br><span class="line">  &#125;</span><br><span class="line">  resError.message = resError.toString();</span><br><span class="line">  <span class="keyword">if</span> (resError.toString().indexOf(<span class="string">'Network'</span>) &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">    resError.message = <span class="string">'网络连接异常'</span>;</span><br><span class="line">    <span class="comment">//source.cancel(resError.message);</span></span><br><span class="line">    <span class="built_in">Promise</span>.reject(<span class="string">'网络连接异常 '</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.warn(resError.message);</span><br><span class="line">  <span class="comment">// iView.Message.error(resError.message); //展示错误信息</span></span><br><span class="line">  iView.Message.error(&#123;</span><br><span class="line">    content: resError.message,</span><br><span class="line">    duration: <span class="number">5</span>,</span><br><span class="line">    closable: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 响应失败，可根据resError信息做监控处理</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(resError);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@/utils/auth/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Cookies <span class="keyword">from</span> <span class="string">'js-cookie'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> TokenKey = <span class="string">'Admin-Token'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getToken</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Cookies.get(TokenKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@/config/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// axios 默认配置</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> AXIOS_DEFAULT_CONFIG = &#123;</span><br><span class="line">  timeout: <span class="number">20000</span>,</span><br><span class="line">  maxContentLength: <span class="number">20000</span>,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    <span class="comment">// 'Content-Type': 'application/x-www-form-urlencoded'</span></span><br><span class="line">    <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> <span class="comment">// 跨域的时候会产生 options预检</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// baseURL: 'http://localhost:8080/xiaozhi-back-api' //可以换种写法</span></span><br><span class="line">  <span class="comment">//baseURL: process.env.NODE_ENV !== 'production' ? '/xiaozhi-back-api' : 'http://172.16.130.164:8080/xiaozhi-back-api'</span></span><br><span class="line">  baseURL: <span class="string">'/xiaozhi-back-api'</span></span><br><span class="line">  <span class="comment">// baseURL: '/'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 开启请求参数打印</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> CONSOLE_REQUEST_ENABLE = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">// 开启响应参数打印</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> CONSOLE_RESPONSE_ENABLE = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="loadingView请求中状态"><a href="#loadingView请求中状态" class="headerlink" title="loadingView请求中状态"></a>loadingView请求中状态</h2><p><code>@/plugins/loadingView.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * loading状态效果</span></span><br><span class="line"><span class="comment"> * 显示window.loadingView.show("loading名")</span></span><br><span class="line"><span class="comment"> * 隐藏window.loadingView.hide("loading名")</span></span><br><span class="line"><span class="comment"> * 注意：勿同时执行相同名称的loadingView</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>._loadingViewArr = [];</span><br><span class="line"><span class="keyword">let</span> animateTimer = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createdView</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> loadingView = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">  loadingView.className = <span class="string">'loadingView animated fadeOut'</span>;</span><br><span class="line">  <span class="keyword">let</span> frame = <span class="built_in">window</span>.document.createElement(<span class="string">'div'</span>);</span><br><span class="line">  frame.className = <span class="string">'loadingViewFrame animated'</span>;</span><br><span class="line">  frame.innerHTML = <span class="string">`&lt;div class="loadingBox1 loadingBox"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">                      &lt;div class="loadingBox2 loadingBox"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">                      &lt;div class="loadingBox4 loadingBox"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">                      &lt;div class="loadingBox3 loadingBox"&gt;&lt;/div&gt;`</span>;</span><br><span class="line">  loadingView.appendChild(frame);</span><br><span class="line">  <span class="built_in">window</span>.document.body.appendChild(loadingView);</span><br><span class="line">  <span class="keyword">return</span> loadingView;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">className</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> classNameArr = <span class="keyword">this</span>.className.replace(<span class="regexp">/[ ]+/g</span>, <span class="string">','</span>).split(<span class="string">','</span>);</span><br><span class="line">  <span class="keyword">let</span> index = classNameArr.indexOf(className);</span><br><span class="line">  <span class="keyword">if</span> (index &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    classNameArr.push(className);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.className = classNameArr.join(<span class="string">' '</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeClass</span>(<span class="params">className</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> classNameArr = <span class="keyword">this</span>.className.replace(<span class="regexp">/[ ]+/g</span>, <span class="string">','</span>).split(<span class="string">','</span>);</span><br><span class="line">  <span class="keyword">let</span> index = classNameArr.indexOf(className);</span><br><span class="line">  <span class="keyword">if</span> (index &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    classNameArr.splice(index, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.className = classNameArr.join(<span class="string">' '</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">css</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> key === <span class="string">'string'</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.style[key] = value;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> style = <span class="keyword">this</span>.style[key];</span><br><span class="line">      <span class="keyword">if</span> (!style) &#123;</span><br><span class="line">        style = <span class="built_in">window</span>.getComputedStyle ? <span class="built_in">window</span>.getComputedStyle(<span class="keyword">this</span>, <span class="literal">null</span>)[key] : <span class="keyword">this</span>.currentStyle[key];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> style;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> key === <span class="string">'object'</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> name <span class="keyword">in</span> key) &#123;</span><br><span class="line">      <span class="keyword">this</span>.style[name] = key[name];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> node = createdView();</span><br><span class="line"><span class="keyword">let</span> showHide = <span class="function"><span class="keyword">function</span>(<span class="params">_name, _isShow</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!_name) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">let</span> loadingId = _name;</span><br><span class="line">  <span class="keyword">let</span> index = <span class="built_in">window</span>._loadingViewArr.indexOf(loadingId);</span><br><span class="line">  <span class="keyword">if</span> (index &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (_isShow) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">window</span>._loadingViewArr.splice(index, <span class="number">1</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (_isShow) &#123;</span><br><span class="line">      <span class="built_in">window</span>._loadingViewArr.push(loadingId);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">window</span>._loadingViewArr.length) &#123;</span><br><span class="line">    <span class="built_in">window</span>.clearTimeout(animateTimer);</span><br><span class="line">    css.bind(node)(<span class="string">'display'</span>, <span class="string">'block'</span>);</span><br><span class="line">    removeClass.bind(node)(<span class="string">'fadeOut'</span>);</span><br><span class="line">    addClass.bind(node)(<span class="string">'fadeIn'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    removeClass.bind(node)(<span class="string">'fadeIn'</span>);</span><br><span class="line">    addClass.bind(node)(<span class="string">'fadeOut'</span>);</span><br><span class="line">    <span class="built_in">window</span>.clearTimeout(animateTimer);</span><br><span class="line">    animateTimer = <span class="built_in">window</span>.setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      css.bind(node)(<span class="string">'display'</span>, <span class="string">'none'</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">window</span>._loadingViewArr.length &gt; <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> loadingView = (<span class="built_in">window</span>.loadingView = &#123;</span><br><span class="line">  show(_name) &#123;</span><br><span class="line">    <span class="keyword">return</span> showHide(_name, <span class="literal">true</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  hide(_name) &#123;</span><br><span class="line">    <span class="keyword">return</span> showHide(_name, <span class="literal">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> loadingView;</span><br></pre></td></tr></table></figure>
+<p>样式<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.loadingView</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="comment">// margin-left: -50px;</span></span><br><span class="line">    <span class="comment">// margin-right: -50px;</span></span><br><span class="line">    <span class="comment">// margin-top: -50px;</span></span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">1999</span>;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">    <span class="attribute">background-color</span>: rgba(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.1</span>);</span><br><span class="line">    <span class="comment">// background-color: red;</span></span><br><span class="line">    <span class="selector-class">.loadingViewFrame</span> &#123;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">margin</span>: -<span class="number">20px</span> <span class="number">0</span> <span class="number">0</span> -<span class="number">20px</span>;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">40px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">        <span class="attribute">-webkit-transform</span>: rotateZ(<span class="number">45deg</span>);</span><br><span class="line">        <span class="attribute">transform</span>: rotateZ(<span class="number">45deg</span>);</span><br><span class="line">        <span class="selector-class">.loadingBox</span> &#123;</span><br><span class="line">            <span class="attribute">float</span>: left;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">50%</span>;</span><br><span class="line">            <span class="attribute">position</span>: relative;</span><br><span class="line">            <span class="attribute">-webkit-transform</span>: scale(<span class="number">1.1</span>);</span><br><span class="line">            <span class="attribute">-ms-transform</span>: scale(<span class="number">1.1</span>);</span><br><span class="line">            <span class="attribute">transform</span>: scale(<span class="number">1.1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.loadingBox</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">            <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">            <span class="attribute">position</span>: absolute;</span><br><span class="line">            <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">            <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">            <span class="attribute">background-color</span>: <span class="variable">@baseThemeColor</span>;</span><br><span class="line">            <span class="attribute">-webkit-animation</span>: foldCubeAngle <span class="number">2.4s</span> infinite linear both;</span><br><span class="line">            <span class="attribute">animation</span>: foldCubeAngle <span class="number">2.4s</span> infinite linear both;</span><br><span class="line">            <span class="attribute">-webkit-transform-origin</span>: <span class="number">100%</span> <span class="number">100%</span>;</span><br><span class="line">            <span class="attribute">-ms-transform-origin</span>: <span class="number">100%</span> <span class="number">100%</span>;</span><br><span class="line">            <span class="attribute">transform-origin</span>: <span class="number">100%</span> <span class="number">100%</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.loadingBox2</span> &#123;</span><br><span class="line">            <span class="attribute">-webkit-transform</span>: scale(<span class="number">1.1</span>) rotateZ(<span class="number">90deg</span>);</span><br><span class="line">            <span class="attribute">transform</span>: scale(<span class="number">1.1</span>) rotateZ(<span class="number">90deg</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.loadingBox3</span> &#123;</span><br><span class="line">            <span class="attribute">-webkit-transform</span>: scale(<span class="number">1.1</span>) rotateZ(<span class="number">180deg</span>);</span><br><span class="line">            <span class="attribute">transform</span>: scale(<span class="number">1.1</span>) rotateZ(<span class="number">180deg</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.loadingBox4</span> &#123;</span><br><span class="line">            <span class="attribute">-webkit-transform</span>: scale(<span class="number">1.1</span>) rotateZ(<span class="number">270deg</span>);</span><br><span class="line">            <span class="attribute">transform</span>: scale(<span class="number">1.1</span>) rotateZ(<span class="number">270deg</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.loadingBox2</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">            <span class="attribute">-webkit-animation-delay</span>: <span class="number">0.3s</span>;</span><br><span class="line">            <span class="attribute">animation-delay</span>: <span class="number">0.3s</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.loadingBox3</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">            <span class="attribute">-webkit-animation-delay</span>: <span class="number">0.6s</span>;</span><br><span class="line">            <span class="attribute">animation-delay</span>: <span class="number">0.6s</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.loadingBox4</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">            <span class="attribute">-webkit-animation-delay</span>: <span class="number">0.9s</span>;</span><br><span class="line">            <span class="attribute">animation-delay</span>: <span class="number">0.9s</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>@/plugins/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> loadingView <span class="keyword">from</span> <span class="string">'./loadingView'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  install: <span class="function">(<span class="params">Vue, options</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 挂载实例</span></span><br><span class="line">    Vue.prototype.$loadingView = loadingView;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="api请求方法封装"><a href="#api请求方法封装" class="headerlink" title="api请求方法封装"></a>api请求方法封装</h1><p><code>@/plugins/api.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** @format */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'./axios'</span>;</span><br><span class="line"><span class="keyword">import</span> _assign <span class="keyword">from</span> <span class="string">'lodash/assign'</span>;</span><br><span class="line"><span class="keyword">import</span> _merge <span class="keyword">from</span> <span class="string">'lodash/merge'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; assert &#125; <span class="keyword">from</span> <span class="string">'@/utils'</span>;	<span class="comment">// 断言</span></span><br><span class="line"><span class="keyword">import</span> &#123; API_DEFAULT_CONFIG, AXIOS_DEFAULT_CONFIG &#125; <span class="keyword">from</span> <span class="string">'@/config'</span>;	<span class="comment">// 配置</span></span><br><span class="line"><span class="keyword">import</span> API_CONFIG <span class="keyword">from</span> <span class="string">'@/api'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成api接口类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Api</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(options) &#123;</span><br><span class="line">    <span class="keyword">this</span>.api = &#123;&#125;;</span><br><span class="line">    <span class="keyword">this</span>.apiBuilder(options);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 创建工程接口</span></span><br><span class="line"><span class="comment">   * @param sep 分隔符</span></span><br><span class="line"><span class="comment">   * @param config 接口配置对象</span></span><br><span class="line"><span class="comment">   * @param mock 是否开启mock</span></span><br><span class="line"><span class="comment">   * @param debug 是否开启debug模式</span></span><br><span class="line"><span class="comment">   * @param mockBaseURL mock接口地址</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  apiBuilder(&#123; sep = <span class="string">'/'</span>, config = &#123;&#125;, mock = <span class="literal">false</span>, debug = <span class="literal">false</span>, mockBaseURL = <span class="string">''</span> &#125;) &#123;</span><br><span class="line">    <span class="built_in">Object</span>.keys(config).map(<span class="function"><span class="params">namespace</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>._apiSingleBuilder(&#123;</span><br><span class="line">        namespace,</span><br><span class="line">        mock,</span><br><span class="line">        mockBaseURL,</span><br><span class="line">        sep,</span><br><span class="line">        debug,</span><br><span class="line">        config: config[namespace]</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 创建单个接口</span></span><br><span class="line"><span class="comment">   * @param sep 分隔符</span></span><br><span class="line"><span class="comment">   * @param config 接口配置对象</span></span><br><span class="line"><span class="comment">   * @param mock 是否开启mock</span></span><br><span class="line"><span class="comment">   * @param debug 是否开启debug模式</span></span><br><span class="line"><span class="comment">   * @param mockBaseURL mock接口地址</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  _apiSingleBuilder(&#123; namespace, sep = <span class="string">'/'</span>, config = &#123;&#125;, mock = <span class="literal">false</span>, debug = <span class="literal">false</span>, mockBaseURL = <span class="string">''</span> &#125;) &#123;</span><br><span class="line">    config.forEach(<span class="function"><span class="params">api</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; name, desc, params, method, path &#125; = api;</span><br><span class="line">      <span class="keyword">let</span> apiname = <span class="string">`<span class="subst">$&#123;namespace&#125;</span><span class="subst">$&#123;sep&#125;</span><span class="subst">$&#123;name&#125;</span>`</span>; <span class="comment">// 接口调用名称 this.$api['apiname'](&#123;参数&#125;,&#123;HTTP请求的配置&#125;)</span></span><br><span class="line">      <span class="keyword">let</span> url = path; <span class="comment">// 接口地址</span></span><br><span class="line">      <span class="keyword">const</span> baseURL = mock ? mockBaseURL : AXIOS_DEFAULT_CONFIG.baseURL; <span class="comment">// 接口base地址</span></span><br><span class="line"></span><br><span class="line">      debug &amp;&amp; assert(name, <span class="string">`<span class="subst">$&#123;url&#125;</span> :接口name属性不能为空`</span>);</span><br><span class="line">      debug &amp;&amp; assert(url.indexOf(<span class="string">'/'</span>) === <span class="number">0</span>, <span class="string">`<span class="subst">$&#123;url&#125;</span> :接口路径path，首字符应为/`</span>);</span><br><span class="line">      <span class="comment">// value可以使用函数调用符号</span></span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>.api, <span class="string">`<span class="subst">$&#123;apiname&#125;</span>`</span>, &#123;</span><br><span class="line">        value(outerParams, outerOptions) &#123;</span><br><span class="line">          <span class="comment">// let _data = _isEmpty(outerParams) ? params : _pick(_assign(&#123;&#125;, params, outerParams), Object.keys(params));</span></span><br><span class="line">          <span class="comment">// 未填的字段 使用默认值 未填的使用默认值</span></span><br><span class="line">          <span class="comment">//todo FormData 则需要手动的设置请求头 Content-type:multipart/form-data</span></span><br><span class="line">          <span class="keyword">let</span> _data =</span><br><span class="line">            <span class="built_in">Array</span>.isArray(outerParams) || outerParams <span class="keyword">instanceof</span> FormData</span><br><span class="line">              ? outerParams</span><br><span class="line">              : _merge(&#123;&#125;, params, outerParams);</span><br><span class="line"></span><br><span class="line">          <span class="keyword">return</span> axios(_normoalize(_assign(&#123; url, desc, baseURL, method &#125;, outerOptions), _data));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据请求类型处理axios参数</span></span><br><span class="line"><span class="comment"> * @param options</span></span><br><span class="line"><span class="comment"> * @param data</span></span><br><span class="line"><span class="comment"> * @returns &#123;*&#125;</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_normoalize</span>(<span class="params">options, data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (options.method === <span class="string">'POST'</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果是 application/x-www-form-urlencoded 需要引入qs模块做参数处理</span></span><br><span class="line">    <span class="comment">// options.data = qs.stringifly(data)</span></span><br><span class="line">    options.data = data;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (options.method === <span class="string">'GET'</span>) &#123;</span><br><span class="line">    options.params = data;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> options;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 导出接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Api(&#123;</span><br><span class="line">  config: API_CONFIG,</span><br><span class="line">  ...API_DEFAULT_CONFIG</span><br><span class="line">&#125;)[<span class="string">'api'</span>];</span><br></pre></td></tr></table></figure>
+<p>工具函数<code>@/utils/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 断言的内容</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">assert</span>(<span class="params">condition, msg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!condition) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`[Apior] <span class="subst">$&#123;msg&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置<code>@/config/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// axios 默认配置</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> AXIOS_DEFAULT_CONFIG = &#123;</span><br><span class="line">  timeout: <span class="number">20000</span>,</span><br><span class="line">  maxContentLength: <span class="number">20000</span>,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    <span class="comment">// 'Content-Type': 'application/x-www-form-urlencoded'</span></span><br><span class="line">    <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> <span class="comment">// 跨域的时候会产生 options预检</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// baseURL: 'http://localhost:8080/xiaozhi-back-api' //可以换种写法</span></span><br><span class="line">  <span class="comment">//baseURL: process.env.NODE_ENV !== 'production' ? '/xiaozhi-back-api' : 'http://172.16.130.164:8080/xiaozhi-back-api'</span></span><br><span class="line">  baseURL: <span class="string">'/xiaozhi-back-api'</span></span><br><span class="line">  <span class="comment">// baseURL: '/'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// API 默认配置</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> API_DEFAULT_CONFIG = &#123;</span><br><span class="line">  mockBaseURL: <span class="string">'http://yapi.demo.qunar.com/mock/12982/flytest/v1'</span>, <span class="comment">// mock地址</span></span><br><span class="line">  mock: <span class="literal">false</span>, <span class="comment">// 是否开启mock</span></span><br><span class="line">  debug: <span class="literal">false</span>, <span class="comment">// 是否开启debug模式</span></span><br><span class="line">  sep: <span class="string">'/'</span> <span class="comment">// 接口调用分隔符</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="api接口地址"><a href="#api接口地址" class="headerlink" title="api接口地址"></a>api接口地址</h2><p><code>@/api/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> common <span class="keyword">from</span> <span class="string">'./common'</span>; <span class="comment">// 登录</span></span><br><span class="line"><span class="keyword">import</span> schoolCount <span class="keyword">from</span> <span class="string">'./school-count'</span>; <span class="comment">// 学校统计</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  ...common,</span><br><span class="line">  ...schoolCount</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>各个模块<code>@/api/school-count/index.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> schoolContact <span class="keyword">from</span> <span class="string">'./school-contact'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  schoolContact</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>@/api/school-count/school-contact.js:</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'teacherPageList'</span>,</span><br><span class="line">    method: <span class="string">'POST'</span>,</span><br><span class="line">    desc: <span class="string">'获取学校联系人列表 '</span>,</span><br><span class="line">    path: <span class="string">'/fansTeacher/teacherPageList'</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$api[<span class="string">'schoolManage/schoolPageList'</span>](&#123;</span><br><span class="line">  pageSize: <span class="keyword">this</span>.page.size,</span><br><span class="line">  page: <span class="keyword">this</span>.page.index</span><br><span class="line">&#125;).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.tableData = data.dataList;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当需设置额外的<code>Content-Type</code>时：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$api[<span class="keyword">this</span>.uploadUrl](formData, &#123;</span><br><span class="line">  headers: &#123;</span><br><span class="line">    <span class="string">'Content-Type'</span>: <span class="string">'multipart/form-data'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  timeout: <span class="number">60000</span></span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.$Message.success(&#123;</span><br><span class="line">    content: <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.title&#125;</span>信息文件上传成功!`</span>,</span><br><span class="line">    duration: <span class="number">5</span>,</span><br><span class="line">    closable: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br><span class="line">  .finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：</p>
+<ol>
+<li>此封装方法只能去到成功时的data值，失败时会展示接口message信息。</li>
+<li>此封装方法默认<code>Content-Type</code>为<code>application/json</code>。如果是如果是 <code>application/x-www-form-urlencoded</code> 需要引入<code>qs</code>模块做参数处理</li>
+</ol>
+</blockquote>
+<p>当需要在js文件中使用时：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> api <span class="keyword">from</span> <span class="string">'@/plugins/api'</span>;</span><br><span class="line"></span><br><span class="line">api[<span class="string">'schoolManage/schoolPageList'</span>](&#123;</span><br><span class="line">  pageSize: <span class="keyword">this</span>.page.size,</span><br><span class="line">  page: <span class="keyword">this</span>.page.index</span><br><span class="line">&#125;).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.tableData = data.dataList;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/24/vue-Router+Vuex实战：页面权限控制+面包屑/" rel="next" title="vue-Router+Vuex实战：多角色页面权限控制+面包屑">
+                <i class="fa fa-chevron-left"></i> vue-Router+Vuex实战：多角色页面权限控制+面包屑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/29/序号动态改变/" rel="prev" title="序号动态改变">
+                序号动态改变 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myAvatar.jpg"
+                alt="虾米俊" />
+            
+              <p class="site-author-name" itemprop="name">虾米俊</p>
+              <p class="site-description motion-element" itemprop="description">雨会下雨会停，这是不变的道理</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiamijun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#入口"><span class="nav-number">1.</span> <span class="nav-text">入口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#axios封装"><span class="nav-number">2.</span> <span class="nav-text">axios封装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拦截器"><span class="nav-number">2.1.</span> <span class="nav-text">拦截器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loadingView请求中状态"><span class="nav-number">2.2.</span> <span class="nav-text">loadingView请求中状态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#api请求方法封装"><span class="nav-number">3.</span> <span class="nav-text">api请求方法封装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#api接口地址"><span class="nav-number">3.1.</span> <span class="nav-text">api接口地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">3.2.</span> <span class="nav-text">使用方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">虾米俊</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">34.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'hWcT9SeAlL37DHejBXLPDeba-gzGzoHsz',
+        appKey: 'NsWPYAqK03m8kNpvHapiGrCs',
+        placeholder: '来说两句~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("hWcT9SeAlL37DHejBXLPDeba-gzGzoHsz", "NsWPYAqK03m8kNpvHapiGrCs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

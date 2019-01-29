@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="虾米俊">
 <meta property="og:description" content="改变iVIew默认样式的方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T08:02:46.065Z">
+<meta property="og:updated_time" content="2019-01-29T08:22:53.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="改变iVIew默认样式的方法">
 <meta name="twitter:description" content="改变iVIew默认样式的方法">
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  442 字
+                  507 字
                 </span>
               
 
@@ -457,6 +457,11 @@
 <h1 id="style不加scoped"><a href="#style不加scoped" class="headerlink" title="style不加scoped"></a>style不加scoped</h1><p>另一种方法是另写一个<code>style</code>，不加<code>scoped</code>，将要重写的iView写在其中。</p>
 <p>但这样有一个缺点：定义的类名可能会污染全局样式。</p>
 <p>因此必须保证手动添加的类名独一无二。</p>
+<h1 id="deep-穿透"><a href="#deep-穿透" class="headerlink" title="/deep/穿透"></a>/deep/穿透</h1><p>直接通过检查元素找到<code>className</code></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/deep/.vux-label::before &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">'*'</span>;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1</span>;</span><br><span class="line">  <span class="attribute">font-family</span>: SimSun;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#ed3f14</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：在less中，deep不能在嵌套写法中穿透2层，因此需要分开写2段</p>
+</blockquote>
 <h1 id="全局的iView样式"><a href="#全局的iView样式" class="headerlink" title="全局的iView样式"></a>全局的iView样式</h1><p>可以全局更改iView样式。</p>
 <p><code>@/style/public.less:</code></p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> url(<span class="string">'../../../node_modules/iview/src/styles/index.less'</span>);</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.select30</span> <span class="selector-class">.ivu-select-dropdown</span> &#123;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">30px</span> <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.search-bg</span> <span class="selector-class">.ivu-form-item</span>&#123;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">5px</span> <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -582,7 +587,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -647,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义指令v-scoped"><span class="nav-number">1.</span> <span class="nav-text">自定义指令v-scoped</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#封装"><span class="nav-number">1.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">1.2.</span> <span class="nav-text">用法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#style不加scoped"><span class="nav-number">2.</span> <span class="nav-text">style不加scoped</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全局的iView样式"><span class="nav-number">3.</span> <span class="nav-text">全局的iView样式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义指令v-scoped"><span class="nav-number">1.</span> <span class="nav-text">自定义指令v-scoped</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#封装"><span class="nav-number">1.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">1.2.</span> <span class="nav-text">用法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#style不加scoped"><span class="nav-number">2.</span> <span class="nav-text">style不加scoped</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#deep-穿透"><span class="nav-number">3.</span> <span class="nav-text">/deep/穿透</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全局的iView样式"><span class="nav-number">4.</span> <span class="nav-text">全局的iView样式</span></a></li></ol></div>
             
 
           </div>
@@ -681,7 +686,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">30.8k</span>
+    <span title="Site words total count">34.1k</span>
   
 </div>
 
