@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="虾米俊">
 <meta property="og:description" content="总结Vue开发过程中，上传下载文件的几种方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-23T03:15:50.152Z">
+<meta property="og:updated_time" content="2019-01-30T02:10:22.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="上传下载文件的几种方法">
 <meta name="twitter:description" content="总结Vue开发过程中，上传下载文件的几种方法。">
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  654 字
+                  659 字
                 </span>
               
 
@@ -447,7 +447,7 @@
 <h2 id="arraybuffer转blob"><a href="#arraybuffer转blob" class="headerlink" title="arraybuffer转blob"></a>arraybuffer转blob</h2><p>下载excel封装：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">downLoadExcelFile</span>(<span class="params">url, queryString, options = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!api[url]) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`不存在该下载接口<span class="subst">$&#123;url&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> queryOptions = <span class="built_in">Object</span>.assign(&#123; <span class="attr">responseType</span>: <span class="string">'arraybuffer'</span> &#125;, options);</span><br><span class="line">  api[url](queryString, queryOptions).then(<span class="function">(<span class="params">&#123; data, fileName &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> blob = <span class="keyword">new</span> Blob([data], &#123; <span class="attr">type</span>: <span class="string">'application/vnd.ms-excel'</span> &#125;);</span><br><span class="line">    <span class="keyword">let</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span><br><span class="line">    <span class="keyword">let</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">    downloadElement.href = href;</span><br><span class="line">    downloadElement.download = <span class="string">'xxx.xlsx'</span>; <span class="comment">//下载后文件名</span></span><br><span class="line">    <span class="keyword">if</span> (fileName) &#123;</span><br><span class="line">      downloadElement.download = fileName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">    downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">    <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">    <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>接口调用方法见<a href="">axios封装</a></p>
+<p>接口调用方法见<a href="https://xiamijun.github.io/2019/01/25/axios%E5%B0%81%E8%A3%85%E5%8F%8Aapi%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">axios封装及api调用方法</a></p>
 </blockquote>
 <p>使用：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; debounce &#125; <span class="keyword">from</span> <span class="string">'@/utils'</span>;</span><br><span class="line"></span><br><span class="line">exportTeachers: (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> debounce(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> params = <span class="keyword">this</span>.searchData;</span><br><span class="line">    params.roleId = <span class="keyword">this</span>.roleId;</span><br><span class="line">    <span class="keyword">this</span>.$download.downLoadExcelFile(<span class="string">'schoolContact/exportTeachers'</span>, params);</span><br><span class="line">  &#125;, <span class="number">300</span>);</span><br><span class="line">&#125;)(),</span><br></pre></td></tr></table></figure>
@@ -462,7 +462,7 @@
 <h2 id="base64上传小图片"><a href="#base64上传小图片" class="headerlink" title="base64上传小图片"></a>base64上传小图片</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form id=&quot;myForm&quot;&gt;</span><br><span class="line">		&lt;input @change=&quot;chooseImage&quot; type=&quot;file&quot; accept=&quot;image/jpeg,image/x-png,image/gif&quot; id=&quot;&quot; value=&quot;&quot;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;img id=&quot;imageMask&quot; src=&quot;&quot;&gt;</span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 选择文件</span></span><br><span class="line">chooseImage(e) &#123;</span><br><span class="line">  <span class="keyword">this</span>.hasContent = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">let</span> _this = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> contentEl = <span class="built_in">document</span>.querySelector(<span class="string">'#content'</span>);</span><br><span class="line">  contentEl.focus();</span><br><span class="line">  <span class="comment">// 读取文件</span></span><br><span class="line">  <span class="keyword">let</span> files = e.target.files;</span><br><span class="line">  <span class="keyword">let</span> file = files[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    reader.readAsDataURL(file); <span class="comment">// 读出 base64</span></span><br><span class="line">    reader.onloadend = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 图片的 base64 格式, 可以直接当成 img 的 src 属性值</span></span><br><span class="line">      <span class="keyword">let</span> dataURL = reader.result;</span><br><span class="line">      <span class="keyword">let</span> imgEle = <span class="built_in">document</span>.getElemetnById(<span class="string">'imageMask'</span>);</span><br><span class="line">      imgEle.setAttribute(<span class="string">'src'</span>, dataURL);</span><br><span class="line">    &#125;;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'myForm'</span>).reset();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>参考：<a href="">发送图文消息</a></p>
+<p>参考：<a href="https://xiamijun.github.io/2019/01/23/%E5%8F%91%E9%80%81%E5%9B%BE%E6%96%87%E6%B6%88%E6%81%AF/" target="_blank" rel="noopener">发送图文消息</a></p>
 </blockquote>
 
       
@@ -584,7 +584,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -683,7 +683,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.1k</span>
+    <span title="Site words total count">36.6k</span>
   
 </div>
 
