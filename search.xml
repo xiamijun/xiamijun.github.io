@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[iVIew对话框组件封装]]></title>
+    <url>%2F2019%2F01%2F30%2FiVIew%E5%AF%B9%E8%AF%9D%E6%A1%86%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[弹出框使用率较高，将其封装为组件 @/components/tip-modal/index.vue: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091&lt;template&gt; &lt;Modal v-scoped :width=&quot;width&quot; v-model=&quot;showTipFlag&quot; :title=&quot;title&quot; :mask-closable=&quot;false&quot; @on-cancel=&quot;cancel&quot; class-name=&quot;vertical-center-modal&quot;&gt; &lt;div class=&quot;cnt&quot;&gt; &lt;slot name=&quot;main-content&quot;&gt;&lt;/slot&gt; &lt;slot&gt;&lt;/slot&gt; &lt;/div&gt; &lt;div v-if=&quot;showFooter&quot; slot=&quot;footer&quot;&gt; &lt;Button type=&quot;primary&quot; @click.native=&quot;ok&quot;&gt;确定&lt;/Button&gt; &lt;Button @click.native=&quot;cancel&quot;&gt;取消&lt;/Button&gt; &lt;/div&gt; &lt;div v-else slot=&quot;footer&quot;&gt;&lt;/div&gt; &lt;/Modal&gt;&lt;/template&gt;&lt;script&gt;export default &#123; name: &apos;TipModal&apos;, props: &#123; title: &#123; type: String, default: &apos;提示信息&apos; &#125;, width: &#123; type: Number, default: 535 &#125;, showTipFlag: &#123; required: true, type: Boolean &#125;, showFooter: &#123; type: Boolean, default: true &#125; &#125;, methods: &#123; _updateVisible(flag) &#123; this.showTipFlag = flag; this.$emit(&apos;update:showTipFlag&apos;, this.showTipFlag); //更新对话框的显示状态 &#125;, ok() &#123; this.$emit(&apos;click-ok&apos;); this._updateVisible(false); &#125;, cancel() &#123; this.$emit(&apos;click-cancel&apos;); this._updateVisible(false); &#125; &#125;&#125;;&lt;/script&gt;&lt;style scoped lang=&quot;less&quot;&gt;.cnt &#123; max-height: 500px; overflow: auto;&#125;.vertical-center-modal &#123; display: flex; align-items: center; justify-content: center; .ivu-modal &#123; top: 0; &#125;&#125;.ivu-modal-header-inner &#123; font-size: 20px; font-weight: normal;&#125;.tip-text &#123; font-weight: bolder; color: #2d8cf0; font-size: 18px; line-height: 1.5;&#125;.tip-text-assist &#123; color: #a6a4a6; font-size: 15px;&#125;&lt;/style&gt; 使用： 123&lt;TipModal :showTipFlag.sync="addSuccessFlag" :title="'提示'" @click-ok="loadData()" :showFooter="false"&gt; 新增成功&lt;/TipModal&gt;]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[npm包：删除文件夹rimraf]]></title>
+    <url>%2F2019%2F01%2F30%2Fnpm%E5%8C%85%EF%BC%9A%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%A4%B9rimraf%2F</url>
+    <content type="text"><![CDATA[当需要删除node_modules文件夹时，通常都会很慢，可以安装npm包：rimraf来快速删除。 全局安装 1npm install rimraf -g 进入目录，删除 1rimraf node_modules 同样可以使用于代码中， 1npm install rimraf --save-dev 1234const rimraf = require('rimraf');rimraf('./test.txt', function (err) &#123; // 删除当前目录下的 test.txt console.log(err);&#125;);]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[表单禁用默认提交]]></title>
+    <url>%2F2019%2F01%2F30%2F%E8%A1%A8%E5%8D%95%E7%A6%81%E7%94%A8%E9%BB%98%E8%AE%A4%E6%8F%90%E4%BA%A4%2F</url>
+    <content type="text"><![CDATA[W3C 标准中有如下规定： 当一个 form 元素中只有一个输入框时，在该输入框中按下回车应提交该表单。 通常我们希望阻止这一默认行为。 使用原生form时： 123&lt;form onsubmit="return false;"&gt; ......&lt;/form&gt; 使用iView的Form时： 123&lt;form @submit.native.prevent&gt; ......&lt;/form&gt;]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[pointer-events用法]]></title>
+    <url>%2F2019%2F01%2F30%2Fpointer-events%E7%94%A8%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[pointer-events用于屏蔽鼠标事件 使用pointer-events属性可以屏蔽鼠标事件。 或者让鼠标点击穿透上层元素。当绝对定位时，由于上层遮挡无法点击下层，可以在上层使用pointer-events: none]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Vue中使用高德地图]]></title>
     <url>%2F2019%2F01%2F30%2FVue%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%2F</url>
     <content type="text"><![CDATA[在Vue中使用高德地图，包括标记、搜索、自动补全功能。（不使用vue-amap） 引入/idnex.html: 1&lt;script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.10&amp;key=3bcadc9fa8870c7db8912575f009bdfb&amp;plugin=AMap.Autocomplete,AMap.Geocoder,AMap.PlaceSearch"&gt;&lt;/script&gt; 注意版本为1.4，低版本在Vue中会报错 key为自己的密钥。plugin后带的是插件 地图组件封装模板： 12345678910&lt;template&gt; &lt;div class="map-engine"&gt; &lt;div class="search" v-show="mapFlag"&gt; &lt;p&gt;请输入关键字：&lt;/p&gt; &lt;input type="text" id="tipInput" style="width: 250px" v-model="searchInput"&gt; &lt;/div&gt; &lt;div id="container" class="container" v-show="mapFlag"&gt; &lt;/div&gt; &lt;/div&gt;&lt;/template&gt; data: 12345678910111213data() &#123; return &#123; mapFlag: false, // 是否显示地图 map: null, // 地图示例 marker: null, // 标记 searchInput: '', // 搜索 markers: [], // 搜索产生的多个标记 lng: '', lat: '', address: '', currentPositionId: '' //当前的位置Id &#125;;&#125;, props： 12345678910props: &#123; locationObj: &#123; type: Object, default: () =&gt; (&#123; address: '当前位置', lng: '', lat: '' &#125;) &#125;&#125;, 初始化时，生成地图实例： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859mounted() &#123; // 忽略eslint的报错 /* eslint-disable no-undef */ window.map = this.map = new AMap.Map('container', &#123; resizeEnable: true, dragEnable: true, keyboardEnable: false, doubleClickZoom: true, zoom: 15 &#125;); // 绑定点击事件 this.map.on('click', this.clickHandler); // 搜索框 let auto = new AMap.Autocomplete(&#123; input: 'tipInput' &#125;); let placeSearch = new AMap.PlaceSearch(&#123; map: '' &#125;); //监听地名的选择 AMap.event.addListener(auto, 'select', e =&gt; &#123; placeSearch.setCity(e.poi.adcode); // 设置城市的 编码 // 地图定位城市 if (e.poi &amp;&amp; e.poi.location) &#123; this.map.setZoom(18); this.map.setCenter(e.poi.location); &#125; // 查询位置 并添加maker placeSearch.search(e.poi.name, (status, result) =&gt; &#123; if (status === 'complete' &amp;&amp; result.info === 'OK') &#123; for (let h = 0; h &lt; result.poiList.pois.length; h++) &#123; //返回搜索列表循环绑定marker let position = result.poiList.pois[h]['location']; //经纬度 let address = result.poiList.pois[h]['address']; //地址 let marker = new AMap.Marker(&#123; map: this.map, position: position &#125;); this.markers.push(marker); marker.extData = &#123; getLng: position['lng'], getLat: position['lat'], address: address &#125;; marker.on('click', e =&gt; &#123; let addressObj = &#123; address: e.target.extData.address, lng: position['lng'], lat: position['lat'] &#125;; this.changeAddress(addressObj); &#125;); &#125; &#125; &#125;); &#125;);&#125;, methods: 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899// 获取地图实例getMap: function(found) &#123; var vm = this; function checkForMap() &#123; if (vm.map) &#123; found(vm.map); &#125; else &#123; setTimeout(checkForMap, 50); &#125; &#125; checkForMap();&#125;,// 监听地图 点击 事件clickHandler(e) &#123; this.lng = e.lnglat.getLng(); this.lat = e.lnglat.getLat(); // 点击添加标记并显示地名 this.getMap(map =&gt; &#123; // 取消上一个标记 if (this.marker) &#123; map.remove(this.marker); &#125; this.marker = new AMap.Marker(&#123; position: new AMap.LngLat(e.lnglat.getLng(), e.lnglat.getLat()) &#125;); // 添加标记 map.add(this.marker); //获取地名 let lnglatXY = [e.lnglat.getLng(), e.lnglat.getLat()]; let geocoder = new AMap.Geocoder(&#123; radius: 1000, extensions: 'all' &#125;); geocoder.getAddress(lnglatXY, (status, result) =&gt; &#123; if (status === 'complete' &amp;&amp; result.info === 'OK') &#123; let address = result.regeocode.formattedAddress; let addressObj = &#123; address: address, lng: e.lnglat.getLng(), lat: e.lnglat.getLat() &#125;; this.changeAddress(addressObj); &#125; &#125;); &#125;);&#125;,// 展开、关闭地图toggleMap(positionId) &#123; //清除所有的覆盖物 if (this.map) &#123; this.map.clearMap(); this.searchInput = ''; &#125; if (positionId === this.currentPositionId) &#123; this.currentPositionId = ''; //关闭地图 this.mapFlag = !this.mapFlag;&#125; else &#123; this.currentPositionId = positionId; //当前的 positionId this.mapFlag = true;&#125;if (this.mapFlag) &#123; // 如果带坐标，则回显 if (this.lng &amp;&amp; this.lat) &#123; this.map.setZoomAndCenter(15, [this.lng, this.lat]); this.getMap(map =&gt; &#123; this.marker = new AMap.Marker(&#123; position: [this.lng, this.lat] &#125;); map.add(this.marker); &#125;); &#125;&#125;/* else &#123; // 清除标记 if (this.marker) &#123; this.map.remove(this.marker); &#125; if (this.markers.length) &#123; this.markers.forEach(item =&gt; &#123; this.map.remove(item); &#125;); &#125; // 清除搜索 this.searchInput = ''; &#125; */&#125;,// 数据变换并抛出changeAddress(addressObj) &#123; this.address = addressObj.address; Object.assign(addressObj, &#123; id: this.currentPositionId &#125;); this.$emit('click-position', addressObj);&#125; watch： 12345678locationObj: &#123; handler: function() &#123; this.lat = this.locationObj.lat; this.lng = this.locationObj.lng; this.address = this.locationObj.address; &#125;, deep: true&#125; destroyed； 1234destroyed() &#123; //销毁地图资源 this.map &amp;&amp; this.map.destroy();&#125; 样式： 1234567891011121314151617181920212223242526&lt;style scoped&gt;.map-engine &#123; position: relative;&#125;.container &#123; width: 100%; height: 600px;&#125;.search &#123; border: 1px solid #ccc; width: 270px; height: 70px; background-color: #fff; position: absolute; top: 30px; left: 0; z-index: 99; padding-top: 8px; padding-left: 8px;&#125;.look &#123; pointer-events: none; outline: none;&#125;&lt;/style&gt; 使用模板： 12345678910111213141516171819&lt;Row style="margin: 8px 0" v-for="item in positionList" :key="item.id"&gt; &lt;Col :span="12"&gt; &lt;Input type="text" :value="item.description" :readonly="true" /&gt; &lt;/Col&gt; &lt;Col :span="4"&gt; &lt;div class="map-op"&gt; &lt;a :class="&#123;btn:true,choose:item.id === currentPositionId&#125;" href="javascript:void(0)" @click="chooseMap(item.id)"&gt;选择地图&lt;/a&gt; | &lt;a class="btn" href="javascript:void(0)" @click="deleteHandler(item.id)"&gt;删除&lt;/a&gt; &lt;/div&gt; &lt;/Col&gt;&lt;/Row&gt;&lt;MapEngine ref="mapEngine" :locationObj="currentGeoCord" @click-position="positionHandler"&gt;&lt;/MapEngine&gt; 12345import MapEngine from '@/components/map-engine';components: &#123; MapEngine&#125; data: 1234567positionList: [], // 表单外置获取的地理位置列表currentPositionId: '', //当前操作的记录currentGeoCord: &#123; address: '当地位置', lng: '', lat: ''&#125;, created： 初始时，获取已经有的位置列表 123created() &#123; this.positionList=&#125; methods: 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869// 打开、关闭地图chooseMap(positionId) &#123; this.currentPositionId = positionId; let positionRecord = this._getPositionById(positionId); if (!positionRecord.latitude &amp;&amp; !positionRecord.longitude) &#123; //恢复默认值 this.currentGeoCord = &#123; address: '当地位置', lng: '', lat: '' &#125;; &#125; else &#123; this.currentGeoCord = &#123; address: positionRecord.description, lat: positionRecord.latitude, lng: positionRecord.longitude &#125;; &#125; // 让mapEngine里面的 watch先执行 this.$nextTick(() =&gt; &#123; this.$refs.mapEngine.toggleMap(positionId); &#125;);&#125;, _getPositionById(positionId) &#123; return this.positionList.find(item =&gt; &#123; return item.id === positionId; &#125;);&#125;, // 点击地图positionHandler(geoCord) &#123; let record = this.positionList.find(item =&gt; &#123; return item.id === geoCord.id; &#125;); Object.assign(record, &#123; latitude: geoCord.lat, longitude: geoCord.lng, description: geoCord.address &#125;);&#125;,// 删除位置deleteHandler(positionId) &#123; this.positionList = this.positionList.filter(item =&gt; &#123; return item.id != positionId; &#125;); //关闭地图 if (this.currentPositionId === positionId) &#123; this.$refs.mapEngine.toggleMap(positionId); this.currentPositionId = ''; // 清空选中的样式 &#125;&#125;,// 添加位置addHandler() &#123; this.positionList.push(this._getPositionRecord());&#125;,_getPositionRecord() &#123; let id = this.uniqueId++; let positionRecord = &#123; id, latitude: '', longitude: '', description: '' &#125;; return positionRecord;&#125;, 效果：]]></content>
@@ -289,6 +321,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[JS函数参数值校验]]></title>
+    <url>%2F2018%2F09%2F27%2FJS%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E5%80%BC%E6%A0%A1%E9%AA%8C%2F</url>
+    <content type="text"><![CDATA[在ES6中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。 其实，我们可以通过这个特性来做函数参数值的校验。 首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：123456789101112131415function fix(a = getA()) &#123; console.log('a', a)&#125;function getA() &#123; console.log('get a') return 2&#125;fix(1);// a 1fix();// get a// a 2 可以看出，如果在调用fix 时传了参数a，则不会执行函数getA，只有当不传递参数a时，才会执行函数getA。 这时候，我们可以利用这一特性，为参数a添加一个必传的校验，代码如下：12345678910111213function fix(a = require()) &#123; console.log('a', a)&#125;function require() &#123; throw new Error('缺少了参数 a')&#125;fix(1);// a 1fix();// Uncaught Error: 缺少了参数 a]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[从进程谈JS运行机制]]></title>
     <url>%2F2018%2F09%2F27%2F%E4%BB%8E%E8%BF%9B%E7%A8%8B%E8%B0%88JS%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%2F</url>
     <content type="text"><![CDATA[进程和线程 进程之间相互独立。 一个进程由一个或多个线程组成。 多个线程在进程中协作完成任务。 同一进程下的各个线程之间共享程序的内存空间。 进程是cpu资源分配的最小单位。 线程是cpu调度的最小单位。 浏览器是多进程的 浏览器每打开一个tab标签页，任务管理器会多加一条记录。 浏览器包含哪些进程 Browser进程主进程，只有一个作用：用户交互，如前进，后退。页面的管理，创建和销毁其他进程。网络资源管理，下载。 第三方插件进程 GPU进程用于3D绘制 浏览器渲染进程（浏览器内核）Renderer进程，内部是多线程的 浏览器内核（渲染进程） 页面的渲染，JS的执行，事件的循环，都在这个进程内进行。 渲染进程是多线程的 浏览器渲染进程包含的线程 GUI渲染线程&ensp; &ensp; 解析HTML，CSS，构建DOM树和RenderObject树，布局和绘制等。&ensp; &ensp; 注：GUI渲染线程与JS引擎线程是互斥的，当JS引擎执行时GUI线程会被挂起，GUI更新会被保存在一个队列中等到JS引擎空闲时立即被执行。 JS引擎线程&ensp; &ensp; 例如V8引擎。 事件触发线程&ensp; &ensp; 归属于浏览器而不是JS引擎，用来控制事件循环（可以理解，JS引擎自己都忙不过来，需要浏览器另开线程协助）。&ensp; &ensp; 当JS引擎执行如setTimeOut、AJAX异步请求等时，会将对应任务添加到事件线程中。&ensp; &ensp; 当对应的事件符合触发条件被触发时，该线程会把事件添加到待处理队列的队尾，等待JS引擎的处理。&ensp; &ensp; 由于JS的单线程关系，所以这些待处理队列中的事件都得排队等待JS引擎处理（当JS引擎空闲时才会去执行）。 定时触发器线程&ensp; &ensp; setInternal与 setTimeout所在线程。&ensp; &ensp; 浏览器定时计数器并不是由JavaScript引擎计数的。&ensp; &ensp; 通过单独线程来计时并触发定时（计时完毕后，添加到事件队列中，等待JS引擎空闲后执行）。&ensp; &ensp; 规定要求setTimeout中低于4ms的时间间隔算为4ms。 异步http请求线程&ensp; &ensp; XMLHttpRequest在连接后通过新开一个线程请求。&ensp; &ensp; 检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放入事件队列中。再由JavaScript引擎执行。 Browser进程和浏览器内核（Renderer进程）的通信过程 Browser进程收到用户请求，获取页面内容（如通过网络下载资源），随后将该任务通过RendererHost接口传递给Render进程。 Renderer进程收到消息，简单解释后，交给渲染线程，然后开始渲染。&ensp; &ensp; 渲染线程接收请求，加载网页并渲染网页。&ensp; &ensp; 可能会有JS线程操作DOM（这样可能会造成回流并重绘）。&ensp; &ensp; 最后Render进程将结果传递给Browser进程。 Browser进程接收到结果并将结果绘制出来。 GUI渲染线程与JS引擎线程互斥 当JS引擎执行时GUI线程会被挂起 巨量计算阻塞页面加载 WebWorker 应对cpu密集型计算 创建Worker时，JS引擎向浏览器申请开一个子线程（子线程是浏览器开的，完全受主线程控制，而且不能操作DOM） JS引擎线程与worker线程间通过特定的方式通信 JS引擎是单线程的，本质仍然未改变 浏览器渲染流程 解析html建立dom树 解析css构建render树（将CSS代码解析成树形的数据结构，然后结合DOM合并成render树） 布局render树（Layout/reflow），负责各元素尺寸、位置的计算 绘制render树（paint），绘制页面像素信息 浏览器会将各层的信息发送给GPU，GPU会将各层合成（composite），显示在屏幕上。 从Event Loop谈JS的运行机制概念： JS分为同步任务和异步任务 同步任务都在主线程上执行，形成一个执行栈 主线程之外，事件触发线程管理着一个任务队列，只要异步任务有了运行结果，就在任务队列之中放置一个事件。 一旦执行栈中的所有同步任务执行完毕（此时JS引擎空闲），系统就会读取任务队列，将可运行的异步任务添加到执行栈中，开始执行。 定时器定时器是JS引擎检测的么？当然不是了。它是由定时器线程控制（因为JS引擎自己都忙不过来，根本无暇分身）。123setTimeout(function()&#123; console.log('hello!');&#125;,1000); 1000毫秒计时完毕后（由定时器线程计时），将回调函数推入事件队列中，等待主线程执行。 123setTimeout(function()&#123; console.log('hello!');&#125;,0); 以最快的时间内将回调函数推入事件队列中，等待主线程执行。 W3C在HTML标准中规定，规定要求setTimeout中低于4ms的时间间隔算为4ms。 setTimeout而不是setInterval setInterval是每次都精确的隔一段时间推入一个事件 但是，事件的实际执行时间不一定就准确，还有可能是这个事件还没执行完毕，下一个事件就来了。 致命问题：累计效应 macrotask与microtask12345678910111213console.log('script start');setTimeout(function()&#123; console.log('setTimeout');&#125;,0);Promise.resolve().then(function()&#123; console.log('promise1');&#125;).then(function()&#123; console.log('promise2');&#125;);console.log('script end'); 正确结果：12345script startscript endpromise1promise2setTimeout 因为Promise里有了一个一个新的概念： microtask JS中分为两种任务类型：macrotask和microtask，在ECMAScript中，microtask称为jobs，macrotask可称为task定义和区别 macrotask（又称之为宏任务）&ensp; &ensp; 可以理解是每次执行栈执行的代码就是一个宏任务（包括每次从事件队列中获取一个事件回调并放到执行栈中执行）。&ensp; &ensp; 每一个macrotask会从头到尾将这个任务执行完毕，不会执行其它。&ensp; &ensp; 浏览器为了能够使得JS内部macrotask与DOM任务能够有序的执行，会在一个macrotask执行结束后，在下一个macrotask执行开始前，对页面进行重新渲染。（task-&gt;渲染-&gt;task-&gt;...） microtask（又称为微任务）&ensp; &ensp; 可以理解是在当前macrotask执行结束后立即执行的任务。&ensp; &ensp; 也就是说，在当前macrotask任务后，下一个macrotask之前，在渲染之前。&ensp; &ensp; 所以它的响应速度相比setTimeout（setTimeout是macrotask）会更快。 场景 macrotask：主代码块，setTimeout，setInterval等（可以看到，事件队列中的每一个事件都是一个macrotask） microtask：Promise，process.nextTick等 总结]]></content>
@@ -297,6 +340,17 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[background-attachment实现滚动视差]]></title>
+    <url>%2F2018%2F09%2F27%2Fbackground-attachment%E5%AE%9E%E7%8E%B0%E6%BB%9A%E5%8A%A8%E8%A7%86%E5%B7%AE%2F</url>
+    <content type="text"><![CDATA[background-attachment实现滚动视差background-attachment 属性设置背景图像是否固定或者随着页面的其余部分滚动。 值 描述 scroll 默认值。背景图像会随着页面其余部分的滚动而移动。 fixed 当页面的其余部分滚动时，背景图像不会移动。 效果]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -322,17 +376,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[JS函数参数值校验]]></title>
-    <url>%2F2018%2F09%2F27%2FJS%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E5%80%BC%E6%A0%A1%E9%AA%8C%2F</url>
-    <content type="text"><![CDATA[在ES6中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。 其实，我们可以通过这个特性来做函数参数值的校验。 首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：123456789101112131415function fix(a = getA()) &#123; console.log('a', a)&#125;function getA() &#123; console.log('get a') return 2&#125;fix(1);// a 1fix();// get a// a 2 可以看出，如果在调用fix 时传了参数a，则不会执行函数getA，只有当不传递参数a时，才会执行函数getA。 这时候，我们可以利用这一特性，为参数a添加一个必传的校验，代码如下：12345678910111213function fix(a = require()) &#123; console.log('a', a)&#125;function require() &#123; throw new Error('缺少了参数 a')&#125;fix(1);// a 1fix();// Uncaught Error: 缺少了参数 a]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[解构赋值和拓展运算符]]></title>
     <url>%2F2018%2F09%2F27%2F%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E5%92%8C%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%2F</url>
     <content type="text"><![CDATA[用解构赋值过滤对象属性1234567891011// 过滤掉对象 types 中的 inner 和 outer 属性const &#123; inner, outer, ...restProps &#125; = &#123; inner: 'This is inner', outer: 'This is outer', v1: '1', v2: '2', v4: '3'&#125;;console.log(restProps);// &#123;v1: "1", v2: "2", v4: "3"&#125; 用解构赋值获取嵌套对象的属性从一堆嵌套很深的对象属性中，很方便地拿到我们想要的那一个。1234567891011121314151617// 通过解构赋值获取嵌套对象的值const car = &#123; model: 'bmw 2018', engine: &#123; v6: true, turbo: true, vin: 12345 &#125;&#125;;// 这里使用 ES6 中的简单写法，使用 &#123; vin &#125; 替代 &#123; vin: vin &#125;const modalAndVIN = (&#123; model, engine: &#123; vin &#125;&#125;) =&gt; &#123; console.log(`model: $&#123;model&#125;, vin: $&#123;vin&#125;`);&#125;modalAndVIN(car);// "model: bmw 2018, vin: 12345" 拓展运算符合并对象拓展运算符，可以用来解构数组，也可以用来解构对象，它可以将对象中的所有属性展开。 通过这个特性，我们可以做一些对象合并的操作。12345678910111213// 使用拓展运算符合并对象，在后面的属性会重写前面相同属性的值const obj1 = &#123; a: 1, b: 2, c: 3 &#125;;const obj2 = &#123; c: 5, d: 9 &#125;;const merged = &#123; ...obj1, ...obj2 &#125;;console.log(merged);// &#123;a: 1, b: 2, c: 5, d: 9&#125;const obj3 = &#123; a: 1, b: 2 &#125;;const obj4 = &#123; c: 3, d: &#123; e: 4, ...obj3 &#125; &#125;;console.log(obj4);// &#123;c: 3, d: &#123;a: 1, b: 2, e: 4&#125; &#125;]]></content>
@@ -341,17 +384,6 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[background-attachment实现滚动视差]]></title>
-    <url>%2F2018%2F09%2F27%2Fbackground-attachment%E5%AE%9E%E7%8E%B0%E6%BB%9A%E5%8A%A8%E8%A7%86%E5%B7%AE%2F</url>
-    <content type="text"><![CDATA[background-attachment实现滚动视差background-attachment 属性设置背景图像是否固定或者随着页面的其余部分滚动。 值 描述 scroll 默认值。背景图像会随着页面其余部分的滚动而移动。 fixed 当页面的其余部分滚动时，背景图像不会移动。 效果]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -575,17 +607,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[怎样求First集与Follow集]]></title>
-    <url>%2F2015%2F03%2F05%2F%E6%80%8E%E6%A0%B7%E6%B1%82First%E9%9B%86%E4%B8%8EFollow%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[文法： S→ABc A→a\ ε B→b\ ε First集合求法: 能 由非终结符号推出的所有的开头符号或可能的ε，但要求这个开头符号是终结符号。如此题A可以推导出a和ε，所以FIRST（A）=｛a，ε｝；同理 FIRST（B）={b,ε};S可以推导出aBc，还可以推导出bc，还可以推导出c，所以FIRST(S）=｛a，b，c｝ Follow集合的求法: 紧跟随其后面的终结符号或＃。但文法的识别符号包含＃，在求的时候还要考虑到ε。 具体做法是把所有包含你要求的符号的产生式都找出来，再看哪个有用。 Follow（S）=｛＃｝ 如求A的，产生式：S→ABc A→a\ ε ，但只有S→ABc 有用。跟随在A后年的终结符号是FIRST（B）=｛b，ε｝，当FIRST（B）的元素为ε时，跟随在A后的符号就是c，所以 Follow（A）=｛b，c｝ 同理Follow（B）=｛c｝ 一，要知道什么是终结符和非终结符 终结符：通俗的说就是不能单独出现在推导式左边的符号，也就是说终结符不能再进行推导。 非终结符：不是终结符的都是非终结符。（非男即女，呵呵） 如：A——&gt;B，则A是非终结符。 （一般书上终结符用小写，非终结符用大写。） 二，文法产生语言句子的基本思想：从识别符号（开始符）开始，把当前产生的符号串中的非终结符替换为相应规则右部的符号串，直到全部由终结符组成。 三，FIRST集求法 ​ First集合最终是对产生式右部的字符串而言的，但其关键是求出非终结符的First集合，由于终结符的First集合就是它自己，所以求出非终结符的First集合后，就可很直观地得到每个字符串的First集合。 \1. 直接收取：对形如U－&gt;a…的产生式（其中a是终结符），把a收入到First(U)中 \2. 反复传送：对形入U－&gt;P…的产生式（其中P是非终结符），应把First(P)中的全部内容传送到First(U)中【意思就是只需要把第一个非终结符的First集传过去~这个地方是要注意的地方，也是难点】。 四，FOLLOW集的求法 ​ Follow集合是针对非终结符而言的，Follow(U)所表达的是句型中非终结符U所有可能的后随终结符号的集合，特别地，“#”是识别符号的后随符。注意Follow集合是从开始符号S开始推导。 直接收取：注意产生式右部的每一个形如“…Ua…”的组合，把a直接收入到Follow(U)中。因a是紧跟在U后的终结符。 直接收取：对形如“…UP…”(P是非终结符)的组合，把First(P)直接收入到Follow(U)中【在这里，如果First（P）中有空字符，那么就要把左部（假设是S）的Follow（S）送入到Follow（U）中。还有就是Follow集中是没有空字符的】。 直接收取：若S－&gt;…U，即以U结尾，则#∈Follow(U) 反复传送：对形如U－&gt;…P的产生式（其中P是非终结符），应把Follow(U)中的全部内容传送到Follow(P)中。]]></content>
+    <title><![CDATA[语法推导树之短语，直接短语，句柄]]></title>
+    <url>%2F2015%2F03%2F05%2F%E8%AF%AD%E6%B3%95%E6%8E%A8%E5%AF%BC%E6%A0%91%E4%B9%8B%E7%9F%AD%E8%AF%AD%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9F%AD%E8%AF%AD%EF%BC%8C%E5%8F%A5%E6%9F%84%2F</url>
+    <content type="text"><![CDATA[概念 短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语 直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语 句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语 例子找出下面的这颗语法推导树的短语，直接短语，句柄。 找出这棵树的所有子树 找出每一颗子树的短语 第1棵：a1ɛb1b2a2a3 第2棵：ɛb1b2 第3棵：a2a3 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 找出每一颗子树的直接短语 第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 第2棵：同上 第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1]]></content>
       <categories>
         <category>计算机基础</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[语法推导树之短语，直接短语，句柄]]></title>
-    <url>%2F2015%2F03%2F05%2F%E8%AF%AD%E6%B3%95%E6%8E%A8%E5%AF%BC%E6%A0%91%E4%B9%8B%E7%9F%AD%E8%AF%AD%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9F%AD%E8%AF%AD%EF%BC%8C%E5%8F%A5%E6%9F%84%2F</url>
-    <content type="text"><![CDATA[概念 短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语 直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语 句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语 例子找出下面的这颗语法推导树的短语，直接短语，句柄。 找出这棵树的所有子树 找出每一颗子树的短语 第1棵：a1ɛb1b2a2a3 第2棵：ɛb1b2 第3棵：a2a3 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 找出每一颗子树的直接短语 第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 第2棵：同上 第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1]]></content>
+    <title><![CDATA[怎样求First集与Follow集]]></title>
+    <url>%2F2015%2F03%2F05%2F%E6%80%8E%E6%A0%B7%E6%B1%82First%E9%9B%86%E4%B8%8EFollow%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[文法： S→ABc A→a\ ε B→b\ ε First集合求法: 能 由非终结符号推出的所有的开头符号或可能的ε，但要求这个开头符号是终结符号。如此题A可以推导出a和ε，所以FIRST（A）=｛a，ε｝；同理 FIRST（B）={b,ε};S可以推导出aBc，还可以推导出bc，还可以推导出c，所以FIRST(S）=｛a，b，c｝ Follow集合的求法: 紧跟随其后面的终结符号或＃。但文法的识别符号包含＃，在求的时候还要考虑到ε。 具体做法是把所有包含你要求的符号的产生式都找出来，再看哪个有用。 Follow（S）=｛＃｝ 如求A的，产生式：S→ABc A→a\ ε ，但只有S→ABc 有用。跟随在A后年的终结符号是FIRST（B）=｛b，ε｝，当FIRST（B）的元素为ε时，跟随在A后的符号就是c，所以 Follow（A）=｛b，c｝ 同理Follow（B）=｛c｝ 一，要知道什么是终结符和非终结符 终结符：通俗的说就是不能单独出现在推导式左边的符号，也就是说终结符不能再进行推导。 非终结符：不是终结符的都是非终结符。（非男即女，呵呵） 如：A——&gt;B，则A是非终结符。 （一般书上终结符用小写，非终结符用大写。） 二，文法产生语言句子的基本思想：从识别符号（开始符）开始，把当前产生的符号串中的非终结符替换为相应规则右部的符号串，直到全部由终结符组成。 三，FIRST集求法 ​ First集合最终是对产生式右部的字符串而言的，但其关键是求出非终结符的First集合，由于终结符的First集合就是它自己，所以求出非终结符的First集合后，就可很直观地得到每个字符串的First集合。 \1. 直接收取：对形如U－&gt;a…的产生式（其中a是终结符），把a收入到First(U)中 \2. 反复传送：对形入U－&gt;P…的产生式（其中P是非终结符），应把First(P)中的全部内容传送到First(U)中【意思就是只需要把第一个非终结符的First集传过去~这个地方是要注意的地方，也是难点】。 四，FOLLOW集的求法 ​ Follow集合是针对非终结符而言的，Follow(U)所表达的是句型中非终结符U所有可能的后随终结符号的集合，特别地，“#”是识别符号的后随符。注意Follow集合是从开始符号S开始推导。 直接收取：注意产生式右部的每一个形如“…Ua…”的组合，把a直接收入到Follow(U)中。因a是紧跟在U后的终结符。 直接收取：对形如“…UP…”(P是非终结符)的组合，把First(P)直接收入到Follow(U)中【在这里，如果First（P）中有空字符，那么就要把左部（假设是S）的Follow（S）送入到Follow（U）中。还有就是Follow集中是没有空字符的】。 直接收取：若S－&gt;…U，即以U结尾，则#∈Follow(U) 反复传送：对形如U－&gt;…P的产生式（其中P是非终结符），应把Follow(U)中的全部内容传送到Follow(P)中。]]></content>
       <categories>
         <category>计算机基础</category>
       </categories>
