@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[浏览器中倍速播放视频]]></title>
+    <url>%2F2019%2F03%2F11%2F%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E5%80%8D%E9%80%9F%E6%92%AD%E6%94%BE%E8%A7%86%E9%A2%91%2F</url>
+    <content type="text"><![CDATA[在浏览器（Chrome）中倍速播放视频（h5播放器） 打开控制台运行： 1videojs.getPlayers("video-player").html5player.tech_.setPlaybackRate(1.5) 其中1.5是播放速度，可以自行设定]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[render函数实现双向绑定]]></title>
+    <url>%2F2019%2F03%2F08%2Frender%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%2F</url>
+    <content type="text"><![CDATA[render函数实现双向绑定 举例render函数渲染iview表格列中的InputNumber，实现双向绑定 12345678910111213141516render: (h, params) =&gt; &#123; let downLimitInput; downLimitInput = h('InputNumber', &#123; props: &#123; value: this.downLimitArr[params.index], 'active-change': false // 延迟更新 &#125;, on: &#123; 'on-change': data =&gt; &#123; this.downLimitArr.splice(params.index, 1, data); &#125; &#125; &#125;); return h('div', &#123;&#125;, [downLimitInput]);&#125; 123data() &#123; downLimitArr: [20, 50, 100]&#125; 扩展事实上Vue官网上有对于v-model的说明， 1&lt;input v-model="searchText"&gt; 等价于 1234&lt;input v-bind:value="searchText" v-on:input="searchText = $event.target.value"&gt;]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[VsCode中启用nodejs代码补全及智能提示]]></title>
     <url>%2F2019%2F02%2F15%2Fvscode%E4%B8%AD%E5%90%AF%E7%94%A8nodejs%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8%E5%8F%8A%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA%2F</url>
     <content type="text"><![CDATA[VsCode中写Node.js，并没有只能提示和代码补全，也没有插件支持。需要安装typings这个包 全局安装 1npm install -g typings 配置 进入项目开发根目录，终端输入： 1typings init 这时目录下会出现一个typings.json的文件，这个文件就是typings的配置文件。 该目录下输入： 1typings install dt~node --global --save （–-global：代表全局文件） （–-save ：表示将此次的安装信息记录到上面讲的typings.json中) 到这里还不行，VSCode后还是没有提示，需要在当前目录下新建一个空的jsconfig.json文件，这一步至关重要。 至此，就有了Node.js的智能提示]]></content>
@@ -329,6 +345,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[解构赋值和拓展运算符]]></title>
+    <url>%2F2018%2F09%2F27%2F%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E5%92%8C%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%2F</url>
+    <content type="text"><![CDATA[用解构赋值过滤对象属性1234567891011// 过滤掉对象 types 中的 inner 和 outer 属性const &#123; inner, outer, ...restProps &#125; = &#123; inner: 'This is inner', outer: 'This is outer', v1: '1', v2: '2', v4: '3'&#125;;console.log(restProps);// &#123;v1: "1", v2: "2", v4: "3"&#125; 用解构赋值获取嵌套对象的属性从一堆嵌套很深的对象属性中，很方便地拿到我们想要的那一个。1234567891011121314151617// 通过解构赋值获取嵌套对象的值const car = &#123; model: 'bmw 2018', engine: &#123; v6: true, turbo: true, vin: 12345 &#125;&#125;;// 这里使用 ES6 中的简单写法，使用 &#123; vin &#125; 替代 &#123; vin: vin &#125;const modalAndVIN = (&#123; model, engine: &#123; vin &#125;&#125;) =&gt; &#123; console.log(`model: $&#123;model&#125;, vin: $&#123;vin&#125;`);&#125;modalAndVIN(car);// "model: bmw 2018, vin: 12345" 拓展运算符合并对象拓展运算符，可以用来解构数组，也可以用来解构对象，它可以将对象中的所有属性展开。 通过这个特性，我们可以做一些对象合并的操作。12345678910111213// 使用拓展运算符合并对象，在后面的属性会重写前面相同属性的值const obj1 = &#123; a: 1, b: 2, c: 3 &#125;;const obj2 = &#123; c: 5, d: 9 &#125;;const merged = &#123; ...obj1, ...obj2 &#125;;console.log(merged);// &#123;a: 1, b: 2, c: 5, d: 9&#125;const obj3 = &#123; a: 1, b: 2 &#125;;const obj4 = &#123; c: 3, d: &#123; e: 4, ...obj3 &#125; &#125;;console.log(obj4);// &#123;c: 3, d: &#123;a: 1, b: 2, e: 4&#125; &#125;]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[background-attachment实现滚动视差]]></title>
     <url>%2F2018%2F09%2F27%2Fbackground-attachment%E5%AE%9E%E7%8E%B0%E6%BB%9A%E5%8A%A8%E8%A7%86%E5%B7%AE%2F</url>
     <content type="text"><![CDATA[background-attachment实现滚动视差background-attachment 属性设置背景图像是否固定或者随着页面的其余部分滚动。 值 描述 scroll 默认值。背景图像会随着页面其余部分的滚动而移动。 fixed 当页面的其余部分滚动时，背景图像不会移动。 效果]]></content>
@@ -351,28 +378,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[JOSN.stringfy小技巧]]></title>
-    <url>%2F2018%2F09%2F27%2FJOSN.stringfy%E5%B0%8F%E6%8A%80%E5%B7%A7%2F</url>
-    <content type="text"><![CDATA[JSON.stringify()的另外两个参数JSON.stringify(value[, replacer [, space]])参数： value：将要被序列化的变量的值 replacer：替代器。如果该参数是一个函数，则被序列化的值的每个属性都会经过该函数的转换和处理；如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的JSON字符串中 space：指定缩进用的空白字符串，用于美化输出，可以是数字或者字符串。如果参数是个数字，它代表有多少的空格；上限为10。该值若小于1，则意味着没有空格；如果该参数为字符串(字符串的前十个字母)，该字符串将被作为空格； 使用函数过滤并序列化对象：123456789101112131415161718// 使用“函数”当替代器function replacer(key, value) &#123; if (typeof value === "string") &#123; return undefined; &#125; return value;&#125;let foo = &#123; foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7&#125;;let jsonString = JSON.stringify(foo, replacer);// &#123;"week":45,"month":7&#125; 使用数组过滤并序列化对象：12345678910111213141516// 使用“数组”当替代器let user = &#123; name: 'zollero', nick: 'z', skills: ['JavaScript', 'CSS', 'HTML5']&#125;;JSON.stringify(user, ['name', 'skills'], 2);// "&#123;// "name": "zollero",// "skills": [// "JavaScript",// "CSS",// "HTML5"// ]// &#125;" 对象的toJSON属性如果一个对象有toJSON属性，当它被序列化的时候，不会对该对象进行序列化，而是将它的toJSON方法的返回值进行序列化。 例子：12345678let obj = &#123; foo: 'foo', toJSON: function () &#123; return 'bar'; &#125;&#125;;JSON.stringify(obj); // '"bar"'JSON.stringify(&#123;x: obj&#125;); // '&#123;"x":"bar"&#125;']]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[解构赋值和拓展运算符]]></title>
-    <url>%2F2018%2F09%2F27%2F%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E5%92%8C%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%2F</url>
-    <content type="text"><![CDATA[用解构赋值过滤对象属性1234567891011// 过滤掉对象 types 中的 inner 和 outer 属性const &#123; inner, outer, ...restProps &#125; = &#123; inner: 'This is inner', outer: 'This is outer', v1: '1', v2: '2', v4: '3'&#125;;console.log(restProps);// &#123;v1: "1", v2: "2", v4: "3"&#125; 用解构赋值获取嵌套对象的属性从一堆嵌套很深的对象属性中，很方便地拿到我们想要的那一个。1234567891011121314151617// 通过解构赋值获取嵌套对象的值const car = &#123; model: 'bmw 2018', engine: &#123; v6: true, turbo: true, vin: 12345 &#125;&#125;;// 这里使用 ES6 中的简单写法，使用 &#123; vin &#125; 替代 &#123; vin: vin &#125;const modalAndVIN = (&#123; model, engine: &#123; vin &#125;&#125;) =&gt; &#123; console.log(`model: $&#123;model&#125;, vin: $&#123;vin&#125;`);&#125;modalAndVIN(car);// "model: bmw 2018, vin: 12345" 拓展运算符合并对象拓展运算符，可以用来解构数组，也可以用来解构对象，它可以将对象中的所有属性展开。 通过这个特性，我们可以做一些对象合并的操作。12345678910111213// 使用拓展运算符合并对象，在后面的属性会重写前面相同属性的值const obj1 = &#123; a: 1, b: 2, c: 3 &#125;;const obj2 = &#123; c: 5, d: 9 &#125;;const merged = &#123; ...obj1, ...obj2 &#125;;console.log(merged);// &#123;a: 1, b: 2, c: 5, d: 9&#125;const obj3 = &#123; a: 1, b: 2 &#125;;const obj4 = &#123; c: 3, d: &#123; e: 4, ...obj3 &#125; &#125;;console.log(obj4);// &#123;c: 3, d: &#123;a: 1, b: 2, e: 4&#125; &#125;]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[JS函数参数值校验]]></title>
     <url>%2F2018%2F09%2F27%2FJS%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E5%80%BC%E6%A0%A1%E9%AA%8C%2F</url>
     <content type="text"><![CDATA[在ES6中，为函数增加了参数默认值的特性，可以为参数设定一些默认值，可以让代码更简洁，可维护。 其实，我们可以通过这个特性来做函数参数值的校验。 首先，函数的参数可以是任意类型的值，也可以是函数，比如下面这个：123456789101112131415function fix(a = getA()) &#123; console.log('a', a)&#125;function getA() &#123; console.log('get a') return 2&#125;fix(1);// a 1fix();// get a// a 2 可以看出，如果在调用fix 时传了参数a，则不会执行函数getA，只有当不传递参数a时，才会执行函数getA。 这时候，我们可以利用这一特性，为参数a添加一个必传的校验，代码如下：12345678910111213function fix(a = require()) &#123; console.log('a', a)&#125;function require() &#123; throw new Error('缺少了参数 a')&#125;fix(1);// a 1fix();// Uncaught Error: 缺少了参数 a]]></content>
@@ -387,6 +392,17 @@
     <title><![CDATA[JS函数收藏]]></title>
     <url>%2F2018%2F09%2F27%2FJS%E5%87%BD%E6%95%B0%E6%94%B6%E8%97%8F%2F</url>
     <content type="text"><![CDATA[Array.prototype.findIndex()返回数组中满足回调函数函数的第一个元素的索引。否则返回-1。 语法arr.findIndex(callback)举例：返回对象数组中value出现的索引123let index=arr.findIndex((item)=&gt;&#123; return item.value===value;&#125;)]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JOSN.stringfy小技巧]]></title>
+    <url>%2F2018%2F09%2F27%2FJOSN.stringfy%E5%B0%8F%E6%8A%80%E5%B7%A7%2F</url>
+    <content type="text"><![CDATA[JSON.stringify()的另外两个参数JSON.stringify(value[, replacer [, space]])参数： value：将要被序列化的变量的值 replacer：替代器。如果该参数是一个函数，则被序列化的值的每个属性都会经过该函数的转换和处理；如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的JSON字符串中 space：指定缩进用的空白字符串，用于美化输出，可以是数字或者字符串。如果参数是个数字，它代表有多少的空格；上限为10。该值若小于1，则意味着没有空格；如果该参数为字符串(字符串的前十个字母)，该字符串将被作为空格； 使用函数过滤并序列化对象：123456789101112131415161718// 使用“函数”当替代器function replacer(key, value) &#123; if (typeof value === "string") &#123; return undefined; &#125; return value;&#125;let foo = &#123; foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7&#125;;let jsonString = JSON.stringify(foo, replacer);// &#123;"week":45,"month":7&#125; 使用数组过滤并序列化对象：12345678910111213141516// 使用“数组”当替代器let user = &#123; name: 'zollero', nick: 'z', skills: ['JavaScript', 'CSS', 'HTML5']&#125;;JSON.stringify(user, ['name', 'skills'], 2);// "&#123;// "name": "zollero",// "skills": [// "JavaScript",// "CSS",// "HTML5"// ]// &#125;" 对象的toJSON属性如果一个对象有toJSON属性，当它被序列化的时候，不会对该对象进行序列化，而是将它的toJSON方法的返回值进行序列化。 例子：12345678let obj = &#123; foo: 'foo', toJSON: function () &#123; return 'bar'; &#125;&#125;;JSON.stringify(obj); // '"bar"'JSON.stringify(&#123;x: obj&#125;); // '&#123;"x":"bar"&#125;']]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
@@ -615,17 +631,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[语法推导树之短语，直接短语，句柄]]></title>
-    <url>%2F2015%2F03%2F05%2F%E8%AF%AD%E6%B3%95%E6%8E%A8%E5%AF%BC%E6%A0%91%E4%B9%8B%E7%9F%AD%E8%AF%AD%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9F%AD%E8%AF%AD%EF%BC%8C%E5%8F%A5%E6%9F%84%2F</url>
-    <content type="text"><![CDATA[概念 短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语 直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语 句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语 例子找出下面的这颗语法推导树的短语，直接短语，句柄。 找出这棵树的所有子树 找出每一颗子树的短语 第1棵：a1ɛb1b2a2a3 第2棵：ɛb1b2 第3棵：a2a3 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 找出每一颗子树的直接短语 第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 第2棵：同上 第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1]]></content>
+    <title><![CDATA[怎样求First集与Follow集]]></title>
+    <url>%2F2015%2F03%2F05%2F%E6%80%8E%E6%A0%B7%E6%B1%82First%E9%9B%86%E4%B8%8EFollow%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[文法： S→ABc A→a\ ε B→b\ ε First集合求法: 能 由非终结符号推出的所有的开头符号或可能的ε，但要求这个开头符号是终结符号。如此题A可以推导出a和ε，所以FIRST（A）=｛a，ε｝；同理 FIRST（B）={b,ε};S可以推导出aBc，还可以推导出bc，还可以推导出c，所以FIRST(S）=｛a，b，c｝ Follow集合的求法: 紧跟随其后面的终结符号或＃。但文法的识别符号包含＃，在求的时候还要考虑到ε。 具体做法是把所有包含你要求的符号的产生式都找出来，再看哪个有用。 Follow（S）=｛＃｝ 如求A的，产生式：S→ABc A→a\ ε ，但只有S→ABc 有用。跟随在A后年的终结符号是FIRST（B）=｛b，ε｝，当FIRST（B）的元素为ε时，跟随在A后的符号就是c，所以 Follow（A）=｛b，c｝ 同理Follow（B）=｛c｝ 一，要知道什么是终结符和非终结符 终结符：通俗的说就是不能单独出现在推导式左边的符号，也就是说终结符不能再进行推导。 非终结符：不是终结符的都是非终结符。（非男即女，呵呵） 如：A——&gt;B，则A是非终结符。 （一般书上终结符用小写，非终结符用大写。） 二，文法产生语言句子的基本思想：从识别符号（开始符）开始，把当前产生的符号串中的非终结符替换为相应规则右部的符号串，直到全部由终结符组成。 三，FIRST集求法 ​ First集合最终是对产生式右部的字符串而言的，但其关键是求出非终结符的First集合，由于终结符的First集合就是它自己，所以求出非终结符的First集合后，就可很直观地得到每个字符串的First集合。 \1. 直接收取：对形如U－&gt;a…的产生式（其中a是终结符），把a收入到First(U)中 \2. 反复传送：对形入U－&gt;P…的产生式（其中P是非终结符），应把First(P)中的全部内容传送到First(U)中【意思就是只需要把第一个非终结符的First集传过去~这个地方是要注意的地方，也是难点】。 四，FOLLOW集的求法 ​ Follow集合是针对非终结符而言的，Follow(U)所表达的是句型中非终结符U所有可能的后随终结符号的集合，特别地，“#”是识别符号的后随符。注意Follow集合是从开始符号S开始推导。 直接收取：注意产生式右部的每一个形如“…Ua…”的组合，把a直接收入到Follow(U)中。因a是紧跟在U后的终结符。 直接收取：对形如“…UP…”(P是非终结符)的组合，把First(P)直接收入到Follow(U)中【在这里，如果First（P）中有空字符，那么就要把左部（假设是S）的Follow（S）送入到Follow（U）中。还有就是Follow集中是没有空字符的】。 直接收取：若S－&gt;…U，即以U结尾，则#∈Follow(U) 反复传送：对形如U－&gt;…P的产生式（其中P是非终结符），应把Follow(U)中的全部内容传送到Follow(P)中。]]></content>
       <categories>
         <category>计算机基础</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[怎样求First集与Follow集]]></title>
-    <url>%2F2015%2F03%2F05%2F%E6%80%8E%E6%A0%B7%E6%B1%82First%E9%9B%86%E4%B8%8EFollow%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[文法： S→ABc A→a\ ε B→b\ ε First集合求法: 能 由非终结符号推出的所有的开头符号或可能的ε，但要求这个开头符号是终结符号。如此题A可以推导出a和ε，所以FIRST（A）=｛a，ε｝；同理 FIRST（B）={b,ε};S可以推导出aBc，还可以推导出bc，还可以推导出c，所以FIRST(S）=｛a，b，c｝ Follow集合的求法: 紧跟随其后面的终结符号或＃。但文法的识别符号包含＃，在求的时候还要考虑到ε。 具体做法是把所有包含你要求的符号的产生式都找出来，再看哪个有用。 Follow（S）=｛＃｝ 如求A的，产生式：S→ABc A→a\ ε ，但只有S→ABc 有用。跟随在A后年的终结符号是FIRST（B）=｛b，ε｝，当FIRST（B）的元素为ε时，跟随在A后的符号就是c，所以 Follow（A）=｛b，c｝ 同理Follow（B）=｛c｝ 一，要知道什么是终结符和非终结符 终结符：通俗的说就是不能单独出现在推导式左边的符号，也就是说终结符不能再进行推导。 非终结符：不是终结符的都是非终结符。（非男即女，呵呵） 如：A——&gt;B，则A是非终结符。 （一般书上终结符用小写，非终结符用大写。） 二，文法产生语言句子的基本思想：从识别符号（开始符）开始，把当前产生的符号串中的非终结符替换为相应规则右部的符号串，直到全部由终结符组成。 三，FIRST集求法 ​ First集合最终是对产生式右部的字符串而言的，但其关键是求出非终结符的First集合，由于终结符的First集合就是它自己，所以求出非终结符的First集合后，就可很直观地得到每个字符串的First集合。 \1. 直接收取：对形如U－&gt;a…的产生式（其中a是终结符），把a收入到First(U)中 \2. 反复传送：对形入U－&gt;P…的产生式（其中P是非终结符），应把First(P)中的全部内容传送到First(U)中【意思就是只需要把第一个非终结符的First集传过去~这个地方是要注意的地方，也是难点】。 四，FOLLOW集的求法 ​ Follow集合是针对非终结符而言的，Follow(U)所表达的是句型中非终结符U所有可能的后随终结符号的集合，特别地，“#”是识别符号的后随符。注意Follow集合是从开始符号S开始推导。 直接收取：注意产生式右部的每一个形如“…Ua…”的组合，把a直接收入到Follow(U)中。因a是紧跟在U后的终结符。 直接收取：对形如“…UP…”(P是非终结符)的组合，把First(P)直接收入到Follow(U)中【在这里，如果First（P）中有空字符，那么就要把左部（假设是S）的Follow（S）送入到Follow（U）中。还有就是Follow集中是没有空字符的】。 直接收取：若S－&gt;…U，即以U结尾，则#∈Follow(U) 反复传送：对形如U－&gt;…P的产生式（其中P是非终结符），应把Follow(U)中的全部内容传送到Follow(P)中。]]></content>
+    <title><![CDATA[语法推导树之短语，直接短语，句柄]]></title>
+    <url>%2F2015%2F03%2F05%2F%E8%AF%AD%E6%B3%95%E6%8E%A8%E5%AF%BC%E6%A0%91%E4%B9%8B%E7%9F%AD%E8%AF%AD%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9F%AD%E8%AF%AD%EF%BC%8C%E5%8F%A5%E6%9F%84%2F</url>
+    <content type="text"><![CDATA[概念 短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语 直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语 句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语 例子找出下面的这颗语法推导树的短语，直接短语，句柄。 找出这棵树的所有子树 找出每一颗子树的短语 第1棵：a1ɛb1b2a2a3 第2棵：ɛb1b2 第3棵：a2a3 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 找出每一颗子树的直接短语 第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 第2棵：同上 第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1]]></content>
       <categories>
         <category>计算机基础</category>
       </categories>
