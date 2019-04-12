@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="cordova常用组件及用法梳理">
+<meta name="keywords" content="JavaScript Vue Css Web Node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cordova组件">
+<meta property="og:url" content="http://yoursite.com/2019/04/09/cordova组件/index.html">
+<meta property="og:site_name" content="虾米俊">
+<meta property="og:description" content="cordova常用组件及用法梳理">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E6%8B%8D%E7%85%A7.png">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%86%99%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E8%AF%BB%E6%96%87%E4%BB%B61.png">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E8%AF%BB%E6%96%87%E4%BB%B62.png">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E6%92%AD%E6%94%BE%E9%9F%B3%E9%A2%91.png">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%AA%92%E4%BD%93%E6%8D%95%E8%8E%B73.png">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%AA%92%E4%BD%93%E6%8D%95%E8%8E%B71.png">
+<meta property="og:image" content="https://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%AA%92%E4%BD%93%E6%8D%95%E8%8E%B72.png">
+<meta property="og:image" content="https://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF.png">
+<meta property="og:updated_time" content="2019-04-12T09:25:43.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cordova组件">
+<meta name="twitter:description" content="cordova常用组件及用法梳理">
+<meta name="twitter:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E6%8B%8D%E7%85%A7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/09/cordova组件/"/>
+
+
+
+
+
+  <title>cordova组件 | 虾米俊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?caad3bfc73b6c3f9a50f328ed093e127";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">虾米俊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">虾米俊的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/cordova组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cordova组件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T17:18:49+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/混合开发/" itemprop="url" rel="index">
+                    <span itemprop="name">混合开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/09/cordova组件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/09/cordova组件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/04/09/cordova组件/" class="leancloud_visitors" data-flag-title="cordova组件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.1k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>cordova</code>常用组件及用法梳理</p>
+<a id="more"></a>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>config.xml</code>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">"cordova-plugin-camera"</span> <span class="attr">spec</span>=<span class="string">"^4.0.3"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>表示当前安装的插件。</p>
+<p>使用<strong>Cordova CLI</strong> 跨平台安装插件</p>
+<p>可在<a href="https://cordova.apache.org/plugins/" target="_blank" rel="noopener">官网</a>查询组件</p>
+<p>事件触发必须在deviceready事件之后</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = &#123;</span><br><span class="line"></span><br><span class="line">  initialize: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'deviceready'</span>, <span class="keyword">this</span>.onDeviceReady.bind(<span class="keyword">this</span>), <span class="literal">false</span>);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  onDeviceReady: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.receivedEvent(<span class="string">'deviceready'</span>);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  receivedEvent: <span class="function"><span class="keyword">function</span> (<span class="params">id</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绑定事件</span></span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"alertDialog"</span>).addEventListener(<span class="string">"click"</span>, _this.alertDialog);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 函数</span></span><br><span class="line">  alertDialog() &#123;</span><br><span class="line">    navigator.notification.alert(<span class="string">'消息'</span>, () =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'alert'</span>)</span><br><span class="line">    &#125;, <span class="string">'标题'</span>, <span class="string">'确认'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.initialize();</span><br></pre></td></tr></table></figure>
+<h2 id="相机"><a href="#相机" class="headerlink" title="相机"></a>相机</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-camera</span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"cameraTakePicture"</span>&gt;</span>照相机<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span> = <span class="string">"myImage"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"cameraGetPicture"</span>&gt;</span>相册<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>拍照功能：</p>
+<p>添加事件监听器:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"cameraTakePicture"</span>).addEventListener(<span class="string">"click"</span>, cameraTakePicture);</span><br></pre></td></tr></table></figure>
+<p>调用由插件API提供的 <code>navigator.camera</code>全局对象。拍摄成功回调函数<code>onSuccess</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cameraTakePicture</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   navigator.camera.getPicture(onSuccess, onFail, &#123; </span><br><span class="line">      quality: <span class="number">50</span>,</span><br><span class="line">      destinationType: Camera.DestinationType.DATA_URL</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onSuccess</span>(<span class="params">imageData</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> image = <span class="built_in">document</span>.getElementById(<span class="string">'myImage'</span>);</span><br><span class="line">      image.src = <span class="string">"data:image/jpeg;base64,"</span> + imageData;</span><br><span class="line">      <span class="built_in">console</span>.log(imageData);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onFail</span>(<span class="params">message</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'Failed because: '</span> + message);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E6%8B%8D%E7%85%A7.png" alt=""></p>
+<p>相册功能：</p>
+<p>添加事件监听器:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"cameraGetPicture"</span>).addEventListener(<span class="string">"click"</span>, cameraGetPicture);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cameraGetPicture</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   navigator.camera.getPicture(onSuccess, onFail, &#123; <span class="attr">quality</span>: <span class="number">50</span>,</span><br><span class="line">      destinationType: Camera.DestinationType.DATA_URL,</span><br><span class="line">      sourceType: Camera.PictureSourceType.PHOTOLIBRARY</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onSuccess</span>(<span class="params">imageURL</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> image = <span class="built_in">document</span>.getElementById(<span class="string">'myImage'</span>);</span><br><span class="line">      image.src = imageURL;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onFail</span>(<span class="params">message</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'Failed because: '</span> + message);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="主要参数"><a href="#主要参数" class="headerlink" title="主要参数"></a>主要参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>quality</td>
+<td>图像质量在0-100范围内。 默认值为50。</td>
+</tr>
+<tr>
+<td>destinationType</td>
+<td>DATA_URL 或 0 返回base64编码字符串。</td>
+</tr>
+</tbody>
+</table>
+<p>FILE_URI 或 1 返回图片文件URI。</p>
+<p>NATIVE_URI 或 2 返回图片本机URI。 |<br>| sourceType      | PHOTOLIBRARY 或 0 打开照片库。</p>
+<p>CAMERA 或 1 打开本机相机。</p>
+<p>SAVEDPHOTOALBUM 或 2 打开已保存的相册。 |<br>| mediaType       | PICTURE 或 0 仅允许选择图片。</p>
+<p>VIDEO 或 1 仅允许视频选择。</p>
+<p>ALLMEDIA 或 2 允许选择所有媒体类型。 |</p>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-file</span><br></pre></td></tr></table></figure>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h3><p>html：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;button id = &quot;createFile&quot;&gt;创建文件&lt;/button&gt;</span><br><span class="line">&lt;button id = &quot;writeFile&quot;&gt;写文件&lt;/button&gt;</span><br><span class="line">&lt;button id = &quot;readFile&quot;&gt;读文件&lt;/button&gt;</span><br><span class="line">&lt;button id = &quot;removeFile&quot;&gt;删除文件&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+<p>添加事件监听器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"createFile"</span>).addEventListener(<span class="string">"click"</span>, createFile);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"writeFile"</span>).addEventListener(<span class="string">"click"</span>, writeFile);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"readFile"</span>).addEventListener(<span class="string">"click"</span>, readFile);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"removeFile"</span>).addEventListener(<span class="string">"click"</span>, removeFile);</span><br></pre></td></tr></table></figure>
+<h4 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h4><p>设备上的应用程序根文件夹中创建文件。<code>window.requestFileSystem</code>请求文件系统，类型可以是 WINDOW.TEMPORARY 或 WINDOW.PERSISTENT，size是存储所需的字节值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> type = <span class="built_in">window</span>.TEMPORARY;</span><br><span class="line">   <span class="keyword">var</span> size = <span class="number">5</span>*<span class="number">1024</span>*<span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">window</span>.requestFileSystem(type, size, successCallback, errorCallback)</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">successCallback</span>(<span class="params">fs</span>) </span>&#123;</span><br><span class="line">      fs.root.getFile(<span class="string">'log.txt'</span>, &#123;<span class="attr">create</span>: <span class="literal">true</span>, <span class="attr">exclusive</span>: <span class="literal">true</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">fileEntry</span>) </span>&#123;</span><br><span class="line">         alert(<span class="string">'File creation successfull!'</span>)</span><br><span class="line">         <span class="built_in">console</span>.log(fileEntry);</span><br><span class="line">      &#125;, errorCallback);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">errorCallback</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">"ERROR: "</span> + error.code)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6.png" alt=""></p>
+<h4 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h4><p>请求文件系统，然后创建文件写入器，写入我们分配给 <strong>blob</strong> 变量的文本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">writeFile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> type = <span class="built_in">window</span>.TEMPORARY;</span><br><span class="line">   <span class="keyword">var</span> size = <span class="number">5</span>*<span class="number">1024</span>*<span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">window</span>.requestFileSystem(type, size, successCallback, errorCallback)</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">successCallback</span>(<span class="params">fs</span>) </span>&#123;</span><br><span class="line">      fs.root.getFile(<span class="string">'log.txt'</span>, &#123;<span class="attr">create</span>: <span class="literal">true</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">fileEntry</span>) </span>&#123;</span><br><span class="line">         fileEntry.createWriter(<span class="function"><span class="keyword">function</span>(<span class="params">fileWriter</span>) </span>&#123;</span><br><span class="line">            fileWriter.onwriteend = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">               alert(<span class="string">'Write completed.'</span>);</span><br><span class="line">               <span class="built_in">console</span>.log(e);</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            fileWriter.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">               alert(<span class="string">'Write failed: '</span> + e.toString());</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([<span class="string">'test text'</span>], &#123;<span class="attr">type</span>: <span class="string">'text/plain'</span>&#125;);</span><br><span class="line">            fileWriter.write(blob);</span><br><span class="line">         &#125;, errorCallback);</span><br><span class="line">      &#125;, errorCallback);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">errorCallback</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">"ERROR: "</span> + error.code)</span><br><span class="line">   &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%86%99%E6%96%87%E4%BB%B6.png" alt=""></p>
+<h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><p>请求文件系统并获取文件对象，创建 <strong>reader</strong> 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> type = <span class="built_in">window</span>.TEMPORARY;</span><br><span class="line">   <span class="keyword">var</span> size = <span class="number">5</span>*<span class="number">1024</span>*<span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">window</span>.requestFileSystem(type, size, successCallback, errorCallback)</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">successCallback</span>(<span class="params">fs</span>) </span>&#123;</span><br><span class="line">      fs.root.getFile(<span class="string">'log.txt'</span>, &#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">fileEntry</span>) </span>&#123;</span><br><span class="line">         fileEntry.file(<span class="function"><span class="keyword">function</span>(<span class="params">file</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">            reader.onloadend = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">              <span class="built_in">console</span>.log(e);</span><br><span class="line">            &#125;;</span><br><span class="line">            reader.readAsText(file);</span><br><span class="line">            <span class="built_in">console</span>.log(file);</span><br><span class="line">         &#125;, errorCallback);</span><br><span class="line">      &#125;, errorCallback);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">errorCallback</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">"ERROR: "</span> + error.code)</span><br><span class="line">   &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E8%AF%BB%E6%96%87%E4%BB%B61.png" alt=""></p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E8%AF%BB%E6%96%87%E4%BB%B62.png" alt=""></p>
+<h4 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeFile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> type = <span class="built_in">window</span>.TEMPORARY;</span><br><span class="line">   <span class="keyword">var</span> size = <span class="number">5</span>*<span class="number">1024</span>*<span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">window</span>.requestFileSystem(type, size, successCallback, errorCallback)</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">successCallback</span>(<span class="params">fs</span>) </span>&#123;</span><br><span class="line">      fs.root.getFile(<span class="string">'log.txt'</span>, &#123;<span class="attr">create</span>: <span class="literal">false</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">fileEntry</span>) </span>&#123;</span><br><span class="line">         fileEntry.remove(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            alert(<span class="string">'File removed.'</span>);</span><br><span class="line">         &#125;, errorCallback);</span><br><span class="line">      &#125;, errorCallback);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">errorCallback</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">"ERROR: "</span> + error.code)</span><br><span class="line">   &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyFile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.resolveLocalFileSystemURL(</span><br><span class="line">    <span class="string">'file:///storage/emulated/0/Pictures/1554715930793.jpg'</span>,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">fileEntry</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">window</span>.resolveLocalFileSystemURL(</span><br><span class="line">        <span class="string">'file:///storage/emulated/0/Sounds/'</span>,</span><br><span class="line">        <span class="function"><span class="keyword">function</span> (<span class="params">dirEntry</span>) </span>&#123;</span><br><span class="line">          fileEntry.copyTo(dirEntry, <span class="string">'new.jpg'</span>, () =&gt; &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'文件复制成功'</span>);</span><br><span class="line">          &#125;, () =&gt; &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'文件复制失败'</span>);</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'创建失败1！'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'创建失败2！'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="上传下载文件"><a href="#上传下载文件" class="headerlink" title="上传下载文件"></a>上传下载文件</h2><h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-file-transfer</span><br></pre></td></tr></table></figure>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h3><p>html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"uploadFile"</span>&gt;</span>上传<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"downloadFile"</span>&gt;</span>下载<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>事件监听器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"uploadFile"</span>).addEventListener(<span class="string">"click"</span>, uploadFile);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"downloadFile"</span>).addEventListener(<span class="string">"click"</span>, downloadFile);</span><br></pre></td></tr></table></figure>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p>从服务器下载文件到设备。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">downloadFile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> fileTransfer = <span class="keyword">new</span> FileTransfer();</span><br><span class="line">   <span class="keyword">var</span> uri = <span class="built_in">encodeURI</span>(<span class="string">"https://cn.vuejs.org/images/logo.png"</span>);	<span class="comment">// 服务器下载链接</span></span><br><span class="line">   <span class="keyword">var</span> fileURL =  <span class="string">"///storage/emulated/0/DCIM/myFile"</span>;	<span class="comment">// 设备上DCIM文件夹的路径</span></span><br><span class="line"></span><br><span class="line">   fileTransfer.download(</span><br><span class="line">      uri, fileURL, <span class="function"><span class="keyword">function</span>(<span class="params">entry</span>) </span>&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">"download complete: "</span> + entry.toURL());</span><br><span class="line">         <span class="built_in">console</span>.log(entry);</span><br><span class="line">      &#125;,</span><br><span class="line">		</span><br><span class="line">      <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">"download error source "</span> + error.source);</span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">"download error target "</span> + error.target);</span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">"download error code"</span> + error.code);</span><br><span class="line">      &#125;,</span><br><span class="line">		</span><br><span class="line">      <span class="literal">false</span>, 	<span class="comment">// not trustAllHosts</span></span><br><span class="line">     &#123;</span><br><span class="line">         headers: &#123;</span><br><span class="line">            <span class="string">"Authorization"</span>: <span class="string">"Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="</span></span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6.png" alt=""></p>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>将文件上传到服务器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">uploadFile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> fileURL = <span class="string">"///storage/emulated/0/DCIM/myFile"</span></span><br><span class="line">   <span class="keyword">var</span> uri = <span class="built_in">encodeURI</span>(<span class="string">"http://posttestserver.com/post.PHP"</span>);</span><br><span class="line">   <span class="keyword">var</span> options = <span class="keyword">new</span> FileUploadOptions();</span><br><span class="line">	</span><br><span class="line">   options.fileKey = <span class="string">"file"</span>;</span><br><span class="line">   options.fileName = fileURL.substr(fileURL.lastIndexOf(<span class="string">'/'</span>)+<span class="number">1</span>);</span><br><span class="line">   options.mimeType = <span class="string">"text/plain"</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> headers = &#123;<span class="string">'headerParam'</span>:<span class="string">'headerValue'</span>&#125;;</span><br><span class="line">   options.headers = headers;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> ft = <span class="keyword">new</span> FileTransfer();</span><br><span class="line"></span><br><span class="line">   ft.upload(fileURL, uri, onSuccess, onError, options);</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onSuccess</span>(<span class="params">r</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Code = "</span> + r.responseCode);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Response = "</span> + r.response);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Sent = "</span> + r.bytesSent);</span><br><span class="line">      <span class="built_in">console</span>.log(r);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">"An error has occurred: Code = "</span> + error.code);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"upload error source "</span> + error.source);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"upload error target "</span> + error.target);</span><br><span class="line">   &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="地理位置"><a href="#地理位置" class="headerlink" title="地理位置"></a>地理位置</h2><h3 id="安装-3"><a href="#安装-3" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-geolocation</span><br></pre></td></tr></table></figure>
+<h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h3><p>html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"getPosition"</span>&gt;</span>当前位置<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>事件监听器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"getPosition"</span>).addEventListener(<span class="string">"click"</span>, getPosition);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPosition</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> options = &#123;</span><br><span class="line">      enableHighAccuracy: <span class="literal">true</span>,	<span class="comment">// 如果请求没有按时完成，我们将使用最后一个已知的值</span></span><br><span class="line">      maximumAge: <span class="number">3600000</span>	<span class="comment">// 最大缓存</span></span><br><span class="line">   &#125;</span><br><span class="line">	</span><br><span class="line">   <span class="keyword">var</span> watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onSuccess</span>(<span class="params">position</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'Latitude: '</span>          + position.coords.latitude          + <span class="string">'\n'</span> +</span><br><span class="line">         <span class="string">'Longitude: '</span>         + position.coords.longitude         + <span class="string">'\n'</span> +</span><br><span class="line">         <span class="string">'Altitude: '</span>          + position.coords.altitude          + <span class="string">'\n'</span> +</span><br><span class="line">         <span class="string">'Accuracy: '</span>          + position.coords.accuracy          + <span class="string">'\n'</span> +</span><br><span class="line">         <span class="string">'Altitude Accuracy: '</span> + position.coords.altitudeAccuracy  + <span class="string">'\n'</span> +</span><br><span class="line">         <span class="string">'Heading: '</span>           + position.coords.heading           + <span class="string">'\n'</span> +</span><br><span class="line">         <span class="string">'Speed: '</span>             + position.coords.speed             + <span class="string">'\n'</span> +</span><br><span class="line">         <span class="string">'Timestamp: '</span>         + position.timestamp                + <span class="string">'\n'</span>);</span><br><span class="line">      <span class="built_in">console</span>.log(position);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">'code: '</span>    + error.code    + <span class="string">'\n'</span> + <span class="string">'message: '</span> + error.message + <span class="string">'\n'</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE.png" alt=""></p>
+<h2 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h2><h3 id="安装-4"><a href="#安装-4" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-media</span><br></pre></td></tr></table></figure>
+<h3 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h3><p>html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"playAudio"</span>&gt;</span>播放<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"pauseAudio"</span>&gt;</span>暂停<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"stopAudio"</span>&gt;</span>停止<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"volumeUp"</span>&gt;</span>音量+<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"volumeDown"</span>&gt;</span>音量-<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>事件监听器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"playAudio"</span>).addEventListener(<span class="string">"click"</span>, playAudio);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"pauseAudio"</span>).addEventListener(<span class="string">"click"</span>, pauseAudio);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"stopAudio"</span>).addEventListener(<span class="string">"click"</span>, stopAudio);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"volumeUp"</span>).addEventListener(<span class="string">"click"</span>, volumeUp);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"volumeDown"</span>).addEventListener(<span class="string">"click"</span>, volumeDown);</span><br></pre></td></tr></table></figure>
+<h4 id="播放"><a href="#播放" class="headerlink" title="播放"></a>播放</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myMedia = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">playAudio</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> src = <span class="string">"/android_asset/www/audio/piano.mp3"</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span>(myMedia === <span class="literal">null</span>) &#123;</span><br><span class="line">      myMedia = <span class="keyword">new</span> Media(src, onSuccess, onError);</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">onSuccess</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">"playAudio Success"</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">"playAudio Error: "</span> + error.code);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   myMedia.setVolume(<span class="number">0.5</span>);</span><br><span class="line">   myMedia.play();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E6%92%AD%E6%94%BE%E9%9F%B3%E9%A2%91.png" alt=""></p>
+<h4 id="暂停和停止"><a href="#暂停和停止" class="headerlink" title="暂停和停止"></a>暂停和停止</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pauseAudio</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(myMedia) &#123;</span><br><span class="line">      myMedia.pause();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stopAudio</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(myMedia) &#123;</span><br><span class="line">      myMedia.stop(); </span><br><span class="line">   &#125;	</span><br><span class="line">   myMedia = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="音量控制"><a href="#音量控制" class="headerlink" title="音量控制"></a>音量控制</h4><p><strong>setVolume</strong> 方法。此方法采用参数，其值从 <strong>0</strong> 到 <strong>1</strong> 。将设置起始值为 <strong>0.5</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> volumeValue = <span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">volumeUp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(myMedia &amp;&amp; volumeValue &lt; <span class="number">1</span>) &#123;</span><br><span class="line">      myMedia.setVolume(volumeValue += <span class="number">0.1</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">volumeDown</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(myMedia &amp;&amp; volumeValue &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      myMedia.setVolume(volumeValue -= <span class="number">0.1</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getDuration</td>
+<td>返回音频的持续时间</td>
+</tr>
+<tr>
+<td>startRecord</td>
+<td>开始录制音频文件</td>
+</tr>
+<tr>
+<td>stopRecord</td>
+<td>停止录制音频文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="媒体捕获"><a href="#媒体捕获" class="headerlink" title="媒体捕获"></a>媒体捕获</h2><h3 id="安装-5"><a href="#安装-5" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-media-capture</span><br></pre></td></tr></table></figure>
+<h3 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a>示例</h3><p>html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"audioCapture"</span>&gt;</span>录音<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"imageCapture"</span>&gt;</span>拍照<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> = <span class="string">"videoCapture"</span>&gt;</span>摄像<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>事件监听器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"audioCapture"</span>).addEventListener(<span class="string">"click"</span>, audioCapture);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"imageCapture"</span>).addEventListener(<span class="string">"click"</span>, imageCapture);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"videoCapture"</span>).addEventListener(<span class="string">"click"</span>, videoCapture);</span><br></pre></td></tr></table></figure>
+<h4 id="录音"><a href="#录音" class="headerlink" title="录音"></a>录音</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">audioCapture</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> options = &#123;</span><br><span class="line">      limit: <span class="number">1</span>,	<span class="comment">// 每次只录制一个</span></span><br><span class="line">      duration: <span class="number">10</span>	<span class="comment">// 音片段的秒数</span></span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   navigator.device.capture.captureAudio(onSuccess, onError, options);</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onSuccess</span>(<span class="params">mediaFiles</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> i, path, len;</span><br><span class="line">		</span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span>, len = mediaFiles.length; i &lt; len; i += <span class="number">1</span>) &#123;</span><br><span class="line">         path = mediaFiles[i].fullPath;</span><br><span class="line">         <span class="built_in">console</span>.log(mediaFiles);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      navigator.notification.alert(<span class="string">'Error code: '</span> + error.code, <span class="literal">null</span>, <span class="string">'Capture Error'</span>);</span><br><span class="line">   &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%AA%92%E4%BD%93%E6%8D%95%E8%8E%B73.png" alt=""></p>
+<h4 id="拍照"><a href="#拍照" class="headerlink" title="拍照"></a>拍照</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">imageCapture</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> options = &#123;</span><br><span class="line">      limit: <span class="number">1</span></span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   navigator.device.capture.captureImage(onSuccess, onError, options);</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onSuccess</span>(<span class="params">mediaFiles</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> i, path, len;</span><br><span class="line">		</span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span>, len = mediaFiles.length; i &lt; len; i += <span class="number">1</span>) &#123;</span><br><span class="line">         path = mediaFiles[i].fullPath;</span><br><span class="line">         <span class="built_in">console</span>.log(mediaFiles);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      navigator.notification.alert(<span class="string">'Error code: '</span> + error.code, <span class="literal">null</span>, <span class="string">'Capture Error'</span>);</span><br><span class="line">   &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%AA%92%E4%BD%93%E6%8D%95%E8%8E%B71.png" alt=""></p>
+<h4 id="摄像"><a href="#摄像" class="headerlink" title="摄像"></a>摄像</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">videoCapture</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> options = &#123;</span><br><span class="line">      limit: <span class="number">1</span>,</span><br><span class="line">      duration: <span class="number">10</span></span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   navigator.device.capture.captureVideo(onSuccess, onError, options);</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onSuccess</span>(<span class="params">mediaFiles</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> i, path, len;</span><br><span class="line">		</span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span>, len = mediaFiles.length; i &lt; len; i += <span class="number">1</span>) &#123;</span><br><span class="line">         path = mediaFiles[i].fullPath;</span><br><span class="line">         <span class="built_in">console</span>.log(mediaFiles);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      navigator.notification.alert(<span class="string">'Error code: '</span> + error.code, <span class="literal">null</span>, <span class="string">'Capture Error'</span>);</span><br><span class="line">   &#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E5%AA%92%E4%BD%93%E6%8D%95%E8%8E%B72.png" alt=""></p>
+<h2 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h2><p>创建新的Cordova项目时，默认情况下会安装并实施<strong>白名单</strong>插件。</p>
+<h3 id="Navigation-Whitelist"><a href="#Navigation-Whitelist" class="headerlink" title="Navigation Whitelist"></a>Navigation Whitelist</h3><p>导航白名单。允许链接到一些外部URL。<strong>config.xml</strong> 中配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">allow-navigation</span> <span class="attr">href</span> = <span class="string">"http://example.com/*"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Intent-Whitelist"><a href="#Intent-Whitelist" class="headerlink" title="Intent Whitelist"></a>Intent Whitelist</h3><p>意向白名单。用于指定允许打开系统的URL。 <strong>config.xml</strong> 中看到Cordova已经允许我们使用大部分所需的链接。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">"http://*/*"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">"https://*/*"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">"tel:*"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">"sms:*"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">"mailto:*"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">"geo:*"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">"android"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">"market:*"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">platform</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">"ios"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">"itms:*"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">"itms-apps:*"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">platform</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Network-Request-Whitelist"><a href="#Network-Request-Whitelist" class="headerlink" title="Network Request Whitelist"></a>Network Request Whitelist</h3><p>网络请求白名单。</p>
+<p><strong>config.xml</strong> 文件中，有<code>&lt; Access origin =&quot;\*&quot;/&gt;</code>元素。此元素允许对应用程序的所有网络请求。如果只想允许特定请求，可以自行设置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">access</span> <span class="attr">origin</span>=<span class="string">"*"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">access</span> <span class="attr">origin</span> = <span class="string">"http://example.com"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Content-Security-Policy"><a href="#Content-Security-Policy" class="headerlink" title="Content Security Policy"></a>Content Security Policy</h3><p>内容安全策略。位于 <strong>index.HTML</strong> 中的 <strong>head</strong> 元素中。</p>
+<p>默认：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Security-Policy"</span> <span class="attr">content</span>=<span class="string">"default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>允许来自同源和 foo.com的所有内容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span> = <span class="string">"Content-Security-Policy"</span> <span class="attr">content</span> = <span class="string">"default-src 'self' foo.com"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>允许所有内容，但将<code>CSS</code>和<code>javascript</code>限制同源：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Security-Policy"</span> <span class="attr">content</span>=<span class="string">"default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="获取当前应用版本号"><a href="#获取当前应用版本号" class="headerlink" title="获取当前应用版本号"></a>获取当前应用版本号</h2><h3 id="安装-6"><a href="#安装-6" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-app-version</span><br></pre></td></tr></table></figure>
+<h3 id="示例-6"><a href="#示例-6" class="headerlink" title="示例"></a>示例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cordova.getAppVersion.getVersionNumber(<span class="function"><span class="keyword">function</span> (<span class="params">version</span>) </span>&#123;</span><br><span class="line">    alert(version);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getAppName</td>
+<td>app名</td>
+</tr>
+<tr>
+<td>getPackageName</td>
+<td>包名</td>
+</tr>
+<tr>
+<td>getVersionCode</td>
+<td>app版本码</td>
+</tr>
+<tr>
+<td>getVersionNumber</td>
+<td>app版本号</td>
+</tr>
+</tbody>
+</table>
+<h2 id="网络信息"><a href="#网络信息" class="headerlink" title="网络信息"></a>网络信息</h2><h3 id="安装-7"><a href="#安装-7" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-network-information</span><br></pre></td></tr></table></figure>
+<h3 id="示例-7"><a href="#示例-7" class="headerlink" title="示例"></a>示例</h3><p>通过<code>navigator.connection.type</code>获取网络类型，取值如下：</p>
+<table>
+<thead>
+<tr>
+<th>常量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connection.UNKNOWN</td>
+<td>未知</td>
+</tr>
+<tr>
+<td>Connection.ETHERNET</td>
+<td>以太网</td>
+</tr>
+<tr>
+<td>Connection.WIFI</td>
+<td>wifi</td>
+</tr>
+<tr>
+<td>Connection.CELL_2G</td>
+<td>2G蜂窝</td>
+</tr>
+<tr>
+<td>Connection.CELL_3G</td>
+<td>3G蜂窝</td>
+</tr>
+<tr>
+<td>Connection.CELL_4G</td>
+<td>4G蜂窝</td>
+</tr>
+<tr>
+<td>Connection.CELL</td>
+<td>蜂窝</td>
+</tr>
+<tr>
+<td>Connection.NONE</td>
+<td>无网络</td>
+</tr>
+</tbody>
+</table>
+<p>另有<code>offline</code>事件和<code>online</code>事件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"offline"</span>, yourCallbackFunction, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"online"</span>, yourCallbackFunction, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="弹窗"><a href="#弹窗" class="headerlink" title="弹窗"></a>弹窗</h2><p>提供四种原生弹窗样式。</p>
+<h3 id="安装-8"><a href="#安装-8" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-dialogs</span><br></pre></td></tr></table></figure>
+<h3 id="navigator-notification-alert"><a href="#navigator-notification-alert" class="headerlink" title="navigator.notification.alert"></a>navigator.notification.alert</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.notification.alert(message, alertCallback, [title], [buttonName])</span><br></pre></td></tr></table></figure>
+<p><code>message</code>为弹窗消息，</p>
+<p><code>alertCallback</code>为弹窗消失后的回调函数，</p>
+<p><code>title</code>为弹窗标题，默认为<code>Alert</code></p>
+<p><code>buttonName</code>为按钮名，默认为<code>OK</code></p>
+<h3 id="navigator-notification-confirm"><a href="#navigator-notification-confirm" class="headerlink" title="navigator.notification.confirm"></a>navigator.notification.confirm</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.notification.alert(message, confirmCallback, [title], [buttonLabels])</span><br></pre></td></tr></table></figure>
+<p><code>message</code>为弹窗消息，</p>
+<p><code>confirmCallback</code>为弹窗消失后的回调函数，参数为点击的按钮<code>index</code>，例如<code>1</code>,<code>2</code>，直接关闭参数为<code>0</code></p>
+<p><code>title</code>为弹窗标题，默认为<code>Confirm</code></p>
+<p><code>buttonLabels</code>为按钮标签数组，默认为<code>[OK,Cancel]</code></p>
+<h3 id="navigator-notification-prompt"><a href="#navigator-notification-prompt" class="headerlink" title="navigator.notification.prompt"></a>navigator.notification.prompt</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.notification.prompt(message, promptCallback, [title], [buttonLabels], [defaultText])</span><br></pre></td></tr></table></figure>
+<h3 id="navigator-notification-beep"><a href="#navigator-notification-beep" class="headerlink" title="navigator.notification.beep"></a>navigator.notification.beep</h3><p>发出蜂鸣声</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.notification.beep(times);</span><br></pre></td></tr></table></figure>
+<h2 id="设备信息"><a href="#设备信息" class="headerlink" title="设备信息"></a>设备信息</h2><h3 id="安装-9"><a href="#安装-9" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-device</span><br></pre></td></tr></table></figure>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>device.cordova</td>
+<td>Cordova版本</td>
+</tr>
+<tr>
+<td>device.model</td>
+<td>设备型号</td>
+</tr>
+<tr>
+<td>device.platform</td>
+<td>平台</td>
+</tr>
+<tr>
+<td>device.uuid</td>
+<td>UUID</td>
+</tr>
+<tr>
+<td>device.version</td>
+<td>设备版本</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://xiejun-image.oss-cn-hangzhou.aliyuncs.com/cordova/%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF.png" alt=""></p>
+<h2 id="首屏加载"><a href="#首屏加载" class="headerlink" title="首屏加载"></a>首屏加载</h2><h3 id="安装-10"><a href="#安装-10" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-splashscreen</span><br></pre></td></tr></table></figure>
+<h3 id="示例-8"><a href="#示例-8" class="headerlink" title="示例"></a>示例</h3><p><code>config.xml</code>中会出现如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">splash</span> <span class="attr">src</span>=<span class="string">"res/screen/ios/Default~iphone.png"</span> <span class="attr">width</span>=<span class="string">"320"</span> <span class="attr">height</span>=<span class="string">"480"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">splash</span> <span class="attr">src</span>=<span class="string">"res/screen/ios/Default@2x~iphone.png"</span> <span class="attr">width</span>=<span class="string">"640"</span> <span class="attr">height</span>=<span class="string">"960"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">splash</span> <span class="attr">src</span>=<span class="string">"res/screen/ios/Default-Portrait~ipad.png"</span> <span class="attr">width</span>=<span class="string">"768"</span> <span class="attr">height</span>=<span class="string">"1024"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">splash</span> <span class="attr">src</span>=<span class="string">"res/screen/ios/Default-Portrait@2x~ipad.png"</span> <span class="attr">width</span>=<span class="string">"1536"</span> <span class="attr">height</span>=<span class="string">"2048"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">splash</span> <span class="attr">src</span>=<span class="string">"res/screen/ios/Default-Landscape~ipad.png"</span> <span class="attr">width</span>=<span class="string">"1024"</span> <span class="attr">height</span>=<span class="string">"768"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">splash</span> <span class="attr">src</span>=<span class="string">"res/screen/ios/Default-Landscape@2x~ipad.png"</span> <span class="attr">width</span>=<span class="string">"2048"</span> <span class="attr">height</span>=<span class="string">"1536"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">splash</span> <span class="attr">src</span>=<span class="string">"res/screen/ios/Default-568h@2x~iphone.png"</span> <span class="attr">width</span>=<span class="string">"640"</span> <span class="attr">height</span>=<span class="string">"1136"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">splash</span> <span class="attr">src</span>=<span class="string">"res/screen/ios/Default-667h.png"</span> <span class="attr">width</span>=<span class="string">"750"</span> <span class="attr">height</span>=<span class="string">"1334"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">splash</span> <span class="attr">src</span>=<span class="string">"res/screen/ios/Default-736h.png"</span> <span class="attr">width</span>=<span class="string">"1242"</span> <span class="attr">height</span>=<span class="string">"2208"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这些是默认的首屏加载图，分别对应不同的屏幕大小。可以任意替换这些资源。</p>
+<h2 id="屏幕方向"><a href="#屏幕方向" class="headerlink" title="屏幕方向"></a>屏幕方向</h2><h3 id="安装-11"><a href="#安装-11" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-screen-orientation</span><br></pre></td></tr></table></figure>
+<h3 id="示例-9"><a href="#示例-9" class="headerlink" title="示例"></a>示例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 锁定方向</span></span><br><span class="line">screen.orientation.lock(<span class="string">'portrait'</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 解锁方向</span></span><br><span class="line">screen.orientation.unlock();</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 获取当前方向</span></span><br><span class="line">screen.orientation.type;</span><br></pre></td></tr></table></figure>
+<h3 id="API-1"><a href="#API-1" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>默认</td>
+</tr>
+<tr>
+<td>landscape</td>
+<td>横屏</td>
+</tr>
+<tr>
+<td>portait</td>
+<td>竖屏</td>
+</tr>
+</tbody>
+</table>
+<h2 id="退出应用"><a href="#退出应用" class="headerlink" title="退出应用"></a>退出应用</h2><h3 id="安装-12"><a href="#安装-12" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-exitapp</span><br></pre></td></tr></table></figure>
+<h3 id="示例-10"><a href="#示例-10" class="headerlink" title="示例"></a>示例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.app.exitApp();</span><br></pre></td></tr></table></figure>
+<h2 id="状态栏"><a href="#状态栏" class="headerlink" title="状态栏"></a>状态栏</h2><h3 id="安装-13"><a href="#安装-13" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-statusbar</span><br></pre></td></tr></table></figure>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>在<code>config.xml</code>中进行配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">"StatusBarOverlaysWebView"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在启动时是否使状态栏覆盖WebView</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">"StatusBarBackgroundColor"</span> <span class="attr">value</span>=<span class="string">"#000000"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>背景色</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">"StatusBarStyle"</span> <span class="attr">value</span>=<span class="string">"lightcontent"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>样式，可选<code>default</code>, <code>lightcontent</code>, <code>blacktranslucent</code>, <code>blackopaque</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">"StatusBarDefaultScrollToTop"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>是否让<code>Cordova WebView</code>获取默认的<code>scroll-to-top</code>行为</p>
+<h2 id="其他插件"><a href="#其他插件" class="headerlink" title="其他插件"></a>其他插件</h2><table>
+<thead>
+<tr>
+<th>插件</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cordova-plugin-battery-status</td>
+<td>电池状态</td>
+</tr>
+<tr>
+<td>cordova-plugin-contacts</td>
+<td>联系人</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/11/浏览器中倍速播放视频/" rel="next" title="浏览器中倍速播放视频">
+                <i class="fa fa-chevron-left"></i> 浏览器中倍速播放视频
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/11/cordova入门/" rel="prev" title="cordova入门">
+                cordova入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myAvatar.jpg"
+                alt="虾米俊" />
+            
+              <p class="site-author-name" itemprop="name">虾米俊</p>
+              <p class="site-description motion-element" itemprop="description">雨会下雨会停，这是不变的道理</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiamijun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相机"><span class="nav-number">2.</span> <span class="nav-text">相机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">2.2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要参数"><span class="nav-number">2.3.</span> <span class="nav-text">主要参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">3.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-1"><span class="nav-number">3.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-1"><span class="nav-number">3.2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建文件"><span class="nav-number">3.2.1.</span> <span class="nav-text">创建文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写文件"><span class="nav-number">3.2.2.</span> <span class="nav-text">写文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取文件"><span class="nav-number">3.2.3.</span> <span class="nav-text">读取文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除文件"><span class="nav-number">3.2.4.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制文件"><span class="nav-number">3.2.5.</span> <span class="nav-text">复制文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传下载文件"><span class="nav-number">4.</span> <span class="nav-text">上传下载文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-2"><span class="nav-number">4.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-2"><span class="nav-number">4.2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载"><span class="nav-number">4.2.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传"><span class="nav-number">4.2.2.</span> <span class="nav-text">上传</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地理位置"><span class="nav-number">5.</span> <span class="nav-text">地理位置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-3"><span class="nav-number">5.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-3"><span class="nav-number">5.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#音频"><span class="nav-number">6.</span> <span class="nav-text">音频</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-4"><span class="nav-number">6.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-4"><span class="nav-number">6.2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#播放"><span class="nav-number">6.2.1.</span> <span class="nav-text">播放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#暂停和停止"><span class="nav-number">6.2.2.</span> <span class="nav-text">暂停和停止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#音量控制"><span class="nav-number">6.2.3.</span> <span class="nav-text">音量控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他方法"><span class="nav-number">6.3.</span> <span class="nav-text">其他方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#媒体捕获"><span class="nav-number">7.</span> <span class="nav-text">媒体捕获</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-5"><span class="nav-number">7.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-5"><span class="nav-number">7.2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#录音"><span class="nav-number">7.2.1.</span> <span class="nav-text">录音</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拍照"><span class="nav-number">7.2.2.</span> <span class="nav-text">拍照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#摄像"><span class="nav-number">7.2.3.</span> <span class="nav-text">摄像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#白名单"><span class="nav-number">8.</span> <span class="nav-text">白名单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigation-Whitelist"><span class="nav-number">8.1.</span> <span class="nav-text">Navigation Whitelist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intent-Whitelist"><span class="nav-number">8.2.</span> <span class="nav-text">Intent Whitelist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Network-Request-Whitelist"><span class="nav-number">8.3.</span> <span class="nav-text">Network Request Whitelist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Content-Security-Policy"><span class="nav-number">8.4.</span> <span class="nav-text">Content Security Policy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取当前应用版本号"><span class="nav-number">9.</span> <span class="nav-text">获取当前应用版本号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-6"><span class="nav-number">9.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-6"><span class="nav-number">9.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络信息"><span class="nav-number">10.</span> <span class="nav-text">网络信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-7"><span class="nav-number">10.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-7"><span class="nav-number">10.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弹窗"><span class="nav-number">11.</span> <span class="nav-text">弹窗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-8"><span class="nav-number">11.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#navigator-notification-alert"><span class="nav-number">11.2.</span> <span class="nav-text">navigator.notification.alert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#navigator-notification-confirm"><span class="nav-number">11.3.</span> <span class="nav-text">navigator.notification.confirm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#navigator-notification-prompt"><span class="nav-number">11.4.</span> <span class="nav-text">navigator.notification.prompt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#navigator-notification-beep"><span class="nav-number">11.5.</span> <span class="nav-text">navigator.notification.beep</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备信息"><span class="nav-number">12.</span> <span class="nav-text">设备信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-9"><span class="nav-number">12.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">12.2.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#首屏加载"><span class="nav-number">13.</span> <span class="nav-text">首屏加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-10"><span class="nav-number">13.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-8"><span class="nav-number">13.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#屏幕方向"><span class="nav-number">14.</span> <span class="nav-text">屏幕方向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-11"><span class="nav-number">14.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-9"><span class="nav-number">14.2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API-1"><span class="nav-number">14.3.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#退出应用"><span class="nav-number">15.</span> <span class="nav-text">退出应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-12"><span class="nav-number">15.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-10"><span class="nav-number">15.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态栏"><span class="nav-number">16.</span> <span class="nav-text">状态栏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-13"><span class="nav-number">16.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用法"><span class="nav-number">16.2.</span> <span class="nav-text">用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他插件"><span class="nav-number">17.</span> <span class="nav-text">其他插件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">虾米俊</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">40.9k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'hWcT9SeAlL37DHejBXLPDeba-gzGzoHsz',
+        appKey: 'NsWPYAqK03m8kNpvHapiGrCs',
+        placeholder: '来说两句~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("hWcT9SeAlL37DHejBXLPDeba-gzGzoHsz", "NsWPYAqK03m8kNpvHapiGrCs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
