@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[vue使用iframe方法]]></title>
+    <url>%2F2019%2F04%2F15%2Fvue%E4%BD%BF%E7%94%A8iframe%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[vue使用iframe的方法和数据通信 使用 将需要引入的html和js等放在项目根目录下的static文件夹下 引入iframe 1&lt;iframe :src="iframeSrc" frameborder="0" width="660" height="600" ref="iframe"&gt;&lt;/iframe&gt; 1iframeSrc: '/assets/previewFile.html' 分别在webpack.dev.conf.js和webpack.prod.conf.js里配置插件 12345new CopyWebpackPlugin([&#123; from: path.resolve(__dirname, '../static'), to: config.dev.assetsSubDirectory, ignore: ['.*']&#125;]) 通信在父中，使用postMessage发消息 12345678910this.$refs.iframe.contentWindow.postMessage( &#123; cmd: 'getFormJson', previewUrl: this.previewUrl, params: &#123; previewUrl: this.previewUrl &#125; &#125;, '*'); 子（html）中，接收数据 12345let previewUrl='';window.addEventListener("message", function(event)&#123; previewUrl=event.data.previewUrl // 其他操作&#125;]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[cordova入门]]></title>
     <url>%2F2019%2F04%2F11%2Fcordova%E5%85%A5%E9%97%A8%2F</url>
     <content type="text"><![CDATA[cordova是一种移动端混合开发框架。它提供了一组设备相关的API，通过这组API，移动应用能够以JavaScript访问原生的设备功能，如摄像头、麦克风等。 安装 下载安装node.js 全局安装cordova 1npm install -g cordova cordova -v验证是否安装成功 创建工程 建立工程文件 1cordova create AndroidFiles com.sun.androidapp AndroidTest AndroidFiles是文件夹名称，com.sun.androidapp是包名称，AndroidTest是工程名称 添加平台 进入目录，输入命令 12cordova platform add androidcordova platform add ios 或其他平台，进行添加。 编译 1cordova build 下载安装Android Stdio 真机调试 真机调试 通过USB线连接安卓机和电脑（手机上设置允许通过USB调试） 可使用adb工具查看连接的设备。 adb路径：C:\Users\admin\AppData\Local\Android\Sdk\platform-tools 1/c/Users/admin/AppData/Local/Android/Sdk/platform-tools/adb.exe devices 查看连接的设备。 若无设备，可使用 12adb kill-serveradb start-server 来尝试连接 安装APP cordova run android安装APP 手机打开APP，chrome浏览器访问chrome://inspect 如果如下图，能看到打开的应用信息，则表示调试连接成功 点击inspect可调试 问题及解决方案 chrome://inspect页面空白 需翻墙]]></content>
@@ -372,28 +380,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[解构赋值和拓展运算符]]></title>
-    <url>%2F2018%2F09%2F27%2F%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E5%92%8C%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%2F</url>
-    <content type="text"><![CDATA[用解构赋值过滤对象属性1234567891011// 过滤掉对象 types 中的 inner 和 outer 属性const &#123; inner, outer, ...restProps &#125; = &#123; inner: 'This is inner', outer: 'This is outer', v1: '1', v2: '2', v4: '3'&#125;;console.log(restProps);// &#123;v1: "1", v2: "2", v4: "3"&#125; 用解构赋值获取嵌套对象的属性从一堆嵌套很深的对象属性中，很方便地拿到我们想要的那一个。1234567891011121314151617// 通过解构赋值获取嵌套对象的值const car = &#123; model: 'bmw 2018', engine: &#123; v6: true, turbo: true, vin: 12345 &#125;&#125;;// 这里使用 ES6 中的简单写法，使用 &#123; vin &#125; 替代 &#123; vin: vin &#125;const modalAndVIN = (&#123; model, engine: &#123; vin &#125;&#125;) =&gt; &#123; console.log(`model: $&#123;model&#125;, vin: $&#123;vin&#125;`);&#125;modalAndVIN(car);// "model: bmw 2018, vin: 12345" 拓展运算符合并对象拓展运算符，可以用来解构数组，也可以用来解构对象，它可以将对象中的所有属性展开。 通过这个特性，我们可以做一些对象合并的操作。12345678910111213// 使用拓展运算符合并对象，在后面的属性会重写前面相同属性的值const obj1 = &#123; a: 1, b: 2, c: 3 &#125;;const obj2 = &#123; c: 5, d: 9 &#125;;const merged = &#123; ...obj1, ...obj2 &#125;;console.log(merged);// &#123;a: 1, b: 2, c: 5, d: 9&#125;const obj3 = &#123; a: 1, b: 2 &#125;;const obj4 = &#123; c: 3, d: &#123; e: 4, ...obj3 &#125; &#125;;console.log(obj4);// &#123;c: 3, d: &#123;a: 1, b: 2, e: 4&#125; &#125;]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[从进程谈JS运行机制]]></title>
-    <url>%2F2018%2F09%2F27%2F%E4%BB%8E%E8%BF%9B%E7%A8%8B%E8%B0%88JS%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%2F</url>
-    <content type="text"><![CDATA[进程和线程 进程之间相互独立。 一个进程由一个或多个线程组成。 多个线程在进程中协作完成任务。 同一进程下的各个线程之间共享程序的内存空间。 进程是cpu资源分配的最小单位。 线程是cpu调度的最小单位。 浏览器是多进程的 浏览器每打开一个tab标签页，任务管理器会多加一条记录。 浏览器包含哪些进程 Browser进程主进程，只有一个作用：用户交互，如前进，后退。页面的管理，创建和销毁其他进程。网络资源管理，下载。 第三方插件进程 GPU进程用于3D绘制 浏览器渲染进程（浏览器内核）Renderer进程，内部是多线程的 浏览器内核（渲染进程） 页面的渲染，JS的执行，事件的循环，都在这个进程内进行。 渲染进程是多线程的 浏览器渲染进程包含的线程 GUI渲染线程&ensp; &ensp; 解析HTML，CSS，构建DOM树和RenderObject树，布局和绘制等。&ensp; &ensp; 注：GUI渲染线程与JS引擎线程是互斥的，当JS引擎执行时GUI线程会被挂起，GUI更新会被保存在一个队列中等到JS引擎空闲时立即被执行。 JS引擎线程&ensp; &ensp; 例如V8引擎。 事件触发线程&ensp; &ensp; 归属于浏览器而不是JS引擎，用来控制事件循环（可以理解，JS引擎自己都忙不过来，需要浏览器另开线程协助）。&ensp; &ensp; 当JS引擎执行如setTimeOut、AJAX异步请求等时，会将对应任务添加到事件线程中。&ensp; &ensp; 当对应的事件符合触发条件被触发时，该线程会把事件添加到待处理队列的队尾，等待JS引擎的处理。&ensp; &ensp; 由于JS的单线程关系，所以这些待处理队列中的事件都得排队等待JS引擎处理（当JS引擎空闲时才会去执行）。 定时触发器线程&ensp; &ensp; setInternal与 setTimeout所在线程。&ensp; &ensp; 浏览器定时计数器并不是由JavaScript引擎计数的。&ensp; &ensp; 通过单独线程来计时并触发定时（计时完毕后，添加到事件队列中，等待JS引擎空闲后执行）。&ensp; &ensp; 规定要求setTimeout中低于4ms的时间间隔算为4ms。 异步http请求线程&ensp; &ensp; XMLHttpRequest在连接后通过新开一个线程请求。&ensp; &ensp; 检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放入事件队列中。再由JavaScript引擎执行。 Browser进程和浏览器内核（Renderer进程）的通信过程 Browser进程收到用户请求，获取页面内容（如通过网络下载资源），随后将该任务通过RendererHost接口传递给Render进程。 Renderer进程收到消息，简单解释后，交给渲染线程，然后开始渲染。&ensp; &ensp; 渲染线程接收请求，加载网页并渲染网页。&ensp; &ensp; 可能会有JS线程操作DOM（这样可能会造成回流并重绘）。&ensp; &ensp; 最后Render进程将结果传递给Browser进程。 Browser进程接收到结果并将结果绘制出来。 GUI渲染线程与JS引擎线程互斥 当JS引擎执行时GUI线程会被挂起 巨量计算阻塞页面加载 WebWorker 应对cpu密集型计算 创建Worker时，JS引擎向浏览器申请开一个子线程（子线程是浏览器开的，完全受主线程控制，而且不能操作DOM） JS引擎线程与worker线程间通过特定的方式通信 JS引擎是单线程的，本质仍然未改变 浏览器渲染流程 解析html建立dom树 解析css构建render树（将CSS代码解析成树形的数据结构，然后结合DOM合并成render树） 布局render树（Layout/reflow），负责各元素尺寸、位置的计算 绘制render树（paint），绘制页面像素信息 浏览器会将各层的信息发送给GPU，GPU会将各层合成（composite），显示在屏幕上。 从Event Loop谈JS的运行机制概念： JS分为同步任务和异步任务 同步任务都在主线程上执行，形成一个执行栈 主线程之外，事件触发线程管理着一个任务队列，只要异步任务有了运行结果，就在任务队列之中放置一个事件。 一旦执行栈中的所有同步任务执行完毕（此时JS引擎空闲），系统就会读取任务队列，将可运行的异步任务添加到执行栈中，开始执行。 定时器定时器是JS引擎检测的么？当然不是了。它是由定时器线程控制（因为JS引擎自己都忙不过来，根本无暇分身）。123setTimeout(function()&#123; console.log('hello!');&#125;,1000); 1000毫秒计时完毕后（由定时器线程计时），将回调函数推入事件队列中，等待主线程执行。 123setTimeout(function()&#123; console.log('hello!');&#125;,0); 以最快的时间内将回调函数推入事件队列中，等待主线程执行。 W3C在HTML标准中规定，规定要求setTimeout中低于4ms的时间间隔算为4ms。 setTimeout而不是setInterval setInterval是每次都精确的隔一段时间推入一个事件 但是，事件的实际执行时间不一定就准确，还有可能是这个事件还没执行完毕，下一个事件就来了。 致命问题：累计效应 macrotask与microtask12345678910111213console.log('script start');setTimeout(function()&#123; console.log('setTimeout');&#125;,0);Promise.resolve().then(function()&#123; console.log('promise1');&#125;).then(function()&#123; console.log('promise2');&#125;);console.log('script end'); 正确结果：12345script startscript endpromise1promise2setTimeout 因为Promise里有了一个一个新的概念： microtask JS中分为两种任务类型：macrotask和microtask，在ECMAScript中，microtask称为jobs，macrotask可称为task定义和区别 macrotask（又称之为宏任务）&ensp; &ensp; 可以理解是每次执行栈执行的代码就是一个宏任务（包括每次从事件队列中获取一个事件回调并放到执行栈中执行）。&ensp; &ensp; 每一个macrotask会从头到尾将这个任务执行完毕，不会执行其它。&ensp; &ensp; 浏览器为了能够使得JS内部macrotask与DOM任务能够有序的执行，会在一个macrotask执行结束后，在下一个macrotask执行开始前，对页面进行重新渲染。（task-&gt;渲染-&gt;task-&gt;...） microtask（又称为微任务）&ensp; &ensp; 可以理解是在当前macrotask执行结束后立即执行的任务。&ensp; &ensp; 也就是说，在当前macrotask任务后，下一个macrotask之前，在渲染之前。&ensp; &ensp; 所以它的响应速度相比setTimeout（setTimeout是macrotask）会更快。 场景 macrotask：主代码块，setTimeout，setInterval等（可以看到，事件队列中的每一个事件都是一个macrotask） microtask：Promise，process.nextTick等 总结]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[JOSN.stringfy小技巧]]></title>
     <url>%2F2018%2F09%2F27%2FJOSN.stringfy%E5%B0%8F%E6%8A%80%E5%B7%A7%2F</url>
     <content type="text"><![CDATA[JSON.stringify()的另外两个参数JSON.stringify(value[, replacer [, space]])参数： value：将要被序列化的变量的值 replacer：替代器。如果该参数是一个函数，则被序列化的值的每个属性都会经过该函数的转换和处理；如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的JSON字符串中 space：指定缩进用的空白字符串，用于美化输出，可以是数字或者字符串。如果参数是个数字，它代表有多少的空格；上限为10。该值若小于1，则意味着没有空格；如果该参数为字符串(字符串的前十个字母)，该字符串将被作为空格； 使用函数过滤并序列化对象：123456789101112131415161718// 使用“函数”当替代器function replacer(key, value) &#123; if (typeof value === "string") &#123; return undefined; &#125; return value;&#125;let foo = &#123; foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7&#125;;let jsonString = JSON.stringify(foo, replacer);// &#123;"week":45,"month":7&#125; 使用数组过滤并序列化对象：12345678910111213141516// 使用“数组”当替代器let user = &#123; name: 'zollero', nick: 'z', skills: ['JavaScript', 'CSS', 'HTML5']&#125;;JSON.stringify(user, ['name', 'skills'], 2);// "&#123;// "name": "zollero",// "skills": [// "JavaScript",// "CSS",// "HTML5"// ]// &#125;" 对象的toJSON属性如果一个对象有toJSON属性，当它被序列化的时候，不会对该对象进行序列化，而是将它的toJSON方法的返回值进行序列化。 例子：12345678let obj = &#123; foo: 'foo', toJSON: function () &#123; return 'bar'; &#125;&#125;;JSON.stringify(obj); // '"bar"'JSON.stringify(&#123;x: obj&#125;); // '&#123;"x":"bar"&#125;']]></content>
@@ -413,6 +399,28 @@
       </categories>
       <tags>
         <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[从进程谈JS运行机制]]></title>
+    <url>%2F2018%2F09%2F27%2F%E4%BB%8E%E8%BF%9B%E7%A8%8B%E8%B0%88JS%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[进程和线程 进程之间相互独立。 一个进程由一个或多个线程组成。 多个线程在进程中协作完成任务。 同一进程下的各个线程之间共享程序的内存空间。 进程是cpu资源分配的最小单位。 线程是cpu调度的最小单位。 浏览器是多进程的 浏览器每打开一个tab标签页，任务管理器会多加一条记录。 浏览器包含哪些进程 Browser进程主进程，只有一个作用：用户交互，如前进，后退。页面的管理，创建和销毁其他进程。网络资源管理，下载。 第三方插件进程 GPU进程用于3D绘制 浏览器渲染进程（浏览器内核）Renderer进程，内部是多线程的 浏览器内核（渲染进程） 页面的渲染，JS的执行，事件的循环，都在这个进程内进行。 渲染进程是多线程的 浏览器渲染进程包含的线程 GUI渲染线程&ensp; &ensp; 解析HTML，CSS，构建DOM树和RenderObject树，布局和绘制等。&ensp; &ensp; 注：GUI渲染线程与JS引擎线程是互斥的，当JS引擎执行时GUI线程会被挂起，GUI更新会被保存在一个队列中等到JS引擎空闲时立即被执行。 JS引擎线程&ensp; &ensp; 例如V8引擎。 事件触发线程&ensp; &ensp; 归属于浏览器而不是JS引擎，用来控制事件循环（可以理解，JS引擎自己都忙不过来，需要浏览器另开线程协助）。&ensp; &ensp; 当JS引擎执行如setTimeOut、AJAX异步请求等时，会将对应任务添加到事件线程中。&ensp; &ensp; 当对应的事件符合触发条件被触发时，该线程会把事件添加到待处理队列的队尾，等待JS引擎的处理。&ensp; &ensp; 由于JS的单线程关系，所以这些待处理队列中的事件都得排队等待JS引擎处理（当JS引擎空闲时才会去执行）。 定时触发器线程&ensp; &ensp; setInternal与 setTimeout所在线程。&ensp; &ensp; 浏览器定时计数器并不是由JavaScript引擎计数的。&ensp; &ensp; 通过单独线程来计时并触发定时（计时完毕后，添加到事件队列中，等待JS引擎空闲后执行）。&ensp; &ensp; 规定要求setTimeout中低于4ms的时间间隔算为4ms。 异步http请求线程&ensp; &ensp; XMLHttpRequest在连接后通过新开一个线程请求。&ensp; &ensp; 检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放入事件队列中。再由JavaScript引擎执行。 Browser进程和浏览器内核（Renderer进程）的通信过程 Browser进程收到用户请求，获取页面内容（如通过网络下载资源），随后将该任务通过RendererHost接口传递给Render进程。 Renderer进程收到消息，简单解释后，交给渲染线程，然后开始渲染。&ensp; &ensp; 渲染线程接收请求，加载网页并渲染网页。&ensp; &ensp; 可能会有JS线程操作DOM（这样可能会造成回流并重绘）。&ensp; &ensp; 最后Render进程将结果传递给Browser进程。 Browser进程接收到结果并将结果绘制出来。 GUI渲染线程与JS引擎线程互斥 当JS引擎执行时GUI线程会被挂起 巨量计算阻塞页面加载 WebWorker 应对cpu密集型计算 创建Worker时，JS引擎向浏览器申请开一个子线程（子线程是浏览器开的，完全受主线程控制，而且不能操作DOM） JS引擎线程与worker线程间通过特定的方式通信 JS引擎是单线程的，本质仍然未改变 浏览器渲染流程 解析html建立dom树 解析css构建render树（将CSS代码解析成树形的数据结构，然后结合DOM合并成render树） 布局render树（Layout/reflow），负责各元素尺寸、位置的计算 绘制render树（paint），绘制页面像素信息 浏览器会将各层的信息发送给GPU，GPU会将各层合成（composite），显示在屏幕上。 从Event Loop谈JS的运行机制概念： JS分为同步任务和异步任务 同步任务都在主线程上执行，形成一个执行栈 主线程之外，事件触发线程管理着一个任务队列，只要异步任务有了运行结果，就在任务队列之中放置一个事件。 一旦执行栈中的所有同步任务执行完毕（此时JS引擎空闲），系统就会读取任务队列，将可运行的异步任务添加到执行栈中，开始执行。 定时器定时器是JS引擎检测的么？当然不是了。它是由定时器线程控制（因为JS引擎自己都忙不过来，根本无暇分身）。123setTimeout(function()&#123; console.log('hello!');&#125;,1000); 1000毫秒计时完毕后（由定时器线程计时），将回调函数推入事件队列中，等待主线程执行。 123setTimeout(function()&#123; console.log('hello!');&#125;,0); 以最快的时间内将回调函数推入事件队列中，等待主线程执行。 W3C在HTML标准中规定，规定要求setTimeout中低于4ms的时间间隔算为4ms。 setTimeout而不是setInterval setInterval是每次都精确的隔一段时间推入一个事件 但是，事件的实际执行时间不一定就准确，还有可能是这个事件还没执行完毕，下一个事件就来了。 致命问题：累计效应 macrotask与microtask12345678910111213console.log('script start');setTimeout(function()&#123; console.log('setTimeout');&#125;,0);Promise.resolve().then(function()&#123; console.log('promise1');&#125;).then(function()&#123; console.log('promise2');&#125;);console.log('script end'); 正确结果：12345script startscript endpromise1promise2setTimeout 因为Promise里有了一个一个新的概念： microtask JS中分为两种任务类型：macrotask和microtask，在ECMAScript中，microtask称为jobs，macrotask可称为task定义和区别 macrotask（又称之为宏任务）&ensp; &ensp; 可以理解是每次执行栈执行的代码就是一个宏任务（包括每次从事件队列中获取一个事件回调并放到执行栈中执行）。&ensp; &ensp; 每一个macrotask会从头到尾将这个任务执行完毕，不会执行其它。&ensp; &ensp; 浏览器为了能够使得JS内部macrotask与DOM任务能够有序的执行，会在一个macrotask执行结束后，在下一个macrotask执行开始前，对页面进行重新渲染。（task-&gt;渲染-&gt;task-&gt;...） microtask（又称为微任务）&ensp; &ensp; 可以理解是在当前macrotask执行结束后立即执行的任务。&ensp; &ensp; 也就是说，在当前macrotask任务后，下一个macrotask之前，在渲染之前。&ensp; &ensp; 所以它的响应速度相比setTimeout（setTimeout是macrotask）会更快。 场景 macrotask：主代码块，setTimeout，setInterval等（可以看到，事件队列中的每一个事件都是一个macrotask） microtask：Promise，process.nextTick等 总结]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[解构赋值和拓展运算符]]></title>
+    <url>%2F2018%2F09%2F27%2F%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E5%92%8C%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%2F</url>
+    <content type="text"><![CDATA[用解构赋值过滤对象属性1234567891011// 过滤掉对象 types 中的 inner 和 outer 属性const &#123; inner, outer, ...restProps &#125; = &#123; inner: 'This is inner', outer: 'This is outer', v1: '1', v2: '2', v4: '3'&#125;;console.log(restProps);// &#123;v1: "1", v2: "2", v4: "3"&#125; 用解构赋值获取嵌套对象的属性从一堆嵌套很深的对象属性中，很方便地拿到我们想要的那一个。1234567891011121314151617// 通过解构赋值获取嵌套对象的值const car = &#123; model: 'bmw 2018', engine: &#123; v6: true, turbo: true, vin: 12345 &#125;&#125;;// 这里使用 ES6 中的简单写法，使用 &#123; vin &#125; 替代 &#123; vin: vin &#125;const modalAndVIN = (&#123; model, engine: &#123; vin &#125;&#125;) =&gt; &#123; console.log(`model: $&#123;model&#125;, vin: $&#123;vin&#125;`);&#125;modalAndVIN(car);// "model: bmw 2018, vin: 12345" 拓展运算符合并对象拓展运算符，可以用来解构数组，也可以用来解构对象，它可以将对象中的所有属性展开。 通过这个特性，我们可以做一些对象合并的操作。12345678910111213// 使用拓展运算符合并对象，在后面的属性会重写前面相同属性的值const obj1 = &#123; a: 1, b: 2, c: 3 &#125;;const obj2 = &#123; c: 5, d: 9 &#125;;const merged = &#123; ...obj1, ...obj2 &#125;;console.log(merged);// &#123;a: 1, b: 2, c: 5, d: 9&#125;const obj3 = &#123; a: 1, b: 2 &#125;;const obj4 = &#123; c: 3, d: &#123; e: 4, ...obj3 &#125; &#125;;console.log(obj4);// &#123;c: 3, d: &#123;a: 1, b: 2, e: 4&#125; &#125;]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -636,17 +644,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[语法推导树之短语，直接短语，句柄]]></title>
-    <url>%2F2015%2F03%2F05%2F%E8%AF%AD%E6%B3%95%E6%8E%A8%E5%AF%BC%E6%A0%91%E4%B9%8B%E7%9F%AD%E8%AF%AD%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9F%AD%E8%AF%AD%EF%BC%8C%E5%8F%A5%E6%9F%84%2F</url>
-    <content type="text"><![CDATA[概念 短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语 直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语 句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语 例子找出下面的这颗语法推导树的短语，直接短语，句柄。 找出这棵树的所有子树 找出每一颗子树的短语 第1棵：a1ɛb1b2a2a3 第2棵：ɛb1b2 第3棵：a2a3 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 找出每一颗子树的直接短语 第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 第2棵：同上 第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1]]></content>
+    <title><![CDATA[怎样求First集与Follow集]]></title>
+    <url>%2F2015%2F03%2F05%2F%E6%80%8E%E6%A0%B7%E6%B1%82First%E9%9B%86%E4%B8%8EFollow%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[文法： S→ABc A→a\ ε B→b\ ε First集合求法: 能 由非终结符号推出的所有的开头符号或可能的ε，但要求这个开头符号是终结符号。如此题A可以推导出a和ε，所以FIRST（A）=｛a，ε｝；同理 FIRST（B）={b,ε};S可以推导出aBc，还可以推导出bc，还可以推导出c，所以FIRST(S）=｛a，b，c｝ Follow集合的求法: 紧跟随其后面的终结符号或＃。但文法的识别符号包含＃，在求的时候还要考虑到ε。 具体做法是把所有包含你要求的符号的产生式都找出来，再看哪个有用。 Follow（S）=｛＃｝ 如求A的，产生式：S→ABc A→a\ ε ，但只有S→ABc 有用。跟随在A后年的终结符号是FIRST（B）=｛b，ε｝，当FIRST（B）的元素为ε时，跟随在A后的符号就是c，所以 Follow（A）=｛b，c｝ 同理Follow（B）=｛c｝ 一，要知道什么是终结符和非终结符 终结符：通俗的说就是不能单独出现在推导式左边的符号，也就是说终结符不能再进行推导。 非终结符：不是终结符的都是非终结符。（非男即女，呵呵） 如：A——&gt;B，则A是非终结符。 （一般书上终结符用小写，非终结符用大写。） 二，文法产生语言句子的基本思想：从识别符号（开始符）开始，把当前产生的符号串中的非终结符替换为相应规则右部的符号串，直到全部由终结符组成。 三，FIRST集求法 ​ First集合最终是对产生式右部的字符串而言的，但其关键是求出非终结符的First集合，由于终结符的First集合就是它自己，所以求出非终结符的First集合后，就可很直观地得到每个字符串的First集合。 \1. 直接收取：对形如U－&gt;a…的产生式（其中a是终结符），把a收入到First(U)中 \2. 反复传送：对形入U－&gt;P…的产生式（其中P是非终结符），应把First(P)中的全部内容传送到First(U)中【意思就是只需要把第一个非终结符的First集传过去~这个地方是要注意的地方，也是难点】。 四，FOLLOW集的求法 ​ Follow集合是针对非终结符而言的，Follow(U)所表达的是句型中非终结符U所有可能的后随终结符号的集合，特别地，“#”是识别符号的后随符。注意Follow集合是从开始符号S开始推导。 直接收取：注意产生式右部的每一个形如“…Ua…”的组合，把a直接收入到Follow(U)中。因a是紧跟在U后的终结符。 直接收取：对形如“…UP…”(P是非终结符)的组合，把First(P)直接收入到Follow(U)中【在这里，如果First（P）中有空字符，那么就要把左部（假设是S）的Follow（S）送入到Follow（U）中。还有就是Follow集中是没有空字符的】。 直接收取：若S－&gt;…U，即以U结尾，则#∈Follow(U) 反复传送：对形如U－&gt;…P的产生式（其中P是非终结符），应把Follow(U)中的全部内容传送到Follow(P)中。]]></content>
       <categories>
         <category>计算机基础</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[怎样求First集与Follow集]]></title>
-    <url>%2F2015%2F03%2F05%2F%E6%80%8E%E6%A0%B7%E6%B1%82First%E9%9B%86%E4%B8%8EFollow%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[文法： S→ABc A→a\ ε B→b\ ε First集合求法: 能 由非终结符号推出的所有的开头符号或可能的ε，但要求这个开头符号是终结符号。如此题A可以推导出a和ε，所以FIRST（A）=｛a，ε｝；同理 FIRST（B）={b,ε};S可以推导出aBc，还可以推导出bc，还可以推导出c，所以FIRST(S）=｛a，b，c｝ Follow集合的求法: 紧跟随其后面的终结符号或＃。但文法的识别符号包含＃，在求的时候还要考虑到ε。 具体做法是把所有包含你要求的符号的产生式都找出来，再看哪个有用。 Follow（S）=｛＃｝ 如求A的，产生式：S→ABc A→a\ ε ，但只有S→ABc 有用。跟随在A后年的终结符号是FIRST（B）=｛b，ε｝，当FIRST（B）的元素为ε时，跟随在A后的符号就是c，所以 Follow（A）=｛b，c｝ 同理Follow（B）=｛c｝ 一，要知道什么是终结符和非终结符 终结符：通俗的说就是不能单独出现在推导式左边的符号，也就是说终结符不能再进行推导。 非终结符：不是终结符的都是非终结符。（非男即女，呵呵） 如：A——&gt;B，则A是非终结符。 （一般书上终结符用小写，非终结符用大写。） 二，文法产生语言句子的基本思想：从识别符号（开始符）开始，把当前产生的符号串中的非终结符替换为相应规则右部的符号串，直到全部由终结符组成。 三，FIRST集求法 ​ First集合最终是对产生式右部的字符串而言的，但其关键是求出非终结符的First集合，由于终结符的First集合就是它自己，所以求出非终结符的First集合后，就可很直观地得到每个字符串的First集合。 \1. 直接收取：对形如U－&gt;a…的产生式（其中a是终结符），把a收入到First(U)中 \2. 反复传送：对形入U－&gt;P…的产生式（其中P是非终结符），应把First(P)中的全部内容传送到First(U)中【意思就是只需要把第一个非终结符的First集传过去~这个地方是要注意的地方，也是难点】。 四，FOLLOW集的求法 ​ Follow集合是针对非终结符而言的，Follow(U)所表达的是句型中非终结符U所有可能的后随终结符号的集合，特别地，“#”是识别符号的后随符。注意Follow集合是从开始符号S开始推导。 直接收取：注意产生式右部的每一个形如“…Ua…”的组合，把a直接收入到Follow(U)中。因a是紧跟在U后的终结符。 直接收取：对形如“…UP…”(P是非终结符)的组合，把First(P)直接收入到Follow(U)中【在这里，如果First（P）中有空字符，那么就要把左部（假设是S）的Follow（S）送入到Follow（U）中。还有就是Follow集中是没有空字符的】。 直接收取：若S－&gt;…U，即以U结尾，则#∈Follow(U) 反复传送：对形如U－&gt;…P的产生式（其中P是非终结符），应把Follow(U)中的全部内容传送到Follow(P)中。]]></content>
+    <title><![CDATA[语法推导树之短语，直接短语，句柄]]></title>
+    <url>%2F2015%2F03%2F05%2F%E8%AF%AD%E6%B3%95%E6%8E%A8%E5%AF%BC%E6%A0%91%E4%B9%8B%E7%9F%AD%E8%AF%AD%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9F%AD%E8%AF%AD%EF%BC%8C%E5%8F%A5%E6%9F%84%2F</url>
+    <content type="text"><![CDATA[概念 短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语 直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语 句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语 例子找出下面的这颗语法推导树的短语，直接短语，句柄。 找出这棵树的所有子树 找出每一颗子树的短语 第1棵：a1ɛb1b2a2a3 第2棵：ɛb1b2 第3棵：a2a3 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 找出每一颗子树的直接短语 第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 第2棵：同上 第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语 第4棵：a1 第5棵：ɛ 第6棵：b1 第7棵：b2 第8棵：a2 从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1]]></content>
       <categories>
         <category>计算机基础</category>
       </categories>
