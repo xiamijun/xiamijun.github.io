@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="虾米俊">
 <meta property="og:description" content="vue使用iframe的方法和数据通信">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-15T03:45:56.830Z">
+<meta property="og:updated_time" content="2019-04-15T08:04:45.156Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue使用iframe方法">
 <meta name="twitter:description" content="vue使用iframe的方法和数据通信">
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  142 字
+                  188 字
                 </span>
               
 
@@ -446,6 +446,7 @@
 <li><p>引入<code>iframe</code></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">:src</span>=<span class="string">"iframeSrc"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">width</span>=<span class="string">"660"</span> <span class="attr">height</span>=<span class="string">"600"</span> <span class="attr">ref</span>=<span class="string">"iframe"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iframeSrc: <span class="string">'/assets/previewFile.html'</span></span><br></pre></td></tr></table></figure>
+<p>注意使用绝对路径，且路径为打包后的二级目录。事实上是用<code>webpack</code>插件将<code>static</code>目录下的文件复制到打包后的二级目录。</p>
 </li>
 <li><p>分别在<code>webpack.dev.conf.js</code>和<code>webpack.prod.conf.js</code>里配置插件</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> CopyWebpackPlugin([&#123;</span><br><span class="line">  <span class="keyword">from</span>: path.resolve(__dirname, <span class="string">'../static'</span>),</span><br><span class="line">  to: config.dev.assetsSubDirectory,</span><br><span class="line">  ignore: [<span class="string">'.*'</span>]</span><br><span class="line">&#125;])</span><br></pre></td></tr></table></figure>
@@ -488,6 +489,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/16/ES6笔记一：let和const/" rel="prev" title="ES6笔记一：let和const">
+                ES6笔记一：let和const <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -571,7 +576,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +675,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">41k</span>
+    <span title="Site words total count">41.9k</span>
   
 </div>
 
