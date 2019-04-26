@@ -1912,6 +1912,235 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/05/语法推导树之短语，直接短语，句柄/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/05/语法推导树之短语，直接短语，句柄/" itemprop="url">语法推导树之短语，直接短语，句柄</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-05T14:27:19+08:00">
+                2015-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/03/05/语法推导树之短语，直接短语，句柄/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2015/03/05/语法推导树之短语，直接短语，句柄/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015/03/05/语法推导树之短语，直接短语，句柄/" class="leancloud_visitors" data-flag-title="语法推导树之短语，直接短语，句柄">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  374 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ul>
+<li>短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语</li>
+<li>直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语</li>
+<li>句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语</li>
+</ul>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>找出下面的这颗语法推导树的短语，直接短语，句柄。</p>
+<p><img src="https://img-blog.csdn.net/20131015151004656?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2pyMTUyMzM2NjExNDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<ol>
+<li><strong>找出这棵树的所有子树</strong></li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20131015151017250?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2pyMTUyMzM2NjExNDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<ol start="2">
+<li><strong>找出每一颗子树的短语</strong></li>
+</ol>
+<p>第1棵：a1ɛb1b2a2a3  </p>
+<p>第2棵：ɛb1b2</p>
+<p>第3棵：a2a3</p>
+<p>第4棵：a1</p>
+<p>第5棵：ɛ</p>
+<p>第6棵：b1  </p>
+<p>第7棵：b2</p>
+<p>第8棵：a2</p>
+<ol start="3">
+<li><strong>找出每一颗子树的直接短语</strong></li>
+</ol>
+<p>第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 </p>
+<p> 第2棵：同上</p>
+<p>第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语</p>
+<p>第4棵：a1</p>
+<p> 第5棵：ɛ</p>
+<p>第6棵：b1  </p>
+<p>第7棵：b2</p>
+<p>第8棵：a2</p>
+<ol start="4">
+<li><strong>从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1</strong></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/05/怎样求First集与Follow集/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2154,235 +2383,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/05/语法推导树之短语，直接短语，句柄/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="虾米俊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/myAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="虾米俊">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/03/05/语法推导树之短语，直接短语，句柄/" itemprop="url">语法推导树之短语，直接短语，句柄</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-05T14:27:19+08:00">
-                2015-03-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2015/03/05/语法推导树之短语，直接短语，句柄/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2015/03/05/语法推导树之短语，直接短语，句柄/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2015/03/05/语法推导树之短语，直接短语，句柄/" class="leancloud_visitors" data-flag-title="语法推导树之短语，直接短语，句柄">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  374 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ul>
-<li>短语：任意一颗子树中，如果根结点经过若干步才推导出了叶子结点，则这些叶子结点组成的序列就是相对于这棵子树的短语</li>
-<li>直接短语：属于短语，只不过不能经过若干步的推导了，必须一步就能推导出来叶子结点来，这些叶子结点组成的序列才是相对于这颗子树的直接短语</li>
-<li>句柄：属于直接短语，它是这些有直接短语的子树中最左边的那颗子树的直接短语</li>
-</ul>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>找出下面的这颗语法推导树的短语，直接短语，句柄。</p>
-<p><img src="https://img-blog.csdn.net/20131015151004656?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2pyMTUyMzM2NjExNDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<ol>
-<li><strong>找出这棵树的所有子树</strong></li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20131015151017250?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2pyMTUyMzM2NjExNDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<ol start="2">
-<li><strong>找出每一颗子树的短语</strong></li>
-</ol>
-<p>第1棵：a1ɛb1b2a2a3  </p>
-<p>第2棵：ɛb1b2</p>
-<p>第3棵：a2a3</p>
-<p>第4棵：a1</p>
-<p>第5棵：ɛ</p>
-<p>第6棵：b1  </p>
-<p>第7棵：b2</p>
-<p>第8棵：a2</p>
-<ol start="3">
-<li><strong>找出每一颗子树的直接短语</strong></li>
-</ol>
-<p>第1棵：因为这棵树的叶子结点是经过若干步推导出来的没有一步就推导出来的，所以没有直接短语 </p>
-<p> 第2棵：同上</p>
-<p>第3棵：同上，虽然a3是直接推导出来的，但是a2不是，所以它们组成的序列不能说是直接短语</p>
-<p>第4棵：a1</p>
-<p> 第5棵：ɛ</p>
-<p>第6棵：b1  </p>
-<p>第7棵：b2</p>
-<p>第8棵：a2</p>
-<ol start="4">
-<li><strong>从这些直接短语中找那个排在最左边的直接短语，即句柄，这道题的句柄就是a1</strong></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2520,7 +2520,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">60.5k</span>
+    <span title="Site words total count">61.4k</span>
   
 </div>
 

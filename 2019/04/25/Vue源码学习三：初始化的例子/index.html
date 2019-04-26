@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="上一章节我们了解了 Vue 对选项的规范化，而接下来才是真正的合并阶段">
+<meta name="description" content="这一节，我们就致力于搞清楚：Vue的思路。">
 <meta name="keywords" content="JavaScript Vue Css Web Node">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue源码学习五：选项的合并">
+<meta property="og:title" content="Vue源码学习三：初始化的例子">
 <meta property="og:url" content="http://yoursite.com/2019/04/25/Vue源码学习三：初始化的例子/index.html">
 <meta property="og:site_name" content="虾米俊">
-<meta property="og:description" content="上一章节我们了解了 Vue 对选项的规范化，而接下来才是真正的合并阶段">
+<meta property="og:description" content="这一节，我们就致力于搞清楚：Vue的思路。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-25T07:10:48.725Z">
+<meta property="og:updated_time" content="2019-04-26T06:56:05.070Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue源码学习五：选项的合并">
-<meta name="twitter:description" content="上一章节我们了解了 Vue 对选项的规范化，而接下来才是真正的合并阶段">
+<meta name="twitter:title" content="Vue源码学习三：初始化的例子">
+<meta name="twitter:description" content="这一节，我们就致力于搞清楚：Vue的思路。">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>Vue源码学习五：选项的合并 | 虾米俊</title>
+  <title>Vue源码学习三：初始化的例子 | 虾米俊</title>
   
 
 
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Vue源码学习五：选项的合并</h1>
+          <h1 class="post-title" itemprop="name headline">Vue源码学习三：初始化的例子</h1>
         
 
         <div class="post-meta">
@@ -376,7 +376,7 @@
 
           
           
-             <span id="/2019/04/25/Vue源码学习三：初始化的例子/" class="leancloud_visitors" data-flag-title="Vue源码学习五：选项的合并">
+             <span id="/2019/04/25/Vue源码学习三：初始化的例子/" class="leancloud_visitors" data-flag-title="Vue源码学习三：初始化的例子">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  872 字
+                  1.8k 字
                 </span>
               
 
@@ -417,7 +417,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -438,31 +438,59 @@
       
 
       
-        <p>上一章节我们了解了 <code>Vue</code> 对选项的规范化，而接下来才是真正的合并阶段</p>
+        <p>这一节，我们就致力于搞清楚：<code>Vue的思路</code>。</p>
 <a id="more"></a>
-<p>继续看 <code>mergeOptions</code>函数的代码，接下来的一段代码如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> options = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> key</span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> parent) &#123;</span><br><span class="line">  mergeField(key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> child) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!hasOwn(parent, key)) &#123;</span><br><span class="line">    mergeField(key)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeField</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> strat = strats[key] || defaultStrat</span><br><span class="line">  options[key] = strat(parent[key], child[key], vm, key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> options</span><br></pre></td></tr></table></figure>
-<p>这段代码的第一句和最后一句说明了 <code>mergeOptions</code> 函数的确返回了一个新的对象。中间的代码是在充实 <code>options</code> 常量。</p>
-<p>先看第一段 <code>for in</code> 代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> parent) &#123;</span><br><span class="line">  mergeField(key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这段 <code>for in</code> 用来遍历 <code>parent</code>，并且将 <code>parent</code> 对象的键作为参数传递给 <code>mergeField</code> 函数，大家应该知道这里的 <code>key</code> 是什么，假如 <code>parent</code> 就是 <code>Vue.options</code>：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Vue.options = &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">      KeepAlive,</span><br><span class="line">      Transition,</span><br><span class="line">      TransitionGroup</span><br><span class="line">  &#125;,</span><br><span class="line">  directives:&#123;</span><br><span class="line">      model,</span><br><span class="line">      show</span><br><span class="line">  &#125;,</span><br><span class="line">  filters: <span class="built_in">Object</span>.create(<span class="literal">null</span>),</span><br><span class="line">  _base: Vue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么 <code>key</code> 就应该分别是：<code>components</code>、<code>directives</code>、<code>filters</code> 以及 <code>_base</code>，除了 <code>_base</code> 其他的字段都可以理解为是 <code>Vue</code> 提供的选项的名字。</p>
-<p>而第二段 <code>for in</code> 代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> child) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!hasOwn(parent, key)) &#123;</span><br><span class="line">    mergeField(key)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其遍历的是 <code>child</code> 对象，并且多了一个判断：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!hasOwn(parent, key))</span><br></pre></td></tr></table></figure>
-<p><code>hasOwn</code> 函数来自于 <code>shared/util.js</code> 文件，可以在附录<a href=""></a>中查看，其作用是用来判断一个属性是否是对象自身的属性(不包括原型上的)。所以这个判断语句的意思是，如果 <code>child</code> 对象的键也在 <code>parent</code> 上出现，那么就不要再调用 <code>mergeField</code> 了，因为在上一个 <code>for in</code> 循环中已经调用过了，这就避免了重复调用。</p>
-<p>总之这两个 <code>for in</code> 循环的目的就是使用在 <code>parent</code> 或者 <code>child</code> 对象中出现的 <code>key(即选项的名字)</code> 作为参数调用 <code>mergeField</code> 函数，真正合并的操作实际在 <code>mergeField</code> 函数中。</p>
-<p><code>mergeField</code> 代码如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeField</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> strat = strats[key] || defaultStrat</span><br><span class="line">  options[key] = strat(parent[key], child[key], vm, key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>mergeField</code> 函数只有两句代码，第一句代码定义了一个常量 <code>strat</code>，它的值是通过指定的 <code>key</code> 访问 <code>strats</code> 对象得到的，而当访问的属性不存在时，则使用 <code>defaultStrat</code> 作为值。</p>
-<p>这里我们就要明确了，<code>strats</code> 是什么？想弄明白这个问题，我们需要从整体角度去看一下 <code>options.js</code>文件，首先看文件顶部的一堆 <code>import</code> 语句下的第一句代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Option overwriting strategies are functions that handle</span></span><br><span class="line"><span class="comment"> * how to merge a parent option value and a child option</span></span><br><span class="line"><span class="comment"> * value into the final value.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> strats = config.optionMergeStrategies</span><br></pre></td></tr></table></figure>
-<p>这句代码就定义了 <code>strats</code> 变量，且它是一个常量，这个常量的值为 <code>config.optionMergeStrategies</code>，这个 <code>config</code> 对象是全局配置对象，来自于 <code>core/config.js</code> 文件，此时 <code>config.optionMergeStrategies</code> 还只是一个空的对象。</p>
-<p>注释：<em>选项覆盖策略是处理如何将父选项值和子选项值合并到最终值的函数</em>。也就是说 <code>config.optionMergeStrategies</code> 是一个合并选项的策略对象，这个对象下包含很多函数，这些函数就可以认为是合并特定选项的策略。这样不同的选项使用不同的合并策略。</p>
-<p>如果你使用自定义选项，那么你也可以自定义该选项的合并策略，只需要在 <code>Vue.config.optionMergeStrategies</code> 对象上添加与自定义选项同名的函数就行。而这就是 <code>Vue</code> 文档中提过的全局配置：<a href="https://vuejs.org/v2/api/#optionMergeStrategies" target="_blank" rel="noopener">optionMergeStrategies</a>。</p>
-<h1 id="选项-el、propsData-的合并策略"><a href="#选项-el、propsData-的合并策略" class="headerlink" title="选项 el、propsData 的合并策略"></a>选项 el、propsData 的合并策略</h1>
+<p>一个例子：</p>
+<p>我们有如下模板：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span>&#123;&#123;test&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>和这样一段 <code>js</code> 代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        test: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>首先我们要找到当我们调用 <code>Vue</code> 构造函数的时候，第一句执行的代码是什么，所以我们要找到 <code>Vue</code> 的构造函数，还记得 <code>Vue</code> 的构造函数定义在哪里吗？查阅附录<a href=""></a>，<code>Vue</code> 的构造函数定义在 <code>core/instance/index.js</code> 文件中，我们找到它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vue</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp;</span><br><span class="line">    !(<span class="keyword">this</span> <span class="keyword">instanceof</span> Vue)</span><br><span class="line">  ) &#123;</span><br><span class="line">    warn(<span class="string">'Vue is a constructor and should be called with the `new` keyword'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>._init(options)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们使用 <code>new</code> 操作符调用 <code>Vue</code> 的时候，第一句执行的代码就是 <code>this._init(options)</code>方法，其中 <code>options</code> 是我们调用 <code>Vue</code> 构造函数时传过来的，也就是说：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">options = &#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        test: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>既然如此，我们就找到 <code>_init</code> 方法，查阅附录<a href=""></a>，<code>_init</code> 方法在 <code>src/core/instance/init.js</code> 文件被添加到 <code>Vue</code> 的原型上，下面我们就看看 <code>_init</code> 做了什么。</p>
+<p><code>_init</code> 方法的一开始，是这两句代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm: Component = <span class="keyword">this</span></span><br><span class="line"><span class="comment">// a uid</span></span><br><span class="line">vm._uid = uid++</span><br></pre></td></tr></table></figure>
+<p>首先声明了常量 <code>vm</code>，其值为 <code>this</code> 也就是当前这个 <code>Vue</code> 实例。然后在实例上添加了一个唯一标示：<code>_uid</code>，其值为 <code>uid</code>，<code>uid</code> 这个变量定义在 <code>initMixin</code> 方法的上面，初始化为 <code>0</code>，可以看到每次实例化一个 <code>Vue</code> 实例之后，<code>uid</code> 的值都会 <code>++</code>。</p>
+<p>所以实际 <code>_uid</code> 就是一个 <code>Vue</code> 实例的实例属性，在之后的分析中，我们将会在很多地方遇到很多的实例属性被逐渐添加到 <code>Vue</code> 实例上，所以我们同样整理了一个附录<a href=""></a></p>
+<p>回过头来继续看代码，接下来是这样一段：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> startTag, endTag</span><br><span class="line"><span class="comment">/* istanbul ignore if */</span></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; config.performance &amp;&amp; mark) &#123;</span><br><span class="line">    startTag = <span class="string">`vue-perf-start:<span class="subst">$&#123;vm._uid&#125;</span>`</span></span><br><span class="line">    endTag = <span class="string">`vue-perf-end:<span class="subst">$&#123;vm._uid&#125;</span>`</span></span><br><span class="line">    mark(startTag)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中间的代码省略...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* istanbul ignore if */</span></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; config.performance &amp;&amp; mark) &#123;</span><br><span class="line">    vm._name = formatComponentName(vm, <span class="literal">false</span>)</span><br><span class="line">    mark(endTag)</span><br><span class="line">    measure(<span class="string">`vue <span class="subst">$&#123;vm._name&#125;</span> init`</span>, startTag, endTag)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>暂且只看这两段代码。首先声明两个变量 <code>startTag</code> 和 <code>endTag</code>，然后这两段代码有一个共同点，即拥有相同的判断语句：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; config.performance &amp;&amp; mark)</span><br></pre></td></tr></table></figure>
+<p>意思是：在非生产环境下，并且 <code>config.performance</code> 和 <code>mark</code> 都为真，那么才执行里面的代码，其中 <code>config.performance</code> 来自于 <code>core/config.js</code> 文件，我们知道，<code>Vue.config</code> 同样引用了这个对象，在 <code>Vue</code> 的官方文档中可以看到如下内容：</p>
+<blockquote>
+<ul>
+<li><p><strong>类型</strong>：<code>boolean</code></p>
+</li>
+<li><p><strong>默认值</strong>：<code>false (自 2.2.3 起)</code></p>
+</li>
+<li><p><strong>用法</strong>：</p>
+<p>设置为 <code>true</code> 以在浏览器开发工具的性能/时间线面板中启用对组件初始化、编译、渲染和打补丁的性能追踪。只适用于开发模式和支持 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark" target="_blank" rel="noopener"><code>performance.mark</code></a> API 的浏览器上。</p>
+</li>
+</ul>
+</blockquote>
+<p><code>Vue</code> 提供了全局配置 <code>Vue.config.performance</code>，我们通过将其设置为 <code>true</code>，即可开启性能追踪，你可以追踪四个场景的性能：</p>
+<ul>
+<li>1、组件初始化(<code>component init</code>)</li>
+<li>2、编译(<code>compile</code>)，将模板(<code>template</code>)编译成渲染函数</li>
+<li>3、渲染(<code>render</code>)，其实就是渲染函数的性能，或者说渲染函数执行且生成虚拟DOM(<code>vnode</code>)的性能</li>
+<li>4、打补丁(<code>patch</code>)，将虚拟DOM渲染为真实DOM的性能</li>
+</ul>
+<p>其中<em>组件初始化</em>的性能追踪就是我们在 <code>_init</code> 方法中看到的那样去实现的，其实现的方式就是在初始化的代码的开头和结尾分别使用 <code>mark</code> 函数打上两个标记，然后通过 <code>measure</code> 函数对这两个标记点进行性能计算。</p>
+<p><code>mark</code> 和 <code>measure</code> 这两个函数可以在附录<a href=""></a>中查看其作用：只有在非生产环境，且浏览器必须支持 <code>window.performance</code> API的情况下才会导出有用的 <code>mark</code>和 <code>measure</code> 函数，也就是说，如果你的浏览器不支持 <code>window.performance</code> 那么在 <code>core/instance/init.js</code> 文件中导入的 <code>mark</code> 和 <code>measure</code> 就都是 <code>undefined</code>，也就不会执行 <code>if</code> 语句里面的内容。</p>
+<p>了解了这两段性能追踪的代码之后，我们再来看看这两段代码中间的代码，也就是被追踪性能的代码，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a flag to avoid this being observed</span></span><br><span class="line">vm._isVue = <span class="literal">true</span></span><br><span class="line"><span class="comment">// merge options</span></span><br><span class="line"><span class="keyword">if</span> (options &amp;&amp; options._isComponent) &#123;</span><br><span class="line">    <span class="comment">// optimize internal component instantiation</span></span><br><span class="line">    <span class="comment">// since dynamic options merging is pretty slow, and none of the</span></span><br><span class="line">    <span class="comment">// internal component options needs special treatment.</span></span><br><span class="line">    initInternalComponent(vm, options)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    vm.$options = mergeOptions(</span><br><span class="line">    resolveConstructorOptions(vm.constructor),</span><br><span class="line">    options || &#123;&#125;,</span><br><span class="line">    vm</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* istanbul ignore else */</span></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">    initProxy(vm)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    vm._renderProxy = vm</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// expose real self</span></span><br><span class="line">vm._self = vm</span><br><span class="line">initLifecycle(vm)</span><br><span class="line">initEvents(vm)</span><br><span class="line">initRender(vm)</span><br><span class="line">callHook(vm, <span class="string">'beforeCreate'</span>)</span><br><span class="line">initInjections(vm) <span class="comment">// resolve injections before data/props</span></span><br><span class="line">initState(vm)</span><br><span class="line">initProvide(vm) <span class="comment">// resolve provide after data/props</span></span><br><span class="line">callHook(vm, <span class="string">'created'</span>)</span><br></pre></td></tr></table></figure>
+<p>逐一分析，首先在 <code>Vue</code> 实例上添加 <code>_isVue</code> 属性，并设置其值为 <code>true</code>。目的是用来标识一个对象是 <code>Vue</code> 实例，即如果发现一个对象拥有 <code>_isVue</code> 属性并且其值为 <code>true</code>，那么就代表该对象是 <code>Vue</code> 实例。这样可以避免该对象被响应系统观测（其实在其他地方也有用到，但是宗旨都是一样的，这个属性就是用来告诉你：我不是普通的对象，我是Vue实例）。</p>
+<p>再往下是这样一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// merge options</span></span><br><span class="line"><span class="keyword">if</span> (options &amp;&amp; options._isComponent) &#123;</span><br><span class="line">    <span class="comment">// optimize internal component instantiation</span></span><br><span class="line">    <span class="comment">// since dynamic options merging is pretty slow, and none of the</span></span><br><span class="line">    <span class="comment">// internal component options needs special treatment.</span></span><br><span class="line">    initInternalComponent(vm, options)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    vm.$options = mergeOptions(</span><br><span class="line">        resolveConstructorOptions(vm.constructor),</span><br><span class="line">        options || &#123;&#125;,</span><br><span class="line">        vm</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>if</code> 分支语句，条件是：<code>options &amp;&amp; options._isComponent</code>，其中 <code>options</code> 就是我们调用 <code>Vue</code> 时传递的参数选项，但 <code>options._isComponent</code> 是什么鬼？我们知道在本节的例子中我们的 <code>options</code> 对象只有两个属性 <code>el</code> 和 <code>data</code>，并且在 <code>Vue</code> 的官方文档中你也找不到关于 <code>_isComponent</code> 这个选项的介绍。其实这是一个内部选项，这个内部选项是在 <code>Vue</code> 创建组件的时候才会有的</p>
+<p>根据本节的例子，上面的代码必然会走 <code>else</code> 分支，也就是这段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm.$options = mergeOptions(</span><br><span class="line">    resolveConstructorOptions(vm.constructor),</span><br><span class="line">    options || &#123;&#125;,</span><br><span class="line">    vm</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>这段代码在 <code>Vue</code> 实例上添加了 <code>$options</code> 属性，在 <code>Vue</code> 的官方文档中，你能够查看到 <code>$options</code> 属性的作用，这个属性用于当前 <code>Vue</code> 的初始化，什么意思呢？大家要注意我们现在的阶段处于 <code>_init()</code> 方法中，在 <code>_init()</code> 方法的内部大家可以看到一系列 <code>init*</code> 的方法，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">initLifecycle(vm)</span><br><span class="line">initEvents(vm)</span><br><span class="line">initRender(vm)</span><br><span class="line">callHook(vm, <span class="string">'beforeCreate'</span>)</span><br><span class="line">initInjections(vm) <span class="comment">// resolve injections before data/props</span></span><br><span class="line">initState(vm)</span><br><span class="line">initProvide(vm) <span class="comment">// resolve provide after data/props</span></span><br><span class="line">callHook(vm, <span class="string">'created'</span>)</span><br></pre></td></tr></table></figure>
+<p>而这些方法才是真正起作用的一些初始化方法，大家可以找到这些方法看一看，在这些初始化方法中，无一例外的都使用到了实例的 <code>$options</code> 属性，即 <code>vm.$options</code>。所以 <code>$options</code> 这个属性的的确确是用于 <code>Vue</code> 实例初始化的，只不过在初始化之前，我们需要一些手段来产生 <code>$options</code> 属性，而这就是 <code>mergeOptions</code> 函数的作用，接下来我们就来看看 <code>mergeOptions</code> 都做了些什么，又有什么意义。</p>
+
       
     </div>
     
@@ -553,17 +581,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -638,22 +657,6 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#选项-el、propsData-的合并策略"><span class="nav-number">1.</span> <span class="nav-text">选项 el、propsData 的合并策略</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -681,7 +684,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">60.5k</span>
+    <span title="Site words total count">61.4k</span>
   
 </div>
 
