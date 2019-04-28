@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vue的初始化">
+<meta name="keywords" content="JavaScript Vue Css Web Node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue源码学习十一：Vue的初始化">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/Vue源码学习十二：初始化之initLifecycle/index.html">
+<meta property="og:site_name" content="虾米俊">
+<meta property="og:description" content="Vue的初始化">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-28T07:18:36.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue源码学习十一：Vue的初始化">
+<meta name="twitter:description" content="Vue的初始化">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/28/Vue源码学习十二：初始化之initLifecycle/"/>
+
+
+
+
+
+  <title>Vue源码学习十一：Vue的初始化 | 虾米俊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?caad3bfc73b6c3f9a50f328ed093e127";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">虾米俊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">虾米俊的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/Vue源码学习十二：初始化之initLifecycle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue源码学习十一：Vue的初始化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-28T15:18:16+08:00">
+                2019-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue源码/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/28/Vue源码学习十二：初始化之initLifecycle/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/28/Vue源码学习十二：初始化之initLifecycle/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/04/28/Vue源码学习十二：初始化之initLifecycle/" class="leancloud_visitors" data-flag-title="Vue源码学习十一：Vue的初始化">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Vue的初始化</p>
+<a id="more"></a>
+<p><code>_init</code> 函数在执行完 <code>initProxy</code> 之后，执行的就是 <code>initLifecycle</code> 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vm._self = vm</span><br><span class="line">initLifecycle(vm)</span><br></pre></td></tr></table></figure>
+<p>在 <code>initLifecycle</code> 函数执行之前，执行了 <code>vm._self = vm</code> 语句，这句话在 <code>Vue</code> 实例对象 <code>vm</code> 上添加了 <code>_self</code> 属性，指向真实的实例本身。</p>
+<p>接下来执行的才是 <code>initLifecycle</code> 函数，同时将当前 <code>Vue</code> 实例 <code>vm</code> 作为参数传递。打开 <code>core/instance/lifecycle.js</code> 文件找到 <code>initLifecycle</code> 函数，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initLifecycle</span> (<span class="params">vm: Component</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 定义 options，它是 vm.$options 的引用，后面的代码使用的都是 options 常量</span></span><br><span class="line">  <span class="keyword">const</span> options = vm.$options</span><br><span class="line"></span><br><span class="line">  <span class="comment">// locate first non-abstract parent</span></span><br><span class="line">  <span class="keyword">let</span> parent = options.parent</span><br><span class="line">  <span class="keyword">if</span> (parent &amp;&amp; !options.abstract) &#123;</span><br><span class="line">    <span class="keyword">while</span> (parent.$options.abstract &amp;&amp; parent.$parent) &#123;</span><br><span class="line">      parent = parent.$parent</span><br><span class="line">    &#125;</span><br><span class="line">    parent.$children.push(vm)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  vm.$parent = parent</span><br><span class="line">  vm.$root = parent ? parent.$root : vm</span><br><span class="line"></span><br><span class="line">  vm.$children = []</span><br><span class="line">  vm.$refs = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  vm._watcher = <span class="literal">null</span></span><br><span class="line">  vm._inactive = <span class="literal">null</span></span><br><span class="line">  vm._directInactive = <span class="literal">false</span></span><br><span class="line">  vm._isMounted = <span class="literal">false</span></span><br><span class="line">  vm._isDestroyed = <span class="literal">false</span></span><br><span class="line">  vm._isBeingDestroyed = <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先定义 <code>options</code> 常量，它是 <code>vm.$options</code> 的引用。接着将执行下面这段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// locate first non-abstract parent (查找第一个非抽象的父组件)</span></span><br><span class="line"><span class="comment">// 定义 parent，它引用当前实例的父实例</span></span><br><span class="line"><span class="keyword">let</span> parent = options.parent</span><br><span class="line"><span class="comment">// 如果当前实例有父组件，且当前实例不是抽象的</span></span><br><span class="line"><span class="keyword">if</span> (parent &amp;&amp; !options.abstract) &#123;</span><br><span class="line">  <span class="comment">// 使用 while 循环查找第一个非抽象的父组件</span></span><br><span class="line">  <span class="keyword">while</span> (parent.$options.abstract &amp;&amp; parent.$parent) &#123;</span><br><span class="line">    parent = parent.$parent</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 经过上面的 while 循环后，parent 应该是一个非抽象的组件，将它作为当前实例的父级，所以将当前实例 vm 添加到父级的 $children 属性里</span></span><br><span class="line">  parent.$children.push(vm)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置当前实例的 $parent 属性，指向父级</span></span><br><span class="line">vm.$parent = parent</span><br><span class="line"><span class="comment">// 设置 $root 属性，有父级就是用父级的 $root，否则 $root 指向自身</span></span><br><span class="line">vm.$root = parent ? parent.$root : vm</span><br></pre></td></tr></table></figure>
+<p>上面代码的作用可以用一句话总结：<em>“将当前实例添加到父实例的 $children 属性里，并设置当前实例的 $parent 指向父实例”</em>。</p>
+<p>我们知道 <code>options</code> 是 <code>vm.$options</code>的引用，所以这里的 <code>options.parent</code> 相当于 <code>vm.$options.parent</code>，那么 <code>vm.$options.parent</code> 从哪里来？比如下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件本身并没有指定 parent 选项</span></span><br><span class="line"><span class="keyword">var</span> ChildComponent = &#123;</span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="comment">// 但是在子组件中访问父实例，能够找到正确的父实例引用</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.parent)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    components: &#123;</span><br><span class="line">      <span class="comment">// 注册组件</span></span><br><span class="line">      ChildComponent</span><br><span class="line">    &#125;,</span><br><span class="line">    data: &#123;</span><br><span class="line">        test: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>我们知道 <code>Vue</code> 给我们提供了 <code>parent</code> 选项，使得我们可以手动指定一个组件的父实例，但在上面的例子中，我们并没有手动指定 <code>parent</code> 选项，但是子组件依然能够正确地找到它的父实例，这说明 <code>Vue</code> 在寻找父实例的时候是自动检测的。那它是怎么做的呢？目前不准备给大家介绍，因为时机还不够成熟，现在讲大家很容易懵，不过可以给大家看一段代码，打开 <code>core/vdom/create-component.js</code> 文件，里面有一个函数叫做 <code>createComponentInstanceForVnode</code>，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createComponentInstanceForVnode</span> (<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  vnode: any, <span class="regexp">//</span> we know it<span class="string">'s MountedComponentVNode but flow doesn'</span>t</span></span></span><br><span class="line"><span class="function"><span class="params">  parent: any, <span class="regexp">//</span> activeInstance in lifecycle state</span></span></span><br><span class="line"><span class="function"><span class="params">  parentElm?: ?Node,</span></span></span><br><span class="line"><span class="function"><span class="params">  refElm?: ?Node</span></span></span><br><span class="line"><span class="function"><span class="params"></span>): <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> vnodeComponentOptions = vnode.componentOptions</span><br><span class="line">  <span class="keyword">const</span> options: InternalComponentOptions = &#123;</span><br><span class="line">    _isComponent: <span class="literal">true</span>,</span><br><span class="line">    parent,</span><br><span class="line">    propsData: vnodeComponentOptions.propsData,</span><br><span class="line">    _componentTag: vnodeComponentOptions.tag,</span><br><span class="line">    _parentVnode: vnode,</span><br><span class="line">    _parentListeners: vnodeComponentOptions.listeners,</span><br><span class="line">    _renderChildren: vnodeComponentOptions.children,</span><br><span class="line">    _parentElm: parentElm || <span class="literal">null</span>,</span><br><span class="line">    _refElm: refElm || <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// check inline-template render functions</span></span><br><span class="line">  <span class="keyword">const</span> inlineTemplate = vnode.data.inlineTemplate</span><br><span class="line">  <span class="keyword">if</span> (isDef(inlineTemplate)) &#123;</span><br><span class="line">    options.render = inlineTemplate.render</span><br><span class="line">    options.staticRenderFns = inlineTemplate.staticRenderFns</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> vnodeComponentOptions.Ctor(options)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数是干什么的呢？我们知道当我们注册一个组件的时候，还是拿上面的例子，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件</span></span><br><span class="line"><span class="keyword">var</span> ChildComponent = &#123;</span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.parent)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    components: &#123;</span><br><span class="line">      <span class="comment">// 注册组件</span></span><br><span class="line">      ChildComponent</span><br><span class="line">    &#125;,</span><br><span class="line">    data: &#123;</span><br><span class="line">        test: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上面的代码中，我们的子组件 <code>ChildComponent</code> 说白了就是一个 <code>json</code> 对象，或者叫做组件选项对象，在父组件的 <code>components</code> 选项中把这个子组件选项对象注册了进去，实际上在 <code>Vue</code> 内部，会首先以子组件选项对象作为参数通过 <code>Vue.extend</code> 函数创建一个子类出来，然后再通过实例化子类来创建子组件，而 <code>createComponentInstanceForVnode</code> 函数的作用，在这里大家就可以简单理解为实例化子组件，只不过这个过程是在虚拟DOM的 <code>patch</code> 算法中进行的，我们后边会详细去讲。我们看 <code>createComponentInstanceForVnode</code> 函数内部有这样一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> options: InternalComponentOptions = &#123;</span><br><span class="line">  _isComponent: <span class="literal">true</span>,</span><br><span class="line">  parent,</span><br><span class="line">  propsData: vnodeComponentOptions.propsData,</span><br><span class="line">  _componentTag: vnodeComponentOptions.tag,</span><br><span class="line">  _parentVnode: vnode,</span><br><span class="line">  _parentListeners: vnodeComponentOptions.listeners,</span><br><span class="line">  _renderChildren: vnodeComponentOptions.children,</span><br><span class="line">  _parentElm: parentElm || <span class="literal">null</span>,</span><br><span class="line">  _refElm: refElm || <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是实例化子组件时的组件选项，我们发现，第二个值就是 <code>parent</code>，那么这个 <code>parent</code> 是谁呢？它是 <code>createComponentInstanceForVnode</code> 函数的形参，所以我们需要找到 <code>createComponentInstanceForVnode</code> 函数是在哪里调用的，它的调用位置就在 <code>core/vdom/create-component.js</code> 文件内的 <code>componentVNodeHooks</code> 钩子对象的 <code>init</code> 钩子函数内，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hooks to be invoked on component VNodes during patch</span></span><br><span class="line"><span class="keyword">const</span> componentVNodeHooks = &#123;</span><br><span class="line">  init (</span><br><span class="line">    vnode: VNodeWithData,</span><br><span class="line">    hydrating: boolean,</span><br><span class="line">    parentElm: ?Node,</span><br><span class="line">    refElm: ?Node</span><br><span class="line">  ): ?boolean &#123;</span><br><span class="line">    <span class="keyword">if</span> (!vnode.componentInstance || vnode.componentInstance._isDestroyed) &#123;</span><br><span class="line">      <span class="keyword">const</span> child = vnode.componentInstance = createComponentInstanceForVnode(</span><br><span class="line">        vnode,</span><br><span class="line">        activeInstance,</span><br><span class="line">        parentElm,</span><br><span class="line">        refElm</span><br><span class="line">      )</span><br><span class="line">      child.$mount(hydrating ? vnode.elm : <span class="literal">undefined</span>, hydrating)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (vnode.data.keepAlive) &#123;</span><br><span class="line">      <span class="comment">// kept-alive components, treat as a patch</span></span><br><span class="line">      <span class="keyword">const</span> mountedNode: any = vnode <span class="comment">// work around flow</span></span><br><span class="line">      componentVNodeHooks.prepatch(mountedNode, mountedNode)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  prepatch (oldVnode: MountedComponentVNode, <span class="attr">vnode</span>: MountedComponentVNode) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  insert (vnode: MountedComponentVNode) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  destroy (vnode: MountedComponentVNode) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 <code>init</code> 函数内有这样一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> child = vnode.componentInstance = createComponentInstanceForVnode(</span><br><span class="line">  vnode,</span><br><span class="line">  activeInstance,</span><br><span class="line">  parentElm,</span><br><span class="line">  refElm</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>第二个参数 <code>activeInstance</code> 就是我们要找的 <code>parent</code>，那么 <code>activeInstance</code> 是什么呢？根据文件顶部的 <code>import</code> 语句可知，<code>activeInstance</code> 来自于 <code>core/instance/lifecycle.js</code> 文件，也就是我们正在看的 <code>initLifecycle</code> 函数的上面，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> activeInstance: any = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+<p>这个变量将总是保存着当前正在渲染的实例的引用，所以它就是当前实例 <code>components</code> 下注册的子组件的父实例，所以 <code>Vue</code> 实际上就是这样做到自动侦测父级的。</p>
+<p>所以现在我们初步知道了 <code>options.parent</code> 值的来历，且知道了它的值指向父实例，那么接下来我们继续看代码，还是这段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义 parent，它引用当前实例的父组件</span></span><br><span class="line"><span class="keyword">let</span> parent = options.parent</span><br><span class="line"><span class="comment">// 如果当前实例有父组件，且当前实例不是抽象的</span></span><br><span class="line"><span class="keyword">if</span> (parent &amp;&amp; !options.abstract) &#123;</span><br><span class="line">  <span class="comment">// 使用 while 循环查找第一个非抽象的父组件</span></span><br><span class="line">  <span class="keyword">while</span> (parent.$options.abstract &amp;&amp; parent.$parent) &#123;</span><br><span class="line">    parent = parent.$parent</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 经过上面的 while 循环后，parent 应该是一个非抽象的组件，将它作为当前实例的父级，所以将当前实例 vm 添加到父级的 $children 属性里</span></span><br><span class="line">  parent.$children.push(vm)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>拿到父实例 <code>parent</code> 之后，进入一个判断分支，条件是：<code>parent &amp;&amp; !options.abstract</code>，即<em>父实例存在，且当前实例不是抽象的</em>，这里大家可能会有疑问：<em>什么是抽象的实例</em>？实际上 <code>Vue</code>内部有一些选项是没有暴露给我们的，就比如这里的 <code>abstract</code>，通过设置这个选项为 <code>true</code>，可以指定该组件是抽象的，那么通过该组件创建的实例也都是抽象的，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">AbsComponents = &#123;</span><br><span class="line">  abstract: <span class="literal">true</span>,</span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我是一个抽象的组件'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>抽象的组件有什么特点呢？一个最显著的特点就是它们一般不渲染真实DOM，这么说大家可能不理解，我举个例子大家就明白了，我们知道 <code>Vue</code> 内置了一些全局组件比如 <code>keep-alive</code> 或者 <code>transition</code>，我们知道这两个组件它是不会渲染DOM至页面的，但他们依然给我提供了很有用的功能。所以他们就是抽象的组件，我们可以查看一下它的源码，打开 <code>core/components/keep-alive.js</code> 文件，你能看到这样的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'keep-alive'</span>,</span><br><span class="line">  abstract: <span class="literal">true</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以发现，它使用 <code>abstract</code> 选项来声明这是一个抽象组件。除了不渲染真实DOM，抽象组件还有一个特点，就是它们不会出现在父子关系的路径上。</p>
+<p>所以现在大家再回看这段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// locate first non-abstract parent (查找第一个非抽象的父组件)</span></span><br><span class="line"><span class="comment">// 定义 parent，它引用当前实例的父组件</span></span><br><span class="line"><span class="keyword">let</span> parent = options.parent</span><br><span class="line"><span class="comment">// 如果当前实例有父组件，且当前实例不是抽象的</span></span><br><span class="line"><span class="keyword">if</span> (parent &amp;&amp; !options.abstract) &#123;</span><br><span class="line">  <span class="comment">// 使用 while 循环查找第一个非抽象的父组件</span></span><br><span class="line">  <span class="keyword">while</span> (parent.$options.abstract &amp;&amp; parent.$parent) &#123;</span><br><span class="line">    parent = parent.$parent</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 经过上面的 while 循环后，parent 应该是一个非抽象的组件，将它作为当前实例的父级，所以将当前实例 vm 添加到父级的 $children 属性里</span></span><br><span class="line">  parent.$children.push(vm)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置当前实例的 $parent 属性，指向父级</span></span><br><span class="line">vm.$parent = parent</span><br><span class="line"><span class="comment">// 设置 $root 属性，有父级就是用父级的 $root，否则 $root 指向自身</span></span><br><span class="line">vm.$root = parent ? parent.$root : vm</span><br></pre></td></tr></table></figure>
+<p>如果 <code>options.abstract</code> 为真，那说明当前实例是抽象的，所以会跳过 <code>if</code> 语句块直接设置 <code>vm.$parent</code> 和 <code>vm.$root</code> 的值。跳过 <code>if</code> 语句块的结果将导致该抽象实例不会被添加到父实例的 <code>$children</code> 中。如果 <code>options.abstract</code> 为假，那说明当前实例不是抽象的，这个时候就会走 <code>while</code> 循环，那么这个 <code>while</code>循环是干嘛的呢？我们前面说过，抽象的组件是不能够也不应该作为父级的，所以 <code>while</code> 循环的目的就是沿着父实例链逐层向上寻找到第一个不抽象的实例作为 <code>parent</code>（父级）。并且在找到父级之后将当前实例添加到父实例的 <code>$children</code> 属性中，这样最终的目的就达成了。</p>
+<p>在上面这段代码执行完毕之后，<code>initLifecycle</code> 函数还负责在当前实例上添加一些属性，即后面要执行的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vm.$children = []</span><br><span class="line">vm.$refs = &#123;&#125;</span><br><span class="line"></span><br><span class="line">vm._watcher = <span class="literal">null</span></span><br><span class="line">vm._inactive = <span class="literal">null</span></span><br><span class="line">vm._directInactive = <span class="literal">false</span></span><br><span class="line">vm._isMounted = <span class="literal">false</span></span><br><span class="line">vm._isDestroyed = <span class="literal">false</span></span><br><span class="line">vm._isBeingDestroyed = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>其中 <code>$children</code> 和 <code>$refs</code> 都是我们熟悉的实例属性，他们都在 <code>initLifecycle</code> 函数中被初始化，其中 <code>$children</code> 被初始化为一个数组，<code>$refs</code> 被初始化为一个空 <code>json</code> 对象</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/28/Vue源码学习十一：Vue的初始化开篇/" rel="next" title="Vue源码学习十一：Vue的初始化">
+                <i class="fa fa-chevron-left"></i> Vue源码学习十一：Vue的初始化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/28/Vue源码学习十三：初始化之 initEvents和initRender/" rel="prev" title="Vue源码学习十三：初始化之 initEvents和initRender">
+                Vue源码学习十三：初始化之 initEvents和initRender <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myAvatar.jpg"
+                alt="虾米俊" />
+            
+              <p class="site-author-name" itemprop="name">虾米俊</p>
+              <p class="site-description motion-element" itemprop="description">雨会下雨会停，这是不变的道理</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiamijun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">虾米俊</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">78.2k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'hWcT9SeAlL37DHejBXLPDeba-gzGzoHsz',
+        appKey: 'NsWPYAqK03m8kNpvHapiGrCs',
+        placeholder: '来说两句~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("hWcT9SeAlL37DHejBXLPDeba-gzGzoHsz", "NsWPYAqK03m8kNpvHapiGrCs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

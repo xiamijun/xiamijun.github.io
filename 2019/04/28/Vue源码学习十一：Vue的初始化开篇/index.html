@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vue的初始化">
+<meta name="keywords" content="JavaScript Vue Css Web Node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue源码学习十一：Vue的初始化">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/Vue源码学习十一：Vue的初始化开篇/index.html">
+<meta property="og:site_name" content="虾米俊">
+<meta property="og:description" content="Vue的初始化">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/Vue%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/%E5%90%88%E5%B9%B6data%E9%80%89%E9%A1%B9.jpg">
+<meta property="og:updated_time" content="2019-04-28T07:17:57.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue源码学习十一：Vue的初始化">
+<meta name="twitter:description" content="Vue的初始化">
+<meta name="twitter:image" content="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/Vue%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/%E5%90%88%E5%B9%B6data%E9%80%89%E9%A1%B9.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/28/Vue源码学习十一：Vue的初始化开篇/"/>
+
+
+
+
+
+  <title>Vue源码学习十一：Vue的初始化 | 虾米俊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?caad3bfc73b6c3f9a50f328ed093e127";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">虾米俊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">虾米俊的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/Vue源码学习十一：Vue的初始化开篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="虾米俊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虾米俊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue源码学习十一：Vue的初始化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-28T13:52:05+08:00">
+                2019-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue源码/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/28/Vue源码学习十一：Vue的初始化开篇/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/28/Vue源码学习十一：Vue的初始化开篇/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/04/28/Vue源码学习十一：Vue的初始化开篇/" class="leancloud_visitors" data-flag-title="Vue源码学习十一：Vue的初始化">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.6k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Vue的初始化</p>
+<a id="more"></a>
+<h1 id="用于初始化的最终选项-options"><a href="#用于初始化的最终选项-options" class="headerlink" title="用于初始化的最终选项 $options"></a>用于初始化的最终选项 $options</h1><p>之前有一个很简单的例子，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        test: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>我们以这个例子为线索开始了对 <code>Vue</code> 代码的讲解，我们知道了在实例化 <code>Vue</code> 实例的时候，<code>Vue.prototype._init</code> 方法被第一个执行，这个方法定义在 <code>src/core/instance/init.js</code> 文件中，在分析 <code>_init</code> 方法的时候我们遇到了下面的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm.$options = mergeOptions(</span><br><span class="line">    resolveConstructorOptions(vm.constructor),</span><br><span class="line">    options || &#123;&#125;,</span><br><span class="line">    vm</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>正是因为上面的代码，使得我们花了大篇章来讲解其内部实现和运作，也就是 选项的规范化和选项的合并这两节所介绍的内容。现在我们已经知道了 <code>mergeOptions</code> 函数是如何对父子选项进行合并处理的，也知道了它的作用。</p>
+<p>我们打开 <code>core/util/options.js</code> 文件，找到 <code>mergeOptions</code> 函数，看其最后一句代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> options</span><br></pre></td></tr></table></figure>
+<p>这说明 <code>mergeOptions</code> 函数最终将合并处理后的选项返回，并以该返回值作为 <code>vm.$options</code> 的值。<code>vm.$options</code> 在 <code>Vue</code> 的官方文档中是可以找到的，它作为实例属性暴露给开发者，那么现在你应该知道 <code>vm.$options</code> 到底是什么了。并且看文档的时候你应该更能够理解其作用，比如官方文档是这样介绍 <code>$options</code> 实例属性的：</p>
+<blockquote>
+<p>用于当前 <code>Vue</code> 实例的初始化选项。需要在选项中包含自定义属性时会有用处</p>
+</blockquote>
+<p>并且给了一个例子，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  customOption: <span class="string">'foo'</span>,</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// =&gt; 'foo'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上面的例子中，在创建 <code>Vue</code> 实例的时候传递了一个自定义选项：<code>customOption</code>，在之后的代码中我们可以通过 <code>this.$options.customOption</code> 进行访问。那原理其实就是使用 <code>mergeOptions</code> 函数对自定义选项进行合并处理，由于没有指定 <code>customOption</code> 选项的合并策略，所以将会使用默认的策略函数 <code>defaultStrat</code>。最终效果就是你初始化的值是什么，得到的就是什么。</p>
+<p>另外，<code>Vue</code> 也提供了 <code>Vue.config.optionMergeStrategies</code> 全局配置，大家也可以在官方文档中找到，我们知道这个对象其实就是选项合并中的策略对象，所以我们可以通过他指定某一个选项的合并策略，常用于指定自定义选项的合并策略，比如我们给 <code>customOption</code> 选项指定一个合并策略，只需要在 <code>Vue.config.optionMergeStrategies</code> 上添加与选项同名的策略函数即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.optionMergeStrategies.customOption = <span class="function"><span class="keyword">function</span> (<span class="params">parentVal, childVal</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> parentVal ? (parentVal + childVal) : childVal</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上代码中，我们添加了自定义选项 <code>customOption</code> 的合并策略，其策略为：如果没有 <code>parentVal</code> 则直接返回 <code>childVal</code>，否则返回两者的和。</p>
+<p>所以如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建子类</span></span><br><span class="line"><span class="keyword">const</span> Sub = Vue.extend(&#123;</span><br><span class="line">    customOption: <span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 以子类创建实例</span></span><br><span class="line"><span class="keyword">const</span> v = <span class="keyword">new</span> Sub(&#123;</span><br><span class="line">    customOption: <span class="number">2</span>,</span><br><span class="line">    created () &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// 3</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>最终，在实例的 <code>created</code> 方法中将打印数字 <code>3</code>。</p>
+<p>现在我们需要回到正题上了，还是拿我们的例子，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        test: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这个时候 <code>mergeOptions</code> 函数将会把 <code>Vue.options</code> 作为 父选项，把我们传递的实例选项作为子选项进行合并，合并的结果我们可以通过打印 <code>$options</code> 属性得知：</p>
+<p><img src="http://xiejun-image.oss-cn-hangzhou.aliyuncs.com/Vue%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/%E5%90%88%E5%B9%B6data%E9%80%89%E9%A1%B9.jpg" alt=""></p>
+<p><code>render</code> 和 <code>staticRenderFns</code> 这两个选项是在将模板编译成渲染函数时添加上去的，我们后面会遇到。</p>
+<h1 id="渲染函数的作用域代理"><a href="#渲染函数的作用域代理" class="headerlink" title="渲染函数的作用域代理"></a>渲染函数的作用域代理</h1><p>现在我们已经足够了解 <code>vm.$options</code> 这个属性了，它才是用来做一系列初始化工作的最终选项，那么接下来我们就继续看 <code>_init</code> 方法中的代码，继续了解 <code>Vue</code> 的初始化工作。</p>
+<p><code>_init</code> 方法中，在经过 <code>mergeOptions</code> 合并处理选项之后，要执行的是下面这段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* istanbul ignore else */</span></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">    initProxy(vm)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    vm._renderProxy = vm</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果是非生产环境的话则执行 <code>initProxy(vm)</code> 函数，如果在生产环境则直接在实例上添加 <code>_renderProxy</code> 实例属性，该属性的值就是当前实例。</p>
+<p>猜一下 <code>initProxy</code> 函数的主要作用是什么？这个函数的作用其实就是在实例对象 <code>vm</code> 上添加 <code>_renderProxy</code> 属性。为什么呢？因为生产环境和非生产环境下要保持功能一致。那么接下来我们就看看 <code>initProxy</code> 的内容，验证一下我们的判断，打开 <code>core/instance/proxy.js</code> 文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* not type checking this file because flow doesn't play well with Proxy */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> config <span class="keyword">from</span> <span class="string">'core/config'</span></span><br><span class="line"><span class="keyword">import</span> &#123; warn, makeMap &#125; <span class="keyword">from</span> <span class="string">'../util/index'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明 initProxy 变量</span></span><br><span class="line"><span class="keyword">let</span> initProxy</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">  <span class="comment">// ... 其他代码</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 在这里初始化 initProxy</span></span><br><span class="line">  initProxy = <span class="function"><span class="keyword">function</span> <span class="title">initProxy</span> (<span class="params">vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (hasProxy) &#123;</span><br><span class="line">      <span class="comment">// determine which proxy handler to use</span></span><br><span class="line">      <span class="keyword">const</span> options = vm.$options</span><br><span class="line">      <span class="keyword">const</span> handlers = options.render &amp;&amp; options.render._withStripped</span><br><span class="line">        ? getHandler</span><br><span class="line">        : hasHandler</span><br><span class="line">      vm._renderProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(vm, handlers)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      vm._renderProxy = vm</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出</span></span><br><span class="line"><span class="keyword">export</span> &#123; initProxy &#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码是简化后的，可以发现在文件的开头声明了 <code>initProxy</code> 变量，但并未初始化，所以目前 <code>initProxy</code> 还是 <code>undefined</code>，随后，在文件的结尾将 <code>initProxy</code> 导出，那么 <code>initProxy</code> 到底是什么呢？实际上变量 <code>initProxy</code> 的赋值是在 <code>if</code> 语句块内进行的，这个 <code>if</code> 语句块进行环境判断，如果是非生产环境的话，那么才会对 <code>initProxy</code> 变量赋值，也就是说在生产环境下我们导出的 <code>initProxy</code> 实际上就是 <code>undefined</code>。只有在非生产环境下导出的 <code>initProxy</code> 才会有值，其值就是这个函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">initProxy = <span class="function"><span class="keyword">function</span> <span class="title">initProxy</span> (<span class="params">vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (hasProxy) &#123;</span><br><span class="line">        <span class="comment">// determine which proxy handler to use</span></span><br><span class="line">        <span class="keyword">const</span> options = vm.$options</span><br><span class="line">        <span class="keyword">const</span> handlers = options.render &amp;&amp; options.render._withStripped</span><br><span class="line">        ? getHandler</span><br><span class="line">        : hasHandler</span><br><span class="line">        vm._renderProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(vm, handlers)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        vm._renderProxy = vm</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数接收一个参数，实际就是 <code>Vue</code> 实例对象，我们先从宏观角度来看一下这个函数的作用是什么，可以发现，这个函数由 <code>if...else</code> 语句块组成，但无论走 <code>if</code> 还是 <code>else</code>，其最终的效果都是在 <code>vm</code> 对象上添加了 <code>_renderProxy</code> 属性，这就验证了我们之前的猜想。如果 <code>hasProxy</code> 为真则走 <code>if</code> 分支，对于 <code>hasProxy</code> 顾名思义，这是用来判断宿主环境是否支持 <code>js</code> 原生的 <code>Proxy</code> 特性的，如果发现 <code>Proxy</code> 存在，则执行：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm._renderProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(vm, handlers)</span><br></pre></td></tr></table></figure>
+<p>如果不存在，那么和生产环境一样，直接赋值就可以了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm._renderProxy = vm</span><br></pre></td></tr></table></figure>
+<p>所以我们发现 <code>initProxy</code> 的作用实际上就是对实例对象 <code>vm</code> 的代理，通过原生的 <code>Proxy</code> 实现。</p>
+<p>另外 <code>hasProxy</code> 变量的定义也在当前文件中，代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hasProxy =</span><br><span class="line">    <span class="keyword">typeof</span> <span class="built_in">Proxy</span> !== <span class="string">'undefined'</span> &amp;&amp;</span><br><span class="line">    <span class="built_in">Proxy</span>.toString().match(<span class="regexp">/native code/</span>)</span><br></pre></td></tr></table></figure>
+<p>上面代码的作用是判断当前宿主环境是否支持原生 <code>Proxy</code></p>
+<p>查看 <code>initProxy</code> 函数的 <code>if</code> 语句块，内容如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">initProxy = <span class="function"><span class="keyword">function</span> <span class="title">initProxy</span> (<span class="params">vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (hasProxy) &#123;</span><br><span class="line">        <span class="comment">// determine which proxy handler to use</span></span><br><span class="line">        <span class="comment">// options 就是 vm.$options 的引用</span></span><br><span class="line">        <span class="keyword">const</span> options = vm.$options</span><br><span class="line">        <span class="comment">// handlers 可能是 getHandler 也可能是 hasHandler</span></span><br><span class="line">        <span class="keyword">const</span> handlers = options.render &amp;&amp; options.render._withStripped</span><br><span class="line">            ? getHandler</span><br><span class="line">            : hasHandler</span><br><span class="line">        <span class="comment">// 代理 vm 对象</span></span><br><span class="line">        vm._renderProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(vm, handlers)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以发现，如果 <code>Proxy</code> 存在，那么将会使用 <code>Proxy</code> 对 <code>vm</code> 做一层代理，代理对象赋值给 <code>vm._renderProxy</code>，所以今后对 <code>vm._renderProxy</code> 的访问，如果有代理那么就会被拦截。代理对象配置参数是 <code>handlers</code>，可以发现 <code>handlers</code> 既可能是 <code>getHandler</code> 又可能是 <code>hasHandler</code>，至于到底使用哪个，是由判断条件决定的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">options.render &amp;&amp; options.render._withStripped</span><br></pre></td></tr></table></figure>
+<p>如果上面的条件为真，则使用 <code>getHandler</code>，否则使用 <code>hasHandler</code>，判断条件要求 <code>options.render</code> 和 <code>options.render._withStripped</code> 必须都为真才行，我现在明确告诉大家 <code>options.render._withStripped</code> 这个属性只在测试代码中出现过，所以一般情况下这个条件都会为假，也就是使用 <code>hasHandler</code> 作为代理配置。</p>
+<p><code>hasHandler</code> 常量就定义在当前文件，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hasHandler = &#123;</span><br><span class="line">    has (target, key) &#123;</span><br><span class="line">        <span class="comment">// has 常量是真实经过 in 运算符得来的结果</span></span><br><span class="line">        <span class="keyword">const</span> has = key <span class="keyword">in</span> target</span><br><span class="line">        <span class="comment">// 如果 key 在 allowedGlobals 之内，或者 key 是以下划线 _ 开头的字符串，则为真</span></span><br><span class="line">        <span class="keyword">const</span> isAllowed = allowedGlobals(key) || (<span class="keyword">typeof</span> key === <span class="string">'string'</span> &amp;&amp; key.charAt(<span class="number">0</span>) === <span class="string">'_'</span>)</span><br><span class="line">        <span class="comment">// 如果 has 和 isAllowed 都为假，使用 warnNonPresent 函数打印错误</span></span><br><span class="line">        <span class="keyword">if</span> (!has &amp;&amp; !isAllowed) &#123;</span><br><span class="line">            warnNonPresent(target, key)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> has || !isAllowed</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>，我们知道 <code>has</code> 可以拦截以下操作：</p>
+<ul>
+<li>属性查询: foo in proxy</li>
+<li>继承属性查询: foo in Object.create(proxy)</li>
+<li>with 检查: with(proxy) { (foo); }</li>
+<li>Reflect.has()</li>
+</ul>
+<p>其中关键点就在 <code>has</code> 可以拦截 <code>with</code> 语句块里对变量的访问，后面我们会讲到。</p>
+<p><code>has</code> 函数内出现了两个函数，分别是 <code>allowedGlobals</code> 以及 <code>warnNonPresent</code>，这两个函数也是定义在当前文件中，首先我们看一下 <code>allowedGlobals</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">onst allowedGlobals = makeMap(</span><br><span class="line">    <span class="string">'Infinity,undefined,NaN,isFinite,isNaN,'</span> +</span><br><span class="line">    <span class="string">'parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,'</span> +</span><br><span class="line">    <span class="string">'Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,'</span> +</span><br><span class="line">    <span class="string">'require'</span> <span class="comment">// for Webpack/Browserify</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>可以看到 <code>allowedGlobals</code> 实际上是通过 <code>makeMap</code> 生成的函数，所以 <code>allowedGlobals</code> 函数的作用是判断给定的 <code>key</code> 是否出现在上面字符串中定义的关键字中的。这些关键字都是在 <code>js</code>中可以全局访问的。</p>
+<p><code>warnNonPresent</code> 函数如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> warnNonPresent = <span class="function">(<span class="params">target, key</span>) =&gt;</span> &#123;</span><br><span class="line">    warn(</span><br><span class="line">        <span class="string">`Property or method "<span class="subst">$&#123;key&#125;</span>" is not defined on the instance but `</span> +</span><br><span class="line">        <span class="string">'referenced during render. Make sure that this property is reactive, '</span> +</span><br><span class="line">        <span class="string">'either in the data option, or for class-based components, by '</span> +</span><br><span class="line">        <span class="string">'initializing the property. '</span> +</span><br><span class="line">        <span class="string">'See: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties.'</span>,</span><br><span class="line">        target</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数就是通过 <code>warn</code> 打印一段警告信息，警告信息提示你“在渲染的时候引用了 <code>key</code>，但是在实例对象上并没有定义 <code>key</code> 这个属性或方法”。其实我们很容易就可以看到这个信息，比如下面的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    template: <span class="string">'&lt;div&gt;&#123;&#123;a&#125;&#125;&lt;/div&gt;'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        test: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>大家注意，在模板中我们使用 <code>a</code>，但是在 <code>data</code> 属性中并没有定义这个属性，这个时候我们就能够得到以上报错信息。</p>
+<p>大家可能比较疑惑的是为什么会这样，其实我们后面讲到渲染函数的时候你自然就知道了，不过现在大家可以先看一下，打开 <code>core/instance/render.js</code> 文件，找到 <code>Vue.prototype._render</code>方法，里面有这样的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vnode = render.call(vm._renderProxy, vm.$createElement)</span><br></pre></td></tr></table></figure>
+<p>可以发现，调用 <code>render</code> 函数的时候，使用 <code>call</code> 方法指定了函数的执行环境为 <code>vm._renderProxy</code>，渲染函数长成什么样呢？还是以上面的例子为例，我们可以通过打印 <code>vm.$options.render</code> 查看，所以它长成这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vm.$options.render = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// render 函数的 this 指向实例的 _renderProxy</span></span><br><span class="line">    <span class="keyword">with</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> _c(<span class="string">'div'</span>, [_v(_s(a))])   <span class="comment">// 在这里访问 a，相当于访问 vm._renderProxy.a</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的代码可以发现，显然函数使用 <code>with</code> 语句块指定了内部代码的执行环境为 <code>this</code>，由于 <code>render</code> 函数调用的时候使用 <code>call</code> 指定了其 <code>this</code> 指向为 <code>vm._renderProxy</code>，所以 <code>with</code> 语句块内代码的执行环境就是 <code>vm._renderProxy</code>，所以在 <code>with</code> 语句块内访问 <code>a</code> 就相当于访问 <code>vm._renderProxy</code> 的 <code>a</code> 属性，前面我们提到过 <code>with</code> 语句块内访问变量将会被 <code>Proxy</code> 的 <code>has</code> 代理所拦截，所以自然就执行了 <code>has</code> 函数内的代码。最终通过 <code>warnNonPresent</code> 打印警告信息给我们，所以这个代理的作用就是为了在开发阶段给我们一个友好而准确的提示。</p>
+<p>现在，我们基本知道了 <code>initProxy</code> 的目的，就是设置渲染函数的作用域代理，其目的是为我们提供更好的提示信息。但是我们忽略了一些细节没有讲清楚，回到下面这段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// has 变量是真实经过 in 运算符得来的结果</span></span><br><span class="line"><span class="keyword">const</span> has = key <span class="keyword">in</span> target</span><br><span class="line"><span class="comment">// 如果 key 在 allowedGlobals 之内，或者 key 是以下划线 _ 开头的字符串，则为真</span></span><br><span class="line"><span class="keyword">const</span> isAllowed = allowedGlobals(key) || (<span class="keyword">typeof</span> key === <span class="string">'string'</span> &amp;&amp; key.charAt(<span class="number">0</span>) === <span class="string">'_'</span>)</span><br><span class="line"><span class="comment">// 如果 has 和 isAllowed 都为假，使用 warnNonPresent 函数打印错误</span></span><br><span class="line"><span class="keyword">if</span> (!has &amp;&amp; !isAllowed) &#123;</span><br><span class="line">    warnNonPresent(target, key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码中的 <code>if</code> 语句的判断条件是 <code>(!has &amp;&amp; !isAllowed)</code>，其中 <code>!has</code> 我们可以理解为<strong>你访问了一个没有定义在实例对象上(或原型链上)的属性</strong>，所以这个时候提示错误信息是合理，但是即便 <code>!has</code> 成立也不一定要提示错误信息，因为必须要满足 <code>!isAllowed</code>，也就是说当你访问了一个<strong>虽然不在实例对象上(或原型链上)的属性，但如果你访问的是全局对象</strong>那么也是被允许的。这样我们就可以在模板中使用全局对象了，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  &#123;&#123;Number(b) + 2&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中 <code>Number</code> 为全局对象，如果去掉 <code>!isAllowed</code> 这个判断条件，那么上面模板的写法将会得到警告信息。除了允许使用全局对象之外，还允许以 <code>_</code> 开头的属性，这么做是由于渲染函数中会包含很多以 <code>_</code> 开头的内部方法，如之前我们查看渲染函数时遇到的 <code>_c</code>、<code>_v</code> 等等。</p>
+<p>最后对于 <code>proxy.js</code> 文件内的代码，还有一段是我们没有讲过的，就是下面这段：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (hasProxy) &#123;</span><br><span class="line">    <span class="comment">// isBuiltInModifier 函数用来检测是否是内置的修饰符</span></span><br><span class="line">    <span class="keyword">const</span> isBuiltInModifier = makeMap(<span class="string">'stop,prevent,self,ctrl,shift,alt,meta,exact'</span>)</span><br><span class="line">    <span class="comment">// 为 config.keyCodes 设置 set 代理，防止内置修饰符被覆盖</span></span><br><span class="line">    config.keyCodes = <span class="keyword">new</span> <span class="built_in">Proxy</span>(config.keyCodes, &#123;</span><br><span class="line">        set (target, key, value) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isBuiltInModifier(key)) &#123;</span><br><span class="line">                warn(<span class="string">`Avoid overwriting built-in modifier in config.keyCodes: .<span class="subst">$&#123;key&#125;</span>`</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                target[key] = value</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码首先检测宿主环境是否支持 <code>Proxy</code>，如果支持的话才会执行里面的代码，内部的代码首先使用 <code>makeMap</code> 函数生成一个 <code>isBuiltInModifier</code> 函数，该函数用来检测给定的值是否是内置的事件修饰符，我们知道在 <code>Vue</code> 中我们可以使用事件修饰符很方便地做一些工作，比如阻止默认事件等。</p>
+<p>然后为 <code>config.keyCodes</code> 设置了 <code>set</code> 代理，其目的是防止开发者在自定义键位别名的时候，覆盖了内置的修饰符，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.keyCodes.shift = <span class="number">16</span></span><br></pre></td></tr></table></figure>
+<p>由于 <code>shift</code> 是内置的修饰符，所以上面这句代码将会得到警告。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/28/Vue源码学习十：选项的合并——其他选项的合并策略/" rel="next" title="Vue源码学习十：选项的合并——其他选项的合并策略">
+                <i class="fa fa-chevron-left"></i> Vue源码学习十：选项的合并——其他选项的合并策略
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/28/Vue源码学习十二：初始化之initLifecycle/" rel="prev" title="Vue源码学习十一：Vue的初始化">
+                Vue源码学习十一：Vue的初始化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myAvatar.jpg"
+                alt="虾米俊" />
+            
+              <p class="site-author-name" itemprop="name">虾米俊</p>
+              <p class="site-description motion-element" itemprop="description">雨会下雨会停，这是不变的道理</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiamijun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用于初始化的最终选项-options"><span class="nav-number">1.</span> <span class="nav-text">用于初始化的最终选项 $options</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#渲染函数的作用域代理"><span class="nav-number">2.</span> <span class="nav-text">渲染函数的作用域代理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">虾米俊</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">78.2k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'hWcT9SeAlL37DHejBXLPDeba-gzGzoHsz',
+        appKey: 'NsWPYAqK03m8kNpvHapiGrCs',
+        placeholder: '来说两句~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("hWcT9SeAlL37DHejBXLPDeba-gzGzoHsz", "NsWPYAqK03m8kNpvHapiGrCs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
