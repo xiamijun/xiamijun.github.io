@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="虾米俊">
 <meta property="og:description" content="SSR笔记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-22T06:39:59.348Z">
+<meta property="og:updated_time" content="2019-05-05T06:37:39.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSR笔记">
 <meta name="twitter:description" content="SSR笔记">
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  188 字
+                  470 字
                 </span>
               
 
@@ -417,7 +417,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -473,6 +473,31 @@
 </li>
 </ol>
 <p>nuxt的思想是<strong>创建即配置</strong></p>
+<p>pages文件夹存放页面。components文件夹存放公共组件。layout存放模板。</p>
+<p><nuxt-link>相当于<router-link></router-link></nuxt-link></p>
+<p><nuxt>相当于<router-view></router-view></nuxt></p>
+<p>声明layout: ‘search’指定使用search模板</p>
+<h2 id="接口定义"><a href="#接口定义" class="headerlink" title="接口定义"></a>接口定义</h2><p>server下写接口，创建interface/city.js:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'koa-router'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">  prefix: <span class="string">'/city'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/list'</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">  ctx.body = [<span class="string">'北京'</span>, <span class="string">'天津'</span>]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router</span><br></pre></td></tr></table></figure>
+<p>server/index.js里引入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cityInterface <span class="keyword">from</span> <span class="string">'./interface/city'</span></span><br><span class="line"></span><br><span class="line">app.use(cityInterface.routes()).use(cityInterface.allowedMethods())</span><br></pre></td></tr></table></figure>
+<h2 id="数据渲染"><a href="#数据渲染" class="headerlink" title="数据渲染"></a>数据渲染</h2><ol>
+<li>客户端获取数据</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> mounted() &#123;</span><br><span class="line">  <span class="comment">// 客户端取</span></span><br><span class="line">  <span class="keyword">let</span> &#123;status, <span class="attr">data</span>: &#123;list&#125;&#125; = <span class="keyword">await</span> axios.get(<span class="string">'/city/list'</span>)</span><br><span class="line">  <span class="keyword">if</span> (status === <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.list = list</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>asyncData处理组件相关数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> asyncData() &#123;</span><br><span class="line">  <span class="comment">// 服务端下发，script标签，window上挂载数据</span></span><br><span class="line">  <span class="keyword">let</span> &#123;status, <span class="attr">data</span>: &#123;list&#125;&#125; = <span class="keyword">await</span> axios.get(<span class="string">'http://localhost:3000/city/list'</span>)</span><br><span class="line">  <span class="keyword">if</span> (status === <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      list</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a>脚手架</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-nuxt-app &lt;项目名&gt;</span><br></pre></td></tr></table></figure>
+<p>如果npx报错，可先全局安装<code>create-nuxt-app</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g create-nuxt-app</span><br><span class="line">create-nuxt-app my-app</span><br></pre></td></tr></table></figure>
+<p>server/index.js下，使用的是require，如果改成import会出错，办法：</p>
+<p>package.json 中，在scripts的dev和start下追加 –exec babel-node，并创建babel指令集.babelrc</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"presets"</span>:[<span class="string">"es2015"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-preset-es2015</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -593,7 +618,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">91</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -658,7 +683,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#koa2"><span class="nav-number">1.</span> <span class="nav-text">koa2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mongodb"><span class="nav-number">2.</span> <span class="nav-text">mongodb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mongoose"><span class="nav-number">3.</span> <span class="nav-text">mongoose</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis"><span class="nav-number">4.</span> <span class="nav-text">redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nuxt"><span class="nav-number">5.</span> <span class="nav-text">nuxt</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#koa2"><span class="nav-number">1.</span> <span class="nav-text">koa2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mongodb"><span class="nav-number">2.</span> <span class="nav-text">mongodb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mongoose"><span class="nav-number">3.</span> <span class="nav-text">mongoose</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis"><span class="nav-number">4.</span> <span class="nav-text">redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nuxt"><span class="nav-number">5.</span> <span class="nav-text">nuxt</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口定义"><span class="nav-number">5.1.</span> <span class="nav-text">接口定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据渲染"><span class="nav-number">5.2.</span> <span class="nav-text">数据渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚手架"><span class="nav-number">5.3.</span> <span class="nav-text">脚手架</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -692,7 +717,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">94.9k</span>
+    <span title="Site words total count">45.8k</span>
   
 </div>
 
