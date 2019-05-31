@@ -88,7 +88,7 @@
 <meta property="og:description" content="装箱、拆箱、隐式类型转换">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2791152-ba592aa9b81fe174.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-05-16T07:55:53.830Z">
+<meta property="og:updated_time" content="2019-05-31T01:12:35.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="装箱、拆箱、隐式类型转换">
 <meta name="twitter:description" content="装箱、拆箱、隐式类型转换">
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  486 字
+                  505 字
                 </span>
               
 
@@ -452,7 +452,8 @@
 <p>用代码来展现：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1  = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"some text"</span>);</span><br><span class="line"><span class="keyword">var</span> s2 = s1.substring(<span class="number">2</span>);</span><br><span class="line">s1 = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
 <h1 id="拆箱"><a href="#拆箱" class="headerlink" title="拆箱"></a>拆箱</h1><p>把引用类型转换为基本的数据类型称为拆箱。通过引用类型的valueOf()或者toString()方法来实现的 </p>
-<h1 id="的隐式类型转换"><a href="#的隐式类型转换" class="headerlink" title="==的隐式类型转换"></a>==的隐式类型转换</h1><p>规律：对象–&gt;字符串–&gt;数值&lt;–布尔，通过比较数值</p>
+<h1 id="的隐式类型转换"><a href="#的隐式类型转换" class="headerlink" title="==的隐式类型转换"></a>==的隐式类型转换</h1><p>注意：若==两边类型相同，不会进行隐式类型转换</p>
+<p>规律：对象–&gt;字符串–&gt;数值&lt;–布尔，通过比较数值</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/2791152-ba592aa9b81fe174.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="对象VS布尔"><a href="#对象VS布尔" class="headerlink" title="对象VS布尔"></a>对象VS布尔</h2><p>对象先转换为字符串，然后再转换为数字，布尔值直接转换为数字</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] == <span class="literal">true</span>;  <span class="comment">//false  []转换为字符串'',然后转换为数字0。true转换为数字1，结果为false</span></span><br></pre></td></tr></table></figure>
@@ -499,6 +500,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/31/memorize函数/" rel="prev" title="memorize函数">
+                memorize函数 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -582,7 +587,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">81</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -681,7 +686,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">47k</span>
+    <span title="Site words total count">47.1k</span>
   
 </div>
 
