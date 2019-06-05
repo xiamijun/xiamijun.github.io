@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="虾米俊">
 <meta property="og:description" content="实现深拷贝">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-13T03:48:12.702Z">
+<meta property="og:updated_time" content="2019-06-05T06:41:03.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现深拷贝">
 <meta name="twitter:description" content="实现深拷贝">
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  273 字
+                  78 字
                 </span>
               
 
@@ -440,13 +440,8 @@
       
         <p>实现深拷贝</p>
 <a id="more"></a>
-<p>实现一个对象的深拷贝函数，需要考虑对象的元素类型以及对应的解决方案：</p>
-<ul>
-<li>基础类型：这种最简单，直接赋值即可</li>
-<li>对象类型：递归调用拷贝函数</li>
-<li>数组类型：这种最难，因为数组中的元素可能是基础类型、对象还可能数组，因此要专门做一个函数来处理数组的深拷贝</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 数组的深拷贝函数</span></span><br><span class="line"><span class="comment"> * @param &#123;Array&#125; src </span></span><br><span class="line"><span class="comment"> * @param &#123;Array&#125; target </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloneArr</span>(<span class="params">src, target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> src) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(item)) &#123;</span><br><span class="line">      target.push(cloneArr(item, []))</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">'object'</span>) &#123;</span><br><span class="line">      target.push(deepClone(item, &#123;&#125;))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      target.push(item)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 对象的深拷贝实现</span></span><br><span class="line"><span class="comment"> * @param &#123;Object&#125; src </span></span><br><span class="line"><span class="comment"> * @param &#123;Object&#125; target </span></span><br><span class="line"><span class="comment"> * @return &#123;Object&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">src, target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> keys = <span class="built_in">Reflect</span>.ownKeys(src)</span><br><span class="line">  <span class="keyword">let</span> value = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">of</span> keys) &#123;</span><br><span class="line">    value = src[key]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(value)) &#123;</span><br><span class="line">      target[key] = cloneArr(value, [])</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> value === <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="comment">// 如果是对象而且不是数组, 那么递归调用深拷贝</span></span><br><span class="line">      target[key] = deepClone(value, &#123;&#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      target[key] = value</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分别先后判断简单数据类型、数组、对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> copy</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> value !== <span class="string">'object'</span>) &#123;</span><br><span class="line">    copy = value</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">    copy = []</span><br><span class="line">    value.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">      copy.push(deepClone(item))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value <span class="keyword">instanceof</span> <span class="built_in">Object</span>) &#123;</span><br><span class="line">    copy = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> value) &#123;</span><br><span class="line">      copy[key] = deepClone(value[key])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> copy</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -640,7 +635,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">47.1k</span>
+    <span title="Site words total count">46.9k</span>
   
 </div>
 
